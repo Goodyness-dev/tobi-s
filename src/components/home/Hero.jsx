@@ -7,8 +7,8 @@ export default function Hero({ onOpenWizard }) {
     <section className="relative overflow-hidden" aria-label="Introduction & Quick Quote">
       {/* Full-width Hero with Preloaded Video Background */}
       <div className="relative min-h-[540px] sm:min-h-[620px] lg:min-h-[680px] flex items-center">
-        {/* Video Background with auto preload */}
-        <div className="absolute inset-0 overflow-hidden">
+        {/* Video Background with auto preload and bulletproof image fallback */}
+        <div className="absolute inset-0 overflow-hidden bg-neutral-950 bg-[url('/images/hero-truck.jpg')] bg-cover bg-center">
           <video
             autoPlay
             muted
