@@ -24,6 +24,17 @@ export function setStoredToken(token) {
   }
 }
 
+const API_BASE = (import.meta.env.VITE_API_URL || '/api').replace(/\/$/, '');
+
+function buildUrl(endpoint) {
+  const path = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
+  if (API_BASE.startsWith('http')) {
+    const cleanPath = path.startsWith('/api') ? path.slice(4) : path;
+    return `${API_BASE}${cleanPath}`;
+  }
+  return path.startsWith('/api') ? path : `/api${path}`;
+}
+
 async function request(endpoint, options = {}) {
   const token = getStoredToken();
   const headers = {
@@ -32,7 +43,7 @@ async function request(endpoint, options = {}) {
     ...options.headers
   };
 
-  const url = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
+  const url = buildUrl(endpoint);
 
   const res = await fetch(url, {
     ...options,

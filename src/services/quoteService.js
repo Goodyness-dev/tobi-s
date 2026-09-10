@@ -7,6 +7,8 @@
  * 3. Provide ready-to-activate infrastructure for EmailJS and Telegram Bot API.
  */
 
+import { quotesApi } from './api';
+
 // Configuration for third-party integrations (Fill in when ready to activate)
 export const INTEGRATION_CONFIG = {
   // EmailJS Configuration
@@ -187,19 +189,10 @@ export const submitQuoteRequest = async (rawData) => {
       specificDate: quote.logistics.specificDate
     };
 
-    const res = await fetch('/api/quotes', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(backendPayload)
-    });
-
-    if (res.ok) {
-      console.log('✅ Quote saved to production SQLite backend');
-    } else {
-      console.warn('Backend returned non-200, kept in localStorage fallback');
-    }
+    await quotesApi.submitPublicQuote(backendPayload);
+    console.log('✅ Quote saved to production SQLite backend');
   } catch (backendErr) {
-    console.warn('Backend API submission note (using local cache):', backendErr);
+    console.warn('Backend API submission note (using local cache):', backendErr.message || backendErr);
   }
 
   // 4. Trigger client-side external integrations asynchronously if enabled
