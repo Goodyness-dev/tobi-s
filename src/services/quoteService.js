@@ -157,16 +157,52 @@ export const submitQuoteRequest = async (rawData) => {
   console.log('Raw Form Data:', rawData);
   console.groupEnd();
 
-  // 2. Persist locally in localStorage for preview / debugging
+  // 2. Persist locally in localStorage for backup / instant client access
   try {
     const existing = JSON.parse(localStorage.getItem('tobys_quotes') || '[]');
     existing.unshift(quote);
-    localStorage.setItem('tobys_quotes', JSON.stringify(existing.slice(0, 20)));
+    localStorage.setItem('tobys_quotes', JSON.stringify(existing.slice(0, 50)));
   } catch (e) {
     console.warn('Could not save to localStorage', e);
   }
 
-  // 3. Trigger external integrations asynchronously if enabled
+  // 3. Submit directly to production backend (SQLite persistence + backend alerts)
+  try {
+    const backendPayload = {
+      id: quote.id,
+      name: quote.customer.name,
+      email: quote.customer.email,
+      phone: quote.customer.phone,
+      location: quote.customer.preferredLocation,
+      make: quote.vehicle.make,
+      modelAndYear: quote.vehicle.modelAndYear,
+      serviceCategory: quote.service.category,
+      detailedService: quote.service.detailedService,
+      engineType: quote.service.engineType,
+      customIssue: quote.service.customIssue,
+      details: quote.service.details,
+      needsTowing: rawData.needsTowing,
+      needsShuttle: rawData.needsShuttle,
+      timeline: quote.logistics.timeline,
+      specificDate: quote.logistics.specificDate
+    };
+
+    const res = await fetch('/api/quotes', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(backendPayload)
+    });
+
+    if (res.ok) {
+      console.log('✅ Quote saved to production SQLite backend');
+    } else {
+      console.warn('Backend returned non-200, kept in localStorage fallback');
+    }
+  } catch (backendErr) {
+    console.warn('Backend API submission note (using local cache):', backendErr);
+  }
+
+  // 4. Trigger client-side external integrations asynchronously if enabled
   if (INTEGRATION_CONFIG.telegram.enabled) {
     sendTelegramNotification(quote).then(res => console.log('Telegram dispatch:', res));
   }
@@ -174,8 +210,8 @@ export const submitQuoteRequest = async (rawData) => {
     sendEmailJsNotification(quote).then(res => console.log('EmailJS dispatch:', res));
   }
 
-  // Simulate network latency for realistic UX
-  await new Promise(resolve => setTimeout(resolve, 800));
+  // Simulate minimal UI delay for realistic polish
+  await new Promise(resolve => setTimeout(resolve, 500));
 
   return {
     success: true,

@@ -155,7 +155,16 @@ export default function Footer({ onOpenWizard, onNavigate }) {
       <div className="border-t border-gray-800 py-6 px-4 text-center text-xs sm:text-sm text-gray-500">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
           <span>© {new Date().getFullYear()} {BUSINESS_INFO.legalName}. All rights reserved.</span>
-          <span>Casa Grande, AZ Auto & Diesel Specialist</span>
+          <div className="flex items-center space-x-4">
+            <span>Casa Grande, AZ Auto & Diesel Specialist</span>
+            <span>•</span>
+            <button
+              onClick={() => onNavigate('admin')}
+              className="text-neutral-500 hover:text-red-400 transition underline underline-offset-2"
+            >
+              Shop Admin Portal
+            </button>
+          </div>
         </div>
       </div>
     </footer>

@@ -1,0 +1,135 @@
+import React, { useState } from 'react';
+import { Lock, Eye, EyeOff, Wrench, AlertCircle, ArrowLeft, Loader2, ShieldCheck } from 'lucide-react';
+import { authApi } from '../../services/api';
+
+export default function AdminLogin({ onLoginSuccess, onBackToSite }) {
+  const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!password.trim()) {
+      setError('Please enter your admin password.');
+      return;
+    }
+
+    setIsLoading(true);
+    setError('');
+
+    try {
+      const result = await authApi.login(password);
+      if (result.success) {
+        onLoginSuccess(result.user);
+      } else {
+        setError(result.error || 'Invalid credentials.');
+      }
+    } catch (err) {
+      setError(err.data?.error || err.message || 'Login failed. Please check your password.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-black text-white flex flex-col justify-center items-center px-4 py-12 relative overflow-hidden">
+      {/* Background Subtle Accent Gradients */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-96 h-96 bg-red-950/20 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute -top-20 -right-20 w-80 h-80 bg-neutral-900/40 rounded-full blur-2xl pointer-events-none" />
+
+      {/* Back to Site Button */}
+      <div className="w-full max-w-md mb-6 z-10">
+        <button
+          onClick={onBackToSite}
+          className="inline-flex items-center space-x-2 text-sm text-neutral-400 hover:text-white transition px-3 py-1.5 rounded-lg hover:bg-neutral-900"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          <span>Back to Customer Website</span>
+        </button>
+      </div>
+
+      {/* Login Card */}
+      <div className="w-full max-w-md bg-[#0a0a0a] border border-neutral-800/80 rounded-3xl p-8 sm:p-10 shadow-2xl relative z-10">
+        {/* Brand Header */}
+        <div className="text-center mb-8">
+          <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-red-950/60 border border-red-800/50 text-red-500 mb-4 shadow-inner">
+            <Wrench className="w-7 h-7" />
+          </div>
+          <h1 className="text-2xl sm:text-3xl font-black font-heading tracking-tight text-white">
+            Toby's Shop Portal
+          </h1>
+          <p className="text-xs sm:text-sm text-neutral-400 mt-1.5 font-medium">
+            Management Dashboard & Quote Dispatch
+          </p>
+          <div className="inline-flex items-center space-x-1.5 bg-neutral-900 border border-neutral-800 px-3 py-1 rounded-full mt-3 text-[11px] text-neutral-400">
+            <ShieldCheck className="w-3.5 h-3.5 text-red-500" />
+            <span>Protected Route • SQLite Active</span>
+          </div>
+        </div>
+
+        {/* Error Alert */}
+        {error && (
+          <div className="mb-6 p-4 rounded-xl bg-red-950/40 border border-red-800/60 text-red-300 text-sm flex items-start space-x-3 animate-shake">
+            <AlertCircle className="w-5 h-5 text-red-400 shrink-0 mt-0.5" />
+            <span className="leading-snug">{error}</span>
+          </div>
+        )}
+
+        {/* Form */}
+        <form onSubmit={handleSubmit} className="space-y-5">
+          <div>
+            <label className="block text-xs font-bold text-neutral-300 uppercase tracking-wider mb-2">
+              Admin Access Key / Password
+            </label>
+            <div className="relative">
+              <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-neutral-500">
+                <Lock className="w-5 h-5" />
+              </div>
+              <input
+                type={showPassword ? 'text' : 'password'}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Enter password..."
+                className="w-full bg-[#121212] border border-neutral-800 focus:border-red-600 focus:ring-1 focus:ring-red-600 rounded-xl pl-11 pr-11 py-3 text-sm text-white placeholder-neutral-500 transition outline-none"
+                autoFocus
+                required
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-neutral-500 hover:text-neutral-300 transition"
+              >
+                {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+              </button>
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            disabled={isLoading}
+            className="w-full py-3.5 px-4 bg-red-700 hover:bg-red-800 disabled:opacity-50 text-white font-bold text-sm rounded-xl transition shadow-lg shadow-red-900/30 flex items-center justify-center space-x-2 active:scale-[0.99]"
+          >
+            {isLoading ? (
+              <>
+                <Loader2 className="w-4 h-4 animate-spin" />
+                <span>Authenticating...</span>
+              </>
+            ) : (
+              <span>Unlock Admin Dashboard</span>
+            )}
+          </button>
+        </form>
+
+        {/* Helpful Tip */}
+        <div className="mt-8 pt-6 border-t border-neutral-900 text-center">
+          <p className="text-xs text-neutral-500 leading-relaxed">
+            Default initial password is <span className="font-mono text-neutral-300 bg-neutral-900 px-1.5 py-0.5 rounded">toby2024</span>.
+            <br />
+            You can change your password anytime inside Settings.
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}

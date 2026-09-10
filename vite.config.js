@@ -7,8 +7,14 @@ export default defineConfig({
   server: {
     port: 3000,
     open: false,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:5001',
+        changeOrigin: true
+      }
+    },
     watch: {
-      ignored: ['**/*.mp4', '**/*.mov', '**/*.avi', '**/*.mkv', '**/*.png', '**/*.jpg', '**/*.jpeg']
+      ignored: ['**/*.mp4', '**/*.mov', '**/*.avi', '**/*.mkv', '**/*.png', '**/*.jpg', '**/*.jpeg', '**/server/data/**']
     }
   }
 })

@@ -9,14 +9,21 @@ import ReviewsSection from './components/home/ReviewsSection';
 import Footer from './components/layout/Footer';
 import AllServicesPage from './components/services/AllServicesPage';
 import QuoteWizardModal from './components/wizard/QuoteWizardModal';
+import AdminLayout from './components/admin/AdminLayout';
+import AdminLogin from './components/admin/AdminLogin';
 import { Phone, Calendar } from 'lucide-react';
 import { BUSINESS_INFO } from './data/businessData';
+import { authApi, getStoredToken } from './services/api';
 
 export default function App() {
-  const [currentPage, setCurrentPage] = useState('home');
+  const [currentPage, setCurrentPage] = useState('home'); // 'home' | 'services' | 'admin'
   const [wizardOpen, setWizardOpen] = useState(false);
   const [wizardCategory, setWizardCategory] = useState(null);
   const [wizardService, setWizardService] = useState(null);
+
+  // Admin Authentication State
+  const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(false);
+  const [adminUser, setAdminUser] = useState(null);
 
   // Midnight Dark Mode state
   const [darkMode, setDarkMode] = useState(() => {
@@ -29,19 +36,38 @@ export default function App() {
     }
   });
 
+  // Check stored auth token on mount
+  useEffect(() => {
+    const token = getStoredToken();
+    if (token) {
+      authApi.verify()
+        .then(res => {
+          if (res.authenticated) {
+            setIsAdminAuthenticated(true);
+            setAdminUser(res.user);
+          }
+        })
+        .catch(() => {
+          setIsAdminAuthenticated(false);
+        });
+    }
+  }, []);
+
   // Apply dark class to <html> and <body> immediately
   useEffect(() => {
     const root = document.documentElement;
-    if (darkMode) {
+    if (darkMode || currentPage === 'admin') {
       root.classList.add('dark');
       document.body.classList.add('dark');
-      localStorage.setItem('tobys_theme', 'dark');
+      if (currentPage !== 'admin') {
+        localStorage.setItem('tobys_theme', 'dark');
+      }
     } else {
       root.classList.remove('dark');
       document.body.classList.remove('dark');
       localStorage.setItem('tobys_theme', 'light');
     }
-  }, [darkMode]);
+  }, [darkMode, currentPage]);
 
   const toggleDarkMode = () => {
     setDarkMode(prev => {
@@ -61,7 +87,9 @@ export default function App() {
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash;
-      if (hash === '#/services' || hash === '#services-all') {
+      if (hash === '#/admin' || hash === '#admin') {
+        setCurrentPage('admin');
+      } else if (hash === '#/services' || hash === '#services-all') {
         setCurrentPage('services');
       } else {
         setCurrentPage('home');
@@ -77,8 +105,10 @@ export default function App() {
     setCurrentPage(page);
     if (page === 'services') {
       window.location.hash = '#/services';
+    } else if (page === 'admin') {
+      window.location.hash = '#/admin';
     } else {
-      if (window.location.hash.startsWith('#/services')) {
+      if (window.location.hash.startsWith('#/services') || window.location.hash.startsWith('#/admin')) {
         window.history.pushState(null, '', window.location.pathname);
       }
     }
@@ -96,6 +126,28 @@ export default function App() {
     setWizardCategory(null);
     setWizardService(null);
   };
+
+  // If on Admin route, render full-screen Admin portal
+  if (currentPage === 'admin') {
+    return isAdminAuthenticated ? (
+      <AdminLayout
+        user={adminUser}
+        onLogout={() => {
+          setIsAdminAuthenticated(false);
+          setAdminUser(null);
+        }}
+        onBackToSite={() => handleNavigate('home')}
+      />
+    ) : (
+      <AdminLogin
+        onLoginSuccess={(user) => {
+          setIsAdminAuthenticated(true);
+          setAdminUser(user);
+        }}
+        onBackToSite={() => handleNavigate('home')}
+      />
+    );
+  }
 
   return (
     <div className={`min-h-screen ${darkMode ? 'bg-black text-white' : 'bg-white text-gray-900'} flex flex-col font-sans transition-colors duration-200`}>
