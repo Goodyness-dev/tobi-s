@@ -127,33 +127,33 @@ export default function InboxView({ onOpenFullQuote }) {
   });
 
   return (
-    <div className="bg-[#0a0a0a] border border-neutral-800 rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row h-[78vh] min-h-[580px]">
+    <div className="bg-white border border-slate-200/80 rounded-3xl overflow-hidden shadow-xs flex flex-col md:flex-row h-[80vh] min-h-[580px]">
       {/* ------------------------------------------------------------- */}
       {/* LEFT PANE: CONVERSATION LIST                                  */}
       {/* ------------------------------------------------------------- */}
-      <div className={`w-full md:w-80 lg:w-96 border-r border-neutral-800 flex flex-col bg-[#070707] ${selectedThread ? 'hidden md:flex' : 'flex'}`}>
+      <div className={`w-full md:w-80 lg:w-96 border-r border-slate-200 flex flex-col bg-white ${selectedThread ? 'hidden md:flex' : 'flex'}`}>
         {/* Search & Header */}
-        <div className="p-4 border-b border-neutral-800 space-y-3">
+        <div className="p-4 border-b border-slate-200/80 space-y-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
-              <MessageSquare className="w-4 h-4 text-red-500" />
-              <h2 className="font-heading font-black text-sm uppercase tracking-wider text-white">
+              <MessageSquare className="w-4 h-4 text-red-600" />
+              <h2 className="font-heading font-black text-sm uppercase tracking-wider text-slate-900">
                 Orders & Messages
               </h2>
             </div>
-            <span className="text-[11px] font-bold text-neutral-400 bg-neutral-900 px-2 py-0.5 rounded-full border border-neutral-800">
+            <span className="text-[11px] font-bold text-slate-500 bg-slate-100 px-2.5 py-0.5 rounded-full border border-slate-200">
               {threads.length} orders
             </span>
           </div>
 
           <div className="relative">
-            <Search className="w-3.5 h-3.5 text-neutral-500 absolute left-3 top-1/2 -translate-y-1/2" />
+            <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
             <input
               type="text"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="Search customer, car, or #ID..."
-              className="w-full bg-[#121212] border border-neutral-800 focus:border-red-600 rounded-xl pl-9 pr-3 py-2 text-xs text-white placeholder-neutral-500 outline-none"
+              className="w-full bg-slate-50 border border-slate-200 focus:border-red-600 focus:bg-white rounded-xl pl-9 pr-3 py-2 text-xs text-slate-900 placeholder-slate-400 outline-none transition"
             />
           </div>
 
@@ -165,8 +165,8 @@ export default function InboxView({ onOpenFullQuote }) {
                 onClick={() => setStatusFilter(f)}
                 className={`px-2.5 py-1 rounded-lg font-bold transition capitalize ${
                   statusFilter === f
-                    ? 'bg-red-950/80 text-red-400 border border-red-800'
-                    : 'bg-neutral-900/60 text-neutral-400 hover:text-white border border-neutral-800/80'
+                    ? 'bg-red-600 text-white shadow-xs shadow-red-600/20'
+                    : 'bg-slate-100 text-slate-600 hover:text-slate-900 hover:bg-slate-200/70 border border-slate-200/60'
                 }`}
               >
                 {f}
@@ -176,14 +176,14 @@ export default function InboxView({ onOpenFullQuote }) {
         </div>
 
         {/* Threads List */}
-        <div className="flex-1 overflow-y-auto divide-y divide-neutral-850">
+        <div className="flex-1 overflow-y-auto divide-y divide-slate-100">
           {isLoadingThreads ? (
-            <div className="p-8 text-center text-neutral-500 text-xs flex flex-col items-center space-y-2">
-              <Loader2 className="w-5 h-5 animate-spin text-red-500" />
+            <div className="p-8 text-center text-slate-400 text-xs flex flex-col items-center space-y-2">
+              <Loader2 className="w-5 h-5 animate-spin text-red-600" />
               <span>Loading messages...</span>
             </div>
           ) : filteredThreads.length === 0 ? (
-            <div className="p-8 text-center text-neutral-500 text-xs">
+            <div className="p-8 text-center text-slate-400 text-xs">
               No orders found in inbox.
             </div>
           ) : (
@@ -203,49 +203,49 @@ export default function InboxView({ onOpenFullQuote }) {
                   onClick={() => selectThread(thread)}
                   className={`p-3.5 cursor-pointer transition flex items-start space-x-3 ${
                     isSelected
-                      ? 'bg-red-950/30 border-l-4 border-l-red-600'
-                      : 'hover:bg-neutral-900/60'
+                      ? 'bg-red-50/70 border-l-4 border-l-red-600'
+                      : 'hover:bg-slate-50'
                   }`}
                 >
                   {/* Initials Avatar */}
                   <div className={`w-9 h-9 rounded-xl flex items-center justify-center font-bold text-xs shrink-0 ${
                     isSelected
-                      ? 'bg-red-600 text-white shadow-md shadow-red-900/40'
-                      : 'bg-neutral-850 text-neutral-300 border border-neutral-750'
+                      ? 'bg-red-600 text-white shadow-sm shadow-red-600/30'
+                      : 'bg-slate-100 text-slate-700 border border-slate-200'
                   }`}>
                     {initials}
                   </div>
 
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center justify-between">
-                      <h4 className={`text-xs font-bold truncate ${isSelected ? 'text-white' : 'text-neutral-200'}`}>
+                      <h4 className={`text-xs font-bold truncate ${isSelected ? 'text-slate-900' : 'text-slate-800'}`}>
                         {thread.name}
                       </h4>
-                      <span className="text-[10px] text-neutral-500 shrink-0 ml-1">
+                      <span className="text-[10px] text-slate-400 shrink-0 ml-1">
                         {new Date(thread.createdAt).toLocaleDateString([], { month: 'short', day: 'numeric' })}
                       </span>
                     </div>
 
-                    <div className="text-[11px] text-neutral-400 font-medium truncate mt-0.5">
+                    <div className="text-[11px] text-slate-600 font-medium truncate mt-0.5">
                       {thread.make} {thread.modelAndYear}
                     </div>
 
-                    <p className="text-[11px] text-neutral-500 truncate mt-1">
+                    <p className="text-[11px] text-slate-500 truncate mt-1">
                       {thread.lastMessage ? thread.lastMessage.preview : (thread.detailedService || thread.serviceCategory)}
                     </p>
 
-                    <div className="flex items-center justify-between mt-2 pt-1 border-t border-neutral-900">
+                    <div className="flex items-center justify-between mt-2 pt-1.5 border-t border-slate-100">
                       <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold border ${
-                        status === 'pending' ? 'bg-amber-950/40 text-amber-400 border-amber-800/80' :
-                        status === 'quoted' ? 'bg-blue-950/40 text-blue-400 border-blue-800/80' :
-                        status === 'completed' ? 'bg-emerald-950/40 text-emerald-400 border-emerald-800/80' :
-                        'bg-neutral-900 text-neutral-400 border-neutral-800'
+                        status === 'pending' ? 'bg-amber-50 text-amber-700 border-amber-200' :
+                        status === 'quoted' ? 'bg-blue-50 text-blue-700 border-blue-200' :
+                        status === 'completed' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' :
+                        'bg-slate-100 text-slate-600 border-slate-200'
                       }`}>
                         {status === 'pending' ? 'Needs Quote' : status === 'quoted' ? 'Quoted' : status}
                       </span>
 
                       {thread.quotedPrice && (
-                        <span className="font-mono text-[11px] font-bold text-emerald-400">
+                        <span className="font-mono text-[11px] font-bold text-emerald-600">
                           ${thread.quotedPrice}
                         </span>
                       )}
@@ -262,30 +262,30 @@ export default function InboxView({ onOpenFullQuote }) {
       {/* RIGHT PANE: ACTIVE THREAD & COMPOSER                          */}
       {/* ------------------------------------------------------------- */}
       {selectedThread ? (
-        <div className="flex-1 flex flex-col bg-[#0b0b0b]">
+        <div className="flex-1 flex flex-col bg-slate-50/60">
           {/* Thread Header */}
-          <div className="px-5 py-4 border-b border-neutral-800 flex flex-wrap items-center justify-between gap-3 bg-[#080808]">
+          <div className="px-5 py-4 border-b border-slate-200 flex flex-wrap items-center justify-between gap-3 bg-white">
             {/* Back button for mobile */}
             <button
               onClick={() => setSelectedThread(null)}
-              className="md:hidden text-xs text-neutral-400 hover:text-white flex items-center space-x-1"
+              className="md:hidden text-xs text-slate-500 hover:text-slate-900 flex items-center space-x-1"
             >
               <span>← Back</span>
             </button>
 
             <div>
               <div className="flex items-center space-x-2">
-                <h3 className="font-heading font-black text-base sm:text-lg text-white">
+                <h3 className="font-heading font-black text-base sm:text-lg text-slate-900">
                   {selectedThread.name}
                 </h3>
-                <span className="font-mono text-xs font-bold text-red-400 bg-red-950/60 px-2 py-0.5 rounded border border-red-900/50">
+                <span className="font-mono text-xs font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded-md border border-red-200">
                   #{selectedThread.id}
                 </span>
               </div>
-              <div className="flex flex-wrap items-center gap-2 text-xs text-neutral-400 mt-1">
-                <span>{selectedThread.make} ({selectedThread.modelAndYear})</span>
+              <div className="flex flex-wrap items-center gap-2 text-xs text-slate-500 mt-1">
+                <span className="font-medium text-slate-700">{selectedThread.make} ({selectedThread.modelAndYear})</span>
                 <span>•</span>
-                <a href={`tel:${selectedThread.phone?.replace(/[^0-9]/g, '')}`} className="text-red-400 hover:underline flex items-center space-x-1">
+                <a href={`tel:${selectedThread.phone?.replace(/[^0-9]/g, '')}`} className="text-red-600 hover:underline flex items-center space-x-1">
                   <Phone className="w-3 h-3" />
                   <span>{selectedThread.phone || 'No phone'}</span>
                 </a>
@@ -299,7 +299,7 @@ export default function InboxView({ onOpenFullQuote }) {
               <select
                 value={selectedThread.status || 'pending'}
                 onChange={(e) => handleStatusChange(e.target.value)}
-                className="bg-[#121212] border border-neutral-800 text-xs font-bold rounded-xl px-3 py-1.5 text-white outline-none cursor-pointer"
+                className="bg-slate-50 border border-slate-200 text-xs font-bold rounded-xl px-3 py-2 text-slate-800 outline-none cursor-pointer hover:border-slate-300 transition"
               >
                 <option value="pending">⏳ Pending (Needs Quote)</option>
                 <option value="in_review">🔍 In Review</option>
@@ -311,7 +311,7 @@ export default function InboxView({ onOpenFullQuote }) {
               {onOpenFullQuote && (
                 <button
                   onClick={() => onOpenFullQuote(selectedThread)}
-                  className="py-1.5 px-3 rounded-xl bg-red-700 hover:bg-red-800 text-white font-bold text-xs transition"
+                  className="py-2 px-3.5 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold text-xs transition shadow-xs shadow-red-600/20"
                 >
                   Quote Studio
                 </button>
@@ -322,41 +322,41 @@ export default function InboxView({ onOpenFullQuote }) {
           {/* Messages Scroll Area */}
           <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4">
             {/* Customer Inquiry Summary Banner Card */}
-            <div className="p-4 rounded-2xl bg-[#121212] border border-neutral-800 text-xs text-neutral-300 space-y-2.5">
-              <div className="flex items-center justify-between font-bold text-white border-b border-neutral-800 pb-2">
+            <div className="p-4 rounded-2xl bg-white border border-slate-200/80 text-xs text-slate-700 space-y-2.5 shadow-xs">
+              <div className="flex items-center justify-between font-bold text-slate-900 border-b border-slate-100 pb-2">
                 <div className="flex items-center space-x-2">
-                  <Wrench className="w-4 h-4 text-red-500" />
+                  <Wrench className="w-4 h-4 text-red-600" />
                   <span>Customer Request Details</span>
                 </div>
-                <span className="text-[11px] text-neutral-500">
+                <span className="text-[11px] text-slate-400 font-normal">
                   {new Date(selectedThread.createdAt).toLocaleString()}
                 </span>
               </div>
 
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                 <div>
-                  <span className="text-neutral-500 block text-[10px] uppercase font-bold">Service</span>
-                  <span className="text-white font-medium">{selectedThread.detailedService || selectedThread.serviceCategory}</span>
+                  <span className="text-slate-400 block text-[10px] uppercase font-bold">Service</span>
+                  <span className="text-slate-900 font-medium">{selectedThread.detailedService || selectedThread.serviceCategory}</span>
                 </div>
                 <div>
-                  <span className="text-neutral-500 block text-[10px] uppercase font-bold">Timeline</span>
-                  <span className="text-white font-medium">{selectedThread.timeline} {selectedThread.specificDate ? `(${selectedThread.specificDate})` : ''}</span>
+                  <span className="text-slate-400 block text-[10px] uppercase font-bold">Timeline</span>
+                  <span className="text-slate-900 font-medium">{selectedThread.timeline} {selectedThread.specificDate ? `(${selectedThread.specificDate})` : ''}</span>
                 </div>
                 <div>
-                  <span className="text-neutral-500 block text-[10px] uppercase font-bold">Location</span>
-                  <span className="text-white font-medium">{selectedThread.location || 'Casa Grande area'}</span>
+                  <span className="text-slate-400 block text-[10px] uppercase font-bold">Location</span>
+                  <span className="text-slate-900 font-medium">{selectedThread.location || 'Casa Grande area'}</span>
                 </div>
               </div>
 
               <div className="flex items-center gap-2 pt-1">
                 {selectedThread.needsTowing && (
-                  <span className="text-[10px] bg-red-950/80 text-red-400 border border-red-800 px-2 py-0.5 rounded-full font-bold flex items-center space-x-1">
+                  <span className="text-[10px] bg-red-50 text-red-700 border border-red-200 px-2 py-0.5 rounded-full font-bold flex items-center space-x-1">
                     <Truck className="w-3 h-3" />
                     <span>Towing Needed</span>
                   </span>
                 )}
                 {selectedThread.needsShuttle && (
-                  <span className="text-[10px] bg-amber-950/80 text-amber-400 border border-amber-800 px-2 py-0.5 rounded-full font-bold flex items-center space-x-1">
+                  <span className="text-[10px] bg-amber-50 text-amber-700 border border-amber-200 px-2 py-0.5 rounded-full font-bold flex items-center space-x-1">
                     <Bus className="w-3 h-3" />
                     <span>Shuttle Requested</span>
                   </span>
@@ -366,8 +366,8 @@ export default function InboxView({ onOpenFullQuote }) {
 
             {/* Conversation Messages */}
             {isLoadingMessages ? (
-              <div className="py-8 text-center text-xs text-neutral-500 flex flex-col items-center space-y-2">
-                <Loader2 className="w-5 h-5 animate-spin text-red-500" />
+              <div className="py-8 text-center text-xs text-slate-400 flex flex-col items-center space-y-2">
+                <Loader2 className="w-5 h-5 animate-spin text-red-600" />
                 <span>Loading messages...</span>
               </div>
             ) : (
@@ -378,19 +378,21 @@ export default function InboxView({ onOpenFullQuote }) {
                     key={msg.id}
                     className={`flex flex-col ${isAdmin ? 'items-end' : 'items-start'}`}
                   >
-                    <div className="flex items-center space-x-1.5 mb-1 px-1 text-[11px] text-neutral-400">
-                      <span className="font-bold text-white">{isAdmin ? (msg.senderName || 'Toby S.') : selectedThread.name}</span>
+                    <div className="flex items-center space-x-1.5 mb-1 px-1 text-[11px] text-slate-400">
+                      <span className="font-bold text-slate-700">{isAdmin ? (msg.senderName || 'Toby S.') : selectedThread.name}</span>
                       <span>•</span>
                       <span>{new Date(msg.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
                     </div>
 
                     <div className={`max-w-lg rounded-2xl p-4 text-xs sm:text-sm leading-relaxed whitespace-pre-wrap ${
                       isAdmin
-                        ? 'bg-gradient-to-br from-red-950/80 to-[#18080a] border border-red-800/80 text-white rounded-tr-sm shadow-md'
-                        : 'bg-[#161616] border border-neutral-800 text-neutral-200 rounded-tl-sm'
+                        ? 'bg-red-600 text-white rounded-tr-xs shadow-md shadow-red-600/15'
+                        : 'bg-white border border-slate-200 text-slate-800 rounded-tl-xs shadow-xs'
                     }`}>
                       {msg.isQuote && (
-                        <div className="inline-flex items-center space-x-1.5 bg-red-600 text-white font-bold text-[10px] px-2 py-0.5 rounded-full uppercase tracking-wider mb-2">
+                        <div className={`inline-flex items-center space-x-1.5 font-bold text-[10px] px-2.5 py-1 rounded-full uppercase tracking-wider mb-2 ${
+                          isAdmin ? 'bg-white/20 text-white' : 'bg-red-50 text-red-700 border border-red-200'
+                        }`}>
                           <DollarSign className="w-3 h-3" />
                           <span>Official Quote Attached</span>
                         </div>
@@ -398,7 +400,7 @@ export default function InboxView({ onOpenFullQuote }) {
                       <p>{msg.message}</p>
                     </div>
 
-                    <span className="text-[10px] text-neutral-500 px-1 mt-1">
+                    <span className="text-[10px] text-slate-400 px-1 mt-1">
                       {isAdmin ? `Delivered via Email to ${selectedThread.email}` : 'Received via Website'}
                     </span>
                   </div>
@@ -410,38 +412,38 @@ export default function InboxView({ onOpenFullQuote }) {
           </div>
 
           {/* Reply Composer Bar */}
-          <div className="p-4 border-t border-neutral-800 bg-[#080808] space-y-3">
+          <div className="p-4 border-t border-slate-200 bg-white space-y-3">
             {sendError && (
-              <div className="p-2.5 rounded-xl bg-red-950/50 border border-red-800 text-red-300 text-xs flex items-center space-x-2">
-                <AlertCircle className="w-4 h-4 text-red-400 shrink-0" />
+              <div className="p-2.5 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs flex items-center space-x-2">
+                <AlertCircle className="w-4 h-4 text-red-600 shrink-0" />
                 <span>{sendError}</span>
               </div>
             )}
 
             {/* Quick Price Quote Tool Toggle */}
             <div className="flex items-center justify-between text-xs">
-              <label className="flex items-center space-x-2 cursor-pointer text-neutral-400 hover:text-white transition">
+              <label className="flex items-center space-x-2 cursor-pointer text-slate-600 hover:text-slate-900 transition">
                 <input
                   type="checkbox"
                   checked={attachPrice}
                   onChange={(e) => setAttachPrice(e.target.checked)}
-                  className="rounded bg-neutral-900 border-neutral-700 text-red-600"
+                  className="rounded bg-slate-100 border-slate-300 text-red-600 focus:ring-red-500"
                 />
                 <span className="font-bold flex items-center space-x-1">
-                  <DollarSign className="w-3.5 h-3.5 text-emerald-500" />
+                  <DollarSign className="w-3.5 h-3.5 text-emerald-600" />
                   <span>Attach Official Quote Price ($)</span>
                 </span>
               </label>
 
               {attachPrice && (
                 <div className="flex items-center space-x-1.5">
-                  <span className="text-neutral-500 font-bold">$</span>
+                  <span className="text-slate-500 font-bold">$</span>
                   <input
                     type="text"
                     value={quotePrice}
                     onChange={(e) => setQuotePrice(e.target.value.replace(/[^0-9.]/g, ''))}
                     placeholder="e.g. 350.00"
-                    className="w-24 bg-[#141414] border border-neutral-700 rounded-lg px-2.5 py-1 text-xs text-white font-mono font-bold outline-none focus:border-red-600"
+                    className="w-24 bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1 text-xs text-slate-900 font-mono font-bold outline-none focus:border-red-600 focus:bg-white"
                     autoFocus
                   />
                 </div>
@@ -460,13 +462,13 @@ export default function InboxView({ onOpenFullQuote }) {
                   }
                 }}
                 placeholder={`Reply to ${selectedThread.name}... (Press Ctrl+Enter to send)`}
-                className="flex-1 bg-[#121212] border border-neutral-800 focus:border-red-600 rounded-2xl p-3 text-xs sm:text-sm text-white placeholder-neutral-500 outline-none resize-none leading-relaxed"
+                className="flex-1 bg-slate-50 border border-slate-200 focus:border-red-600 focus:bg-white rounded-2xl p-3 text-xs sm:text-sm text-slate-900 placeholder-slate-400 outline-none resize-none leading-relaxed transition"
               />
 
               <button
                 type="submit"
                 disabled={isSending || (!replyText.trim() && !quotePrice.trim())}
-                className="py-3 px-5 bg-red-700 hover:bg-red-800 disabled:opacity-40 text-white font-bold text-xs sm:text-sm rounded-2xl transition shadow-md shadow-red-900/40 flex items-center space-x-2 shrink-0 active:scale-95"
+                className="py-3 px-5 bg-red-600 hover:bg-red-700 disabled:opacity-40 text-white font-bold text-xs sm:text-sm rounded-2xl transition shadow-md shadow-red-600/20 flex items-center space-x-2 shrink-0 active:scale-95 cursor-pointer"
               >
                 {isSending ? (
                   <Loader2 className="w-4 h-4 animate-spin" />
@@ -479,17 +481,17 @@ export default function InboxView({ onOpenFullQuote }) {
               </button>
             </form>
 
-            <div className="flex items-center justify-between text-[11px] text-neutral-500 px-1">
+            <div className="flex items-center justify-between text-[11px] text-slate-400 px-1">
               <span>Customer receives your reply directly in their email inbox.</span>
-              <span className="hidden sm:inline">Ctrl + Enter to send</span>
+              <span className="hidden sm:inline font-mono">Ctrl + Enter to send</span>
             </div>
           </div>
         </div>
       ) : (
-        <div className="flex-1 flex flex-col items-center justify-center p-8 text-neutral-500 space-y-2">
-          <MessageSquare className="w-10 h-10 text-neutral-600" />
-          <h4 className="text-sm font-bold text-white">No Order Selected</h4>
-          <p className="text-xs max-w-xs text-center">
+        <div className="flex-1 flex flex-col items-center justify-center p-8 text-slate-400 space-y-2 bg-slate-50/50">
+          <MessageSquare className="w-10 h-10 text-slate-300" />
+          <h4 className="text-sm font-bold text-slate-800">No Order Selected</h4>
+          <p className="text-xs max-w-xs text-center text-slate-500">
             Pick an order from the list on the left to read customer details and send direct replies.
           </p>
         </div>
