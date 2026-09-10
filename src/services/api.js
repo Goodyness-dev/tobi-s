@@ -135,6 +135,24 @@ export const quotesApi = {
       method: 'POST',
       body: JSON.stringify(quoteData)
     });
+  },
+
+  async getInbox({ status = 'all', search = '' } = {}) {
+    const params = new URLSearchParams();
+    if (status && status !== 'all') params.set('status', status);
+    if (search) params.set('search', search);
+    return request(`/api/inbox?${params.toString()}`, { method: 'GET' });
+  },
+
+  async getMessages(quoteId) {
+    return request(`/api/quotes/${encodeURIComponent(quoteId)}/messages`, { method: 'GET' });
+  },
+
+  async sendMessage(quoteId, { message, quotePrice = null }) {
+    return request(`/api/quotes/${encodeURIComponent(quoteId)}/messages`, {
+      method: 'POST',
+      body: JSON.stringify({ message, quotePrice })
+    });
   }
 };
 

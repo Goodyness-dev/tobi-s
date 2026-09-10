@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
 import { 
   Wrench, Settings, ClipboardList, LogOut, 
-  ExternalLink, ShieldCheck, ChevronDown, CheckCircle
+  ExternalLink, ShieldCheck, MessageSquare
 } from 'lucide-react';
 import OrdersView from './OrdersView';
 import AdminSettings from './AdminSettings';
+import InboxView from './InboxView';
+import QuoteDetailModal from './QuoteDetailModal';
 import { authApi } from '../../services/api';
 
 export default function AdminLayout({ user, onLogout, onBackToSite }) {
-  const [activeTab, setActiveTab] = useState('orders'); // 'orders' | 'settings'
+  const [activeTab, setActiveTab] = useState('inbox'); // 'inbox' | 'orders' | 'settings'
+  const [modalQuote, setModalQuote] = useState(null);
 
   const handleLogout = async () => {
     await authApi.logout();
@@ -47,6 +50,18 @@ export default function AdminLayout({ user, onLogout, onBackToSite }) {
             {/* Middle: Tab Switcher (Desktop) */}
             <div className="hidden md:flex items-center bg-[#121212] border border-neutral-800 rounded-2xl p-1">
               <button
+                onClick={() => setActiveTab('inbox')}
+                className={`py-2 px-4 rounded-xl text-xs font-bold transition flex items-center space-x-2 ${
+                  activeTab === 'inbox'
+                    ? 'bg-red-700 text-white shadow-md'
+                    : 'text-neutral-400 hover:text-white'
+                }`}
+              >
+                <MessageSquare className="w-4 h-4" />
+                <span>Customer Inbox</span>
+              </button>
+
+              <button
                 onClick={() => setActiveTab('orders')}
                 className={`py-2 px-4 rounded-xl text-xs font-bold transition flex items-center space-x-2 ${
                   activeTab === 'orders'
@@ -55,7 +70,7 @@ export default function AdminLayout({ user, onLogout, onBackToSite }) {
                 }`}
               >
                 <ClipboardList className="w-4 h-4" />
-                <span>Orders & Quotes</span>
+                <span>Orders Table</span>
               </button>
 
               <button
@@ -94,32 +109,54 @@ export default function AdminLayout({ user, onLogout, onBackToSite }) {
         </div>
 
         {/* Mobile Tab Switcher */}
-        <div className="flex md:hidden border-t border-neutral-800/80 bg-[#0c0c0c] px-4 py-2">
+        <div className="flex md:hidden border-t border-neutral-800/80 bg-[#0c0c0c] px-3 py-2 gap-1">
+          <button
+            onClick={() => setActiveTab('inbox')}
+            className={`flex-1 py-2 text-[11px] font-bold text-center rounded-xl transition flex items-center justify-center space-x-1 ${
+              activeTab === 'inbox' ? 'bg-red-700 text-white' : 'text-neutral-400'
+            }`}
+          >
+            <MessageSquare className="w-3.5 h-3.5" />
+            <span>Inbox</span>
+          </button>
           <button
             onClick={() => setActiveTab('orders')}
-            className={`flex-1 py-2 text-xs font-bold text-center rounded-xl transition flex items-center justify-center space-x-1.5 ${
+            className={`flex-1 py-2 text-[11px] font-bold text-center rounded-xl transition flex items-center justify-center space-x-1 ${
               activeTab === 'orders' ? 'bg-red-700 text-white' : 'text-neutral-400'
             }`}
           >
-            <ClipboardList className="w-4 h-4" />
-            <span>Orders & Quotes</span>
+            <ClipboardList className="w-3.5 h-3.5" />
+            <span>Orders</span>
           </button>
           <button
             onClick={() => setActiveTab('settings')}
-            className={`flex-1 py-2 text-xs font-bold text-center rounded-xl transition flex items-center justify-center space-x-1.5 ${
+            className={`flex-1 py-2 text-[11px] font-bold text-center rounded-xl transition flex items-center justify-center space-x-1 ${
               activeTab === 'settings' ? 'bg-red-700 text-white' : 'text-neutral-400'
             }`}
           >
-            <Settings className="w-4 h-4" />
-            <span>Settings & Telegram</span>
+            <Settings className="w-3.5 h-3.5" />
+            <span>Settings</span>
           </button>
         </div>
       </header>
 
       {/* Main Content Area */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
-        {activeTab === 'orders' ? <OrdersView /> : <AdminSettings />}
+        {activeTab === 'inbox' && (
+          <InboxView onOpenFullQuote={(q) => setModalQuote(q)} />
+        )}
+        {activeTab === 'orders' && <OrdersView />}
+        {activeTab === 'settings' && <AdminSettings />}
       </main>
+
+      {/* Optional Full Quote Studio Modal if triggered from Inbox */}
+      {modalQuote && (
+        <QuoteDetailModal
+          quote={modalQuote}
+          onClose={() => setModalQuote(null)}
+          onUpdate={(updated) => setModalQuote(updated)}
+        />
+      )}
 
       {/* Footer */}
       <footer className="border-t border-neutral-900 bg-[#050505] py-4 text-center text-xs text-neutral-600">

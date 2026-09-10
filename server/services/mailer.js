@@ -278,3 +278,49 @@ export async function testEmailConnection(toEmail, config = {}) {
     return { success: false, error: err.message };
   }
 }
+
+/**
+ * Sends customer a direct message/reply sent from Toby's site inbox
+ */
+export async function sendCustomerInboxReplyEmail(quote, replyMessage, quotePrice = null) {
+  const emailJsServiceId = getSetting('emailjs_service_id', '');
+  const emailJsTemplateId = getSetting('emailjs_template_id_quote', '');
+  const emailJsPublicKey = getSetting('emailjs_public_key', '');
+  const shopPhone = getSetting('shop_phone', '(520) 836-6921');
+  const shopName = getSetting('shop_name', "Toby's Auto Mechanic");
+
+  if (emailJsServiceId && emailJsTemplateId && emailJsPublicKey) {
+    try {
+      const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          service_id: emailJsServiceId,
+          template_id: emailJsTemplateId,
+          user_id: emailJsPublicKey,
+          template_params: {
+            quote_id: quote.id,
+            to_email: quote.email,
+            customer_name: quote.name,
+            vehicle_make: quote.make,
+            vehicle_model: quote.modelAndYear,
+            service_name: quote.detailedService || quote.serviceCategory,
+            quote_price: quotePrice ? `$${quotePrice}` : (quote.quotedPrice ? `$${quote.quotedPrice}` : 'Estimate in note'),
+            turnaround_time: quote.estimatedTurnaround || 'Fast turnaround',
+            warranty_text: quote.warrantyNote || 'Standard shop warranty',
+            mechanic_note: replyMessage,
+            shop_phone: shopPhone,
+            shop_name: shopName
+          }
+        })
+      });
+      return { success: response.ok, status: response.status };
+    } catch (err) {
+      console.error('[Mailer] Inbox reply dispatch error:', err);
+      return { success: false, error: err.message };
+    }
+  }
+
+  console.log(`[Mailer] Simulated Inbox reply sent to ${quote.email}: "${replyMessage}"`);
+  return { success: true, method: 'simulated' };
+}

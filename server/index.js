@@ -9,7 +9,10 @@ import {
   deleteQuote,
   getQuotesSummaryStats,
   getAllSettings,
-  saveSettings
+  saveSettings,
+  addQuoteMessage,
+  getQuoteMessages,
+  getInboxThreads
 } from './db.js';
 import {
   authenticateAdmin,
@@ -21,7 +24,8 @@ import { sendTelegramAlert, testTelegramConnection } from './services/telegram.j
 import {
   sendCustomerQuoteEmail,
   sendNewQuoteAdminNotification,
-  testEmailConnection
+  testEmailConnection,
+  sendCustomerInboxReplyEmail
 } from './services/mailer.js';
 
 const PORT = process.env.PORT || 5001;
@@ -175,6 +179,16 @@ const server = http.createServer(async (req, res) => {
       return sendJson(res, 200, stats);
     }
 
+    if (pathname === '/api/inbox' && method === 'GET') {
+      const session = requireAuth(req, res);
+      if (!session) return;
+
+      const status = parsedUrl.searchParams.get('status') || undefined;
+      const search = parsedUrl.searchParams.get('search') || undefined;
+      const threads = getInboxThreads({ search, status });
+      return sendJson(res, 200, { threads });
+    }
+
     if (pathname === '/api/quotes' && method === 'GET') {
       const session = requireAuth(req, res);
       if (!session) return;
@@ -255,6 +269,50 @@ const server = http.createServer(async (req, res) => {
         quote: updatedQuote,
         emailDelivery: emailResult
       });
+    }
+
+    // Match /api/quotes/:id/messages
+    const messagesMatch = pathname.match(/^\/api\/quotes\/([^/]+)\/messages$/);
+    if (messagesMatch) {
+      const quoteId = messagesMatch[1];
+      const session = requireAuth(req, res);
+      if (!session) return;
+
+      if (method === 'GET') {
+        const messages = getQuoteMessages(quoteId);
+        return sendJson(res, 200, { messages });
+      }
+
+      if (method === 'POST') {
+        const body = await parseBody(req);
+        if (!body.message || !body.message.trim()) {
+          return sendError(res, 400, 'Message text is required');
+        }
+
+        const quote = getQuoteById(quoteId);
+        if (!quote) return sendError(res, 404, 'Quote not found');
+
+        const newMsg = addQuoteMessage(quoteId, {
+          sender: 'admin',
+          senderName: body.senderName || session.user.name || 'Toby S.',
+          message: body.message,
+          isQuote: Boolean(body.isQuote),
+          quotePrice: body.quotePrice || null
+        });
+
+        // If price was attached, update quote status
+        if (body.quotePrice) {
+          updateQuoteStatus(quoteId, 'quoted');
+        }
+
+        // Send reply directly to customer email
+        sendCustomerInboxReplyEmail(quote, body.message, body.quotePrice).catch(e => console.error('[API] Reply email error:', e));
+
+        return sendJson(res, 201, {
+          success: true,
+          message: newMsg
+        });
+      }
     }
 
     // -------------------------------------------------------------

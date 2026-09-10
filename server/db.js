@@ -63,6 +63,19 @@ db.exec(`
     created_at INTEGER NOT NULL,
     expires_at INTEGER NOT NULL
   );
+
+  CREATE TABLE IF NOT EXISTS quote_messages (
+    id TEXT PRIMARY KEY,
+    quote_id TEXT NOT NULL,
+    sender TEXT NOT NULL,
+    sender_name TEXT NOT NULL,
+    message TEXT NOT NULL,
+    is_quote INTEGER DEFAULT 0,
+    quote_price TEXT,
+    created_at TEXT NOT NULL
+  );
+
+  CREATE INDEX IF NOT EXISTS idx_quote_messages_quote_id ON quote_messages(quote_id);
 `);
 
 // Pre-populate default settings if empty
@@ -167,6 +180,29 @@ export function insertQuote(quoteData) {
     now
   );
 
+  // Automatically insert the customer's initial inquiry into the thread
+  try {
+    const inquiryText = [
+      `Vehicle: ${quoteData.vehicle_make || quoteData.make || ''} ${quoteData.vehicle_model_year || quoteData.modelAndYear || ''}`,
+      `Service Requested: ${quoteData.detailed_service || quoteData.detailedService || quoteData.service_category || quoteData.serviceCategory || ''}`,
+      (quoteData.engine_type || quoteData.engineType) ? `Engine Type: ${quoteData.engine_type || quoteData.engineType}` : null,
+      (quoteData.custom_issue || quoteData.customIssue) ? `Issue Description: ${quoteData.custom_issue || quoteData.customIssue}` : null,
+      quoteData.details ? `Symptoms & Details: ${quoteData.details}` : null,
+      (quoteData.needs_towing || quoteData.needsTowing) ? `🚨 Needs Towing` : null,
+      (quoteData.needs_shuttle || quoteData.needsShuttle) ? `🚐 Needs Shuttle Ride` : null,
+      quoteData.timeline ? `Timeline: ${quoteData.timeline}` : null,
+      quoteData.location ? `Location: ${quoteData.location}` : null
+    ].filter(Boolean).join('\n');
+
+    addQuoteMessage(quoteData.id, {
+      sender: 'customer',
+      senderName: quoteData.customer_name || quoteData.name || 'Customer',
+      message: inquiryText || 'Requested a service estimate.'
+    });
+  } catch (err) {
+    console.warn('Initial thread message note:', err.message);
+  }
+
   return getQuoteById(quoteData.id);
 }
 
@@ -235,6 +271,20 @@ export function saveCustomerQuoteResponse(id, { price, breakdown, turnaround, wa
     id
   );
 
+  // Record Toby's quote in the conversation thread
+  try {
+    const quoteMsg = `💰 OFFICIAL QUOTE ESTIMATE: $${price}\n⏱ Estimated Turnaround: ${turnaround || 'Same Day / 1-2 Days'}\n🛡 Warranty: ${warranty || '12-month / 12,000-mile warranty'}${message ? `\n\nNote from Toby:\n"${message}"` : ''}`;
+    addQuoteMessage(id, {
+      sender: 'admin',
+      senderName: getSetting('admin_name', 'Toby S.'),
+      message: quoteMsg,
+      isQuote: true,
+      quotePrice: String(price)
+    });
+  } catch (err) {
+    console.warn('Quote thread message note:', err.message);
+  }
+
   return getQuoteById(id);
 }
 
@@ -290,6 +340,92 @@ function formatQuoteRow(row) {
     createdAt: row.created_at,
     updatedAt: row.updated_at
   };
+}
+
+export function addQuoteMessage(quoteId, { sender = 'admin', senderName = 'Toby S.', message, isQuote = false, quotePrice = null }) {
+  const msgId = `MSG-${Date.now()}-${Math.random().toString(36).substr(2, 5)}`;
+  const now = new Date().toISOString();
+  const stmt = db.prepare(`
+    INSERT INTO quote_messages (id, quote_id, sender, sender_name, message, is_quote, quote_price, created_at)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+  `);
+  stmt.run(msgId, quoteId, sender, senderName, message, isQuote ? 1 : 0, quotePrice ? String(quotePrice) : null, now);
+
+  db.prepare('UPDATE quotes SET updated_at = ? WHERE id = ?').run(now, quoteId);
+  return { id: msgId, quoteId, sender, senderName, message, isQuote: Boolean(isQuote), quotePrice, createdAt: now };
+}
+
+export function getQuoteMessages(quoteId) {
+  const stmt = db.prepare('SELECT * FROM quote_messages WHERE quote_id = ? ORDER BY created_at ASC');
+  const rows = stmt.all(quoteId);
+  return rows.map(r => ({
+    id: r.id,
+    quoteId: r.quote_id,
+    sender: r.sender,
+    senderName: r.sender_name,
+    message: r.message,
+    isQuote: Boolean(r.is_quote),
+    quotePrice: r.quote_price,
+    createdAt: r.created_at
+  }));
+}
+
+export function getInboxThreads({ search, status } = {}) {
+  const quotes = getAllQuotes({ search, status });
+  return quotes.map(q => {
+    const messages = getQuoteMessages(q.id);
+    const lastMsg = messages[messages.length - 1] || null;
+    return {
+      ...q,
+      messageCount: messages.length,
+      lastMessage: lastMsg ? {
+        sender: lastMsg.sender,
+        senderName: lastMsg.senderName,
+        preview: lastMsg.message.slice(0, 120),
+        isQuote: lastMsg.isQuote,
+        quotePrice: lastMsg.quotePrice,
+        createdAt: lastMsg.createdAt
+      } : null
+    };
+  });
+}
+
+// Ensure any existing quotes have their initial thread created
+try {
+  const allExistingQuotes = getAllQuotes();
+  for (const q of allExistingQuotes) {
+    const existingMsgs = getQuoteMessages(q.id);
+    if (existingMsgs.length === 0) {
+      const inquiryText = [
+        `Vehicle: ${q.make} ${q.modelAndYear}`,
+        `Service Requested: ${q.detailedService || q.serviceCategory}`,
+        q.engineType ? `Engine: ${q.engineType}` : null,
+        q.customIssue ? `Issue: ${q.customIssue}` : null,
+        q.details ? `Symptoms/Notes: ${q.details}` : null,
+        q.needsTowing ? `🚨 Towing Requested` : null,
+        q.needsShuttle ? `🚐 Shuttle Requested` : null,
+        q.timeline ? `Timeline: ${q.timeline}` : null
+      ].filter(Boolean).join('\n');
+
+      addQuoteMessage(q.id, {
+        sender: 'customer',
+        senderName: q.name || 'Customer',
+        message: inquiryText || 'Requested vehicle repair estimate.'
+      });
+
+      if (q.quotedPrice) {
+        addQuoteMessage(q.id, {
+          sender: 'admin',
+          senderName: getSetting('admin_name', 'Toby S.'),
+          message: `💰 OFFICIAL QUOTE ESTIMATE: $${q.quotedPrice}\n⏱ Turnaround: ${q.estimatedTurnaround || '1-2 Days'}\n🛡 Warranty: ${q.warrantyNote || 'Standard warranty'}${q.adminMessage ? `\n\nNote from Toby:\n"${q.adminMessage}"` : ''}`,
+          isQuote: true,
+          quotePrice: String(q.quotedPrice)
+        });
+      }
+    }
+  }
+} catch (migrErr) {
+  console.warn('Inbox thread migration note:', migrErr.message);
 }
 
 export default db;
