@@ -35,7 +35,7 @@ export default function OrdersView() {
     } catch (err) {
       console.warn('Error fetching quotes from backend (checking localStorage fallback):', err);
       try {
-        const local = JSON.parse(localStorage.getItem('tobys_quotes') || '[]');
+        const local = JSON.parse(localStorage.getItem('biz_quotes') || localStorage.getItem('tobys_quotes') || '[]');
         setQuotes(local);
         setStats({
           total: local.length,
@@ -110,7 +110,7 @@ export default function OrdersView() {
             </div>
           </div>
           <div className="text-2xl sm:text-3xl font-black font-heading text-amber-600">{stats.pending}</div>
-          <span className="text-[11px] text-amber-600/80 mt-1 block font-medium">Needs Toby's price response</span>
+          <span className="text-[11px] text-amber-600/80 mt-1 block font-medium">Needs shop price response</span>
         </div>
 
         {/* Quoted */}

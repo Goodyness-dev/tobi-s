@@ -4,6 +4,7 @@ import {
   Loader2, Save, Eye, EyeOff, HelpCircle, ExternalLink, RefreshCw, Key
 } from 'lucide-react';
 import { settingsApi, authApi } from '../../services/api';
+import { BUSINESS_INFO } from '../../data/businessData';
 
 export default function AdminSettings() {
   const [settings, setSettings] = useState(null);
@@ -193,11 +194,11 @@ export default function AdminSettings() {
         {/* Setup Walkthrough */}
         <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 text-xs text-slate-700 space-y-2">
           <div className="font-bold text-slate-900 flex items-center space-x-1.5 text-sm">
-            <HelpCircle className="w-4 h-4 text-red-600" />
-            <span>How Toby sets up Telegram (Takes 60 seconds):</span>
+            <HelpCircle className="w-4 h-4 text-shop-red" />
+            <span>How to set up Telegram alerts for {BUSINESS_INFO.name} (Takes 60 seconds):</span>
           </div>
           <ol className="list-decimal list-inside space-y-1 text-slate-600 leading-relaxed pl-1">
-            <li>Open Telegram on your phone or computer, search for <strong className="text-slate-900">@BotFather</strong>, send <code className="text-red-700 bg-red-50 px-1 py-0.5 rounded font-mono font-bold">/newbot</code> and copy your HTTP API Token.</li>
+            <li>Open Telegram on your phone or computer, search for <strong className="text-slate-900">@BotFather</strong>, send <code className="text-shop-red bg-shop-light px-1 py-0.5 rounded font-mono font-bold">/newbot</code> and copy your HTTP API Token.</li>
             <li>Search for <strong className="text-slate-900">@userinfobot</strong> on Telegram and tap Start to see your numeric <strong className="text-slate-900">Id</strong> (Chat ID).</li>
             <li>Paste your Token and Chat ID below, click <strong className="text-slate-900">Test Connection</strong>, and verify you get the test ping on your phone!</li>
           </ol>
@@ -318,9 +319,9 @@ export default function AdminSettings() {
               value={settings.emailjs_template_id_quote || ''}
               onChange={(e) => setSettings({ ...settings, emailjs_template_id_quote: e.target.value })}
               placeholder="e.g. template_customer_quote"
-              className="w-full bg-slate-50 border border-slate-200 focus:border-red-600 focus:bg-white rounded-xl px-4 py-3 text-sm text-slate-900 placeholder-slate-400 outline-none font-mono transition"
+              className="w-full bg-slate-50 border border-slate-200 focus:border-shop-red focus:bg-white rounded-xl px-4 py-3 text-sm text-slate-900 placeholder-slate-400 outline-none font-mono transition"
             />
-            <span className="text-[11px] text-slate-400 mt-1 block">Used when Toby clicks "Send Quote to Customer".</span>
+            <span className="text-[11px] text-slate-400 mt-1 block">Used when clicking "Send Quote to Customer".</span>
           </div>
 
           <div>
@@ -332,9 +333,9 @@ export default function AdminSettings() {
               value={settings.emailjs_template_id_notify || ''}
               onChange={(e) => setSettings({ ...settings, emailjs_template_id_notify: e.target.value })}
               placeholder="e.g. template_admin_alert"
-              className="w-full bg-slate-50 border border-slate-200 focus:border-red-600 focus:bg-white rounded-xl px-4 py-3 text-sm text-slate-900 placeholder-slate-400 outline-none font-mono transition"
+              className="w-full bg-slate-50 border border-slate-200 focus:border-shop-red focus:bg-white rounded-xl px-4 py-3 text-sm text-slate-900 placeholder-slate-400 outline-none font-mono transition"
             />
-            <span className="text-[11px] text-slate-400 mt-1 block">Alerts Toby's shop email when customer submits.</span>
+            <span className="text-[11px] text-slate-400 mt-1 block">Alerts shop email when customer submits a quote request.</span>
           </div>
         </div>
 
@@ -494,8 +495,8 @@ export default function AdminSettings() {
               type="password"
               value={oldPassword}
               onChange={(e) => setOldPassword(e.target.value)}
-              placeholder="Current password (default: toby2024)"
-              className="w-full bg-slate-50 border border-slate-200 focus:border-red-600 focus:bg-white rounded-xl px-4 py-3 text-sm text-slate-900 outline-none transition"
+              placeholder="Current admin password"
+              className="w-full bg-slate-50 border border-slate-200 focus:border-shop-red focus:bg-white rounded-xl px-4 py-3 text-sm text-slate-900 outline-none transition"
               required
             />
           </div>

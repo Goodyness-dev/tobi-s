@@ -5,19 +5,22 @@ import {
   ShieldCheck, Wrench, Trash2, ArrowUpRight, Check
 } from 'lucide-react';
 import { quotesApi } from '../../services/api';
+import { BUSINESS_INFO } from '../../data/businessData';
 
 export default function QuoteDetailModal({ quote, onClose, onUpdate }) {
   const [activeTab, setActiveTab] = useState('quote_studio'); // 'quote_studio' | 'full_details'
-  const [status, setStatus] = useState(quote.status || 'pending');
+  const [status, setStatus] = useState(quote?.status || 'pending');
   const [isUpdatingStatus, setIsUpdatingStatus] = useState(false);
 
   // Quote Studio State
-  const [price, setPrice] = useState(quote.quotedPrice || '');
-  const [turnaround, setTurnaround] = useState(quote.estimatedTurnaround || 'Same day drop-off / 1-2 days');
-  const [warranty, setWarranty] = useState(quote.warrantyNote || '12-month / 12,000-mile parts & labor warranty');
+  const [price, setPrice] = useState(quote?.quotedPrice || '');
+  const [turnaround, setTurnaround] = useState(quote?.estimatedTurnaround || 'Prompt scheduling / 24-48 hours');
+  const [warranty, setWarranty] = useState(quote?.warrantyNote || '100% Workmanship & Parts Guarantee');
   const [message, setMessage] = useState(
-    quote.adminMessage || 
-    `Hi ${quote.name}, thanks for reaching out to Toby's Auto Mechanic! I reviewed your repair request and we have bays ready for your ${quote.make} ${quote.modelAndYear}. Give us a call or reply to lock in your drop-off time.`
+    quote?.adminMessage || 
+    (quote?.make
+      ? `Hi ${quote?.name || 'Customer'}, thanks for reaching out to ${BUSINESS_INFO.name}! I reviewed your repair request for your ${quote?.make} ${quote?.modelAndYear || ''}. Give us a call at ${BUSINESS_INFO.phone} or reply here to confirm your appointment.`
+      : `Hi ${quote?.name || 'Customer'}, thanks for reaching out to ${BUSINESS_INFO.name}! I reviewed your service request for "${quote?.serviceCategory || quote?.detailedService || 'your project'}". Give us a call at ${BUSINESS_INFO.phone} or reply here to confirm your appointment.`)
   );
   
   const [isSendingQuote, setIsSendingQuote] = useState(false);
@@ -200,12 +203,12 @@ export default function QuoteDetailModal({ quote, onClose, onUpdate }) {
             onClick={() => setActiveTab('full_details')}
             className={`py-3.5 px-4 font-bold text-xs sm:text-sm border-b-2 transition flex items-center space-x-2 ${
               activeTab === 'full_details'
-                ? 'border-red-600 text-red-600'
+                ? 'border-shop-red text-shop-red'
                 : 'border-transparent text-slate-500 hover:text-slate-800'
             }`}
           >
             <Wrench className="w-4 h-4 text-slate-400" />
-            <span>Full Vehicle & Issue Specs</span>
+            <span>{quote.make ? 'Full Vehicle & Issue Specs' : 'Full Service & Issue Specs'}</span>
           </button>
         </div>
 
@@ -304,14 +307,14 @@ export default function QuoteDetailModal({ quote, onClose, onUpdate }) {
                 {/* Personal Message / Note to Customer */}
                 <div>
                   <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
-                    Toby's Personal Message to Customer
+                    {BUSINESS_INFO.owner?.name ? `${BUSINESS_INFO.owner.name}'s Note to Customer` : 'Direct Message to Customer'}
                   </label>
                   <textarea
                     rows={4}
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     placeholder="Write a custom explanation, recommendations, or deposit instructions..."
-                    className="w-full bg-slate-50 border border-slate-200 focus:border-red-600 focus:bg-white rounded-xl p-4 text-sm text-slate-900 placeholder-slate-400 outline-none leading-relaxed transition"
+                    className="w-full bg-slate-50 border border-slate-200 focus:border-shop-red focus:bg-white rounded-xl p-4 text-sm text-slate-900 placeholder-slate-400 outline-none leading-relaxed transition"
                   />
                   <span className="text-[11px] text-slate-400 mt-1 block">
                     This message is prominently highlighted in the customer's quote email.
@@ -327,7 +330,7 @@ export default function QuoteDetailModal({ quote, onClose, onUpdate }) {
                   <button
                     type="submit"
                     disabled={isSendingQuote}
-                    className="w-full sm:w-auto py-3 px-6 bg-red-600 hover:bg-red-700 disabled:opacity-50 text-white font-bold text-xs sm:text-sm rounded-xl transition shadow-md shadow-red-600/20 flex items-center justify-center space-x-2 active:scale-95 cursor-pointer"
+                    className="w-full sm:w-auto py-3 px-6 bg-shop-red hover:bg-shop-redHover disabled:opacity-50 text-white font-bold text-xs sm:text-sm rounded-xl transition shadow-md shadow-shop-red/20 flex items-center justify-center space-x-2 active:scale-95 cursor-pointer"
                   >
                     {isSendingQuote ? (
                       <>
@@ -348,26 +351,47 @@ export default function QuoteDetailModal({ quote, onClose, onUpdate }) {
             /* TAB 2: Full Details */
             <div className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {/* Vehicle Specs */}
+                {/* Request / Vehicle Specs */}
                 <div className="bg-white border border-slate-200/80 rounded-2xl p-5 space-y-3 shadow-xs">
-                  <span className="text-xs font-bold text-slate-400 uppercase tracking-wider block">Vehicle Specifications</span>
-                  <div className="flex justify-between text-sm border-b border-slate-100 pb-2">
-                    <span className="text-slate-500">Make:</span>
-                    <span className="text-slate-900 font-bold">{quote.make}</span>
-                  </div>
-                  <div className="flex justify-between text-sm border-b border-slate-100 pb-2">
-                    <span className="text-slate-500">Model & Year:</span>
-                    <span className="text-slate-900 font-bold">{quote.modelAndYear}</span>
-                  </div>
-                  {quote.engineType && (
-                    <div className="flex justify-between text-sm border-b border-slate-100 pb-2">
-                      <span className="text-slate-500">Engine Type:</span>
-                      <span className="text-red-600 font-bold">{quote.engineType}</span>
-                    </div>
+                  <span className="text-xs font-bold text-slate-400 uppercase tracking-wider block">
+                    {quote.make ? 'Vehicle Specifications' : 'Service & Property Details'}
+                  </span>
+                  {quote.make ? (
+                    <>
+                      <div className="flex justify-between text-sm border-b border-slate-100 pb-2">
+                        <span className="text-slate-500">Make:</span>
+                        <span className="text-slate-900 font-bold">{quote.make}</span>
+                      </div>
+                      <div className="flex justify-between text-sm border-b border-slate-100 pb-2">
+                        <span className="text-slate-500">Model & Year:</span>
+                        <span className="text-slate-900 font-bold">{quote.modelAndYear}</span>
+                      </div>
+                      {quote.engineType && (
+                        <div className="flex justify-between text-sm border-b border-slate-100 pb-2">
+                          <span className="text-slate-500">Engine Type:</span>
+                          <span className="text-shop-red font-bold">{quote.engineType}</span>
+                        </div>
+                      )}
+                    </>
+                  ) : (
+                    <>
+                      {quote.propertyType && (
+                        <div className="flex justify-between text-sm border-b border-slate-100 pb-2">
+                          <span className="text-slate-500">Property / Location:</span>
+                          <span className="text-slate-900 font-bold">{quote.propertyType}</span>
+                        </div>
+                      )}
+                      {quote.modelAndYear && (
+                        <div className="flex justify-between text-sm border-b border-slate-100 pb-2">
+                          <span className="text-slate-500">Item / Equipment:</span>
+                          <span className="text-slate-900 font-bold">{quote.modelAndYear}</span>
+                        </div>
+                      )}
+                    </>
                   )}
                   <div className="flex justify-between text-sm">
                     <span className="text-slate-500">Timeline:</span>
-                    <span className="text-slate-900 font-medium">{quote.timeline} {quote.specificDate ? `(${quote.specificDate})` : ''}</span>
+                    <span className="text-slate-900 font-medium">{quote.timeline || 'Prompt'} {quote.specificDate ? `(${quote.specificDate})` : ''}</span>
                   </div>
                 </div>
 

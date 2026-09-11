@@ -5,6 +5,7 @@ import {
   Loader2, MessageSquare, AlertCircle, User, ShieldCheck, ChevronRight
 } from 'lucide-react';
 import { quotesApi } from '../../services/api';
+import { BUSINESS_INFO } from '../../data/businessData';
 
 export default function InboxView({ onOpenFullQuote }) {
   const [threads, setThreads] = useState([]);
@@ -379,14 +380,14 @@ export default function InboxView({ onOpenFullQuote }) {
                     className={`flex flex-col ${isAdmin ? 'items-end' : 'items-start'}`}
                   >
                     <div className="flex items-center space-x-1.5 mb-1 px-1 text-[11px] text-slate-400">
-                      <span className="font-bold text-slate-700">{isAdmin ? (msg.senderName || 'Toby S.') : selectedThread.name}</span>
+                      <span className="font-bold text-slate-700">{isAdmin ? (msg.senderName || BUSINESS_INFO.owner?.name || BUSINESS_INFO.name) : selectedThread.name}</span>
                       <span>•</span>
                       <span>{new Date(msg.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
                     </div>
 
                     <div className={`max-w-lg rounded-2xl p-4 text-xs sm:text-sm leading-relaxed whitespace-pre-wrap ${
                       isAdmin
-                        ? 'bg-red-600 text-white rounded-tr-xs shadow-md shadow-red-600/15'
+                        ? 'bg-shop-red text-white rounded-tr-xs shadow-md shadow-shop-red/15'
                         : 'bg-white border border-slate-200 text-slate-800 rounded-tl-xs shadow-xs'
                     }`}>
                       {msg.isQuote && (
