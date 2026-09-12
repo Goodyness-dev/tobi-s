@@ -10,7 +10,7 @@ export default function ReferringDoctorsPage({ onNavigate }) {
     doctorEmail: '',
     patientName: '',
     patientPhone: '',
-    procedureType: 'Dental Implants',
+    procedureType: 'Dental Implants & Periodontics',
     notes: '',
     xrayAttached: false
   });
@@ -36,10 +36,10 @@ export default function ReferringDoctorsPage({ onNavigate }) {
           <span>Doctor-to-Doctor Partnership</span>
         </div>
         <h1 className="text-3xl sm:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-5">
-          General Dentist & Orthodontic Referral Studio
+          General Dentist & Specialist Referral Studio
         </h1>
         <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
-          Drs. Milano and Mazza view the relationship with referring dentists as an integrated surgical team. We provide rapid consultation scheduling, comprehensive treatment letters, and seamless transfer back to your office for final restorative crown and bridge placement.
+          At Lumia Dental, we view referring practitioners as valued partners. Our in-house specialists in Periodontics, Endodontics, Orthodontics (Invisalign Diamond), and Pediatric Dentistry provide seamless collaborative care, timely consult reports, and prompt transition back to your office.
         </p>
       </div>
 
@@ -50,7 +50,7 @@ export default function ReferringDoctorsPage({ onNavigate }) {
             Submit an Online Patient Referral
           </h2>
           <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mb-6">
-            Directly transmitted to our surgical coordinators. We contact your patient within 24 hours.
+            Directly transmitted to our clinical coordinators. We contact your patient within 24 hours.
           </p>
 
           {submitted ? (
@@ -62,7 +62,7 @@ export default function ReferringDoctorsPage({ onNavigate }) {
                 Referral Received
               </h3>
               <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300">
-                Thank you, Dr. {doctorForm.doctorName}. We have logged the referral for {doctorForm.patientName}. A surgical consult report will be dispatched to your practice upon completion of the visit.
+                Thank you, Dr. {doctorForm.doctorName}. We have logged the referral for {doctorForm.patientName}. A clinical treatment report will be dispatched to your practice upon completion of the visit.
               </p>
               <button
                 onClick={() => setSubmitted(false)}
@@ -94,7 +94,7 @@ export default function ReferringDoctorsPage({ onNavigate }) {
                   <input
                     type="text"
                     required
-                    placeholder="e.g. Valley Dental Care"
+                    placeholder="e.g. Manhattan Dental Group"
                     value={doctorForm.practiceName}
                     onChange={(e) => setDoctorForm({ ...doctorForm, practiceName: e.target.value })}
                     className="w-full px-4 py-3 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm focus:outline-none focus:border-teal-500 transition"
@@ -110,7 +110,7 @@ export default function ReferringDoctorsPage({ onNavigate }) {
                   <input
                     type="tel"
                     required
-                    placeholder="(610) 000-0000"
+                    placeholder="(212) 000-0000"
                     value={doctorForm.doctorPhone}
                     onChange={(e) => setDoctorForm({ ...doctorForm, doctorPhone: e.target.value })}
                     className="w-full px-4 py-3 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm focus:outline-none focus:border-teal-500 transition"
@@ -123,7 +123,7 @@ export default function ReferringDoctorsPage({ onNavigate }) {
                   <input
                     type="email"
                     required
-                    placeholder="office@valleydental.com"
+                    placeholder="doctor@practice.com"
                     value={doctorForm.doctorEmail}
                     onChange={(e) => setDoctorForm({ ...doctorForm, doctorEmail: e.target.value })}
                     className="w-full px-4 py-3 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm focus:outline-none focus:border-teal-500 transition"
@@ -141,7 +141,7 @@ export default function ReferringDoctorsPage({ onNavigate }) {
                   <input
                     type="text"
                     required
-                    placeholder="e.g. Jane Miller"
+                    placeholder="e.g. Jane Doe"
                     value={doctorForm.patientName}
                     onChange={(e) => setDoctorForm({ ...doctorForm, patientName: e.target.value })}
                     className="w-full px-4 py-3 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm focus:outline-none focus:border-teal-500 transition"
@@ -154,7 +154,7 @@ export default function ReferringDoctorsPage({ onNavigate }) {
                   <input
                     type="tel"
                     required
-                    placeholder="(610) 000-0000"
+                    placeholder="(212) 000-0000"
                     value={doctorForm.patientPhone}
                     onChange={(e) => setDoctorForm({ ...doctorForm, patientPhone: e.target.value })}
                     className="w-full px-4 py-3 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm focus:outline-none focus:border-teal-500 transition"
@@ -164,20 +164,19 @@ export default function ReferringDoctorsPage({ onNavigate }) {
 
               <div>
                 <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
-                  Procedure Requested
+                  Specialty Referral Category
                 </label>
                 <select
                   value={doctorForm.procedureType}
                   onChange={(e) => setDoctorForm({ ...doctorForm, procedureType: e.target.value })}
                   className="w-full px-4 py-3 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm focus:outline-none focus:border-teal-500 transition"
                 >
-                  <option value="Dental Implants">Dental Implants (Single / Multiple)</option>
-                  <option value="All-on-X / Full Arch">Full Arch Immediate Load (All-on-4 / All-on-X)</option>
-                  <option value="Wisdom Teeth">Wisdom Teeth Extraction</option>
-                  <option value="Bone Graft / Sinus Lift">Bone Grafting / Sinus Lift</option>
-                  <option value="Impacted Canine">Impacted Canine Exposure & Bracketing</option>
-                  <option value="Orthognathic Jaw Surgery">Orthognathic / Corrective Jaw Surgery</option>
-                  <option value="Oral Pathology">Oral Pathology / Biopsy Evaluation</option>
+                  <option value="Dental Implants & Periodontics">Periodontics & Dental Implants (Dr. Bagga)</option>
+                  <option value="Endodontics / Root Canal">Microscopic Endodontics / Root Canal (Dr. Drummond)</option>
+                  <option value="Orthodontics & Invisalign">Invisalign® Clear Aligners (Dr. Goodman)</option>
+                  <option value="Pediatric Dentistry">Pediatric Dentistry (Dr. Lobo)</option>
+                  <option value="Cosmetic & Veneers">Cosmetic Smile Rehabilitation (Dr. Han / Dr. Lyristis)</option>
+                  <option value="Second Opinion">Specialist Second Opinion</option>
                 </select>
               </div>
 
@@ -187,7 +186,7 @@ export default function ReferringDoctorsPage({ onNavigate }) {
                 </label>
                 <textarea
                   rows="3"
-                  placeholder="e.g. Tooth #19 extraction with socket preservation for future implant restoration..."
+                  placeholder="e.g. Tooth #14 root canal therapy needed, or #19 implant placement evaluation..."
                   value={doctorForm.notes}
                   onChange={(e) => setDoctorForm({ ...doctorForm, notes: e.target.value })}
                   className="w-full px-4 py-3 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm focus:outline-none focus:border-teal-500 transition"
@@ -197,10 +196,10 @@ export default function ReferringDoctorsPage({ onNavigate }) {
               {/* Simulated Drag & Drop for Radiographs */}
               <div className="p-5 rounded-2xl border-2 border-dashed border-slate-300 dark:border-slate-700 text-center hover:border-teal-500 transition cursor-pointer">
                 <p className="text-xs font-semibold text-slate-700 dark:text-slate-300">
-                  📁 Attach CBCT / Panorex / Periapical X-Rays
+                  📁 Attach Digital Radiographs / Panorex / STL Scans
                 </p>
                 <p className="text-[11px] text-slate-400 mt-1">
-                  DICOM, JPEG, or PDF accepted (or email directly to info@milanoandmazzaoralsurgery.com)
+                  DICOM, JPEG, STL, or PDF accepted (or email to {BUSINESS_INFO.email})
                 </p>
               </div>
 
@@ -218,26 +217,26 @@ export default function ReferringDoctorsPage({ onNavigate }) {
         <div className="lg:col-span-5 space-y-6">
           <div className="card-thick bg-gradient-to-b from-teal-900 to-slate-950 text-white rounded-3xl p-8 border-2 border-teal-700/50 shadow-xl">
             <span className="px-3 py-1 rounded-full bg-teal-800/80 text-teal-200 text-xs font-semibold uppercase tracking-wider inline-block mb-3 border border-teal-600/40">
-              Direct Provider Hotline
+              Direct Doctor Hotline
             </span>
             <h3 className="text-2xl font-bold mb-2">
-              Speak Directly with Dr. Milano or Dr. Mazza
+              Speak Directly with Our Specialists
             </h3>
             <p className="text-teal-100/90 text-sm leading-relaxed mb-6">
-              Need to discuss an urgent case, complex airway concern, or CBCT implant planning? Call our provider backline directly.
+              Need to discuss an urgent case, complex endodontic diagnosis, or implant treatment plan? Call our clinical backline directly.
             </p>
 
             <a
-              href="tel:6102589081"
+              href={`tel:${BUSINESS_INFO.phone.replace(/[^0-9]/g, '')}`}
               className="w-full py-3.5 rounded-2xl bg-white text-slate-950 font-bold text-sm flex items-center justify-center gap-2 hover:bg-teal-50 transition active:scale-98 shadow-md"
             >
-              <span>Call Doctor Line: (610) 258-9081</span>
+              <span>Call Provider Line: {BUSINESS_INFO.phone}</span>
             </a>
 
             <div className="mt-6 pt-6 border-t border-teal-800/80 text-xs text-teal-200/80 space-y-2">
-              <p>📍 1412 Sullivan Trail, Easton, PA 18040</p>
-              <p>📠 Secure Referral Fax: (610) 258-0377</p>
-              <p>✉️ Doctor Portal Email: info@milanoandmazzaoralsurgery.com</p>
+              <p>📍 {BUSINESS_INFO.address.formatted}</p>
+              <p>📱 Call or Text: {BUSINESS_INFO.phone}</p>
+              <p>✉️ Doctor Portal Email: {BUSINESS_INFO.email}</p>
             </div>
           </div>
 
@@ -252,11 +251,11 @@ export default function ReferringDoctorsPage({ onNavigate }) {
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-teal-500 font-bold">✓</span>
-                <span>Complete post-op surgical and radiographic treatment letter sent to your office.</span>
+                <span>Complete post-treatment radiographic and clinical summary sent to your office.</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-teal-500 font-bold">✓</span>
-                <span>Patients are always directed back to your practice for all restorative work.</span>
+                <span>Patients are always directed back to your practice for all continuing care.</span>
               </li>
             </ul>
           </div>

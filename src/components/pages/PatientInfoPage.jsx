@@ -10,8 +10,8 @@ export default function PatientInfoPage({ onOpenConsultation, onNavigate }) {
     phone: '',
     email: '',
     insuranceCarrier: '',
-    procedureConcern: 'Dental Implants',
-    sedationInterest: 'IV Twilight Sleep'
+    procedureConcern: 'Cosmetic Dentistry & Veneers',
+    sedationInterest: 'Ceiling 4K TV & Streaming Entertainment'
   });
 
   const handleInsuranceCheck = (name) => {
@@ -27,61 +27,61 @@ export default function PatientInfoPage({ onOpenConsultation, onNavigate }) {
     <div className="pt-28 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       {/* Breadcrumb */}
       <div className="flex items-center gap-2 text-xs font-medium text-slate-500 dark:text-slate-400 mb-6">
-        <button onClick={() => onNavigate('home')} className="hover:text-teal-600 transition">
+        <button onClick={() => onNavigate('home')} className="hover:text-cyan-600 transition">
           Home
         </button>
         <span>/</span>
-        <span className="text-slate-800 dark:text-slate-200 font-semibold">Patient Information & Registration</span>
+        <span className="text-slate-800 dark:text-slate-200 font-semibold">New Patient Information &amp; Insurance</span>
       </div>
 
       {/* Header */}
       <div className="text-center max-w-3xl mx-auto mb-16">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-teal-50 dark:bg-teal-950/70 border border-teal-200 dark:border-teal-800/60 text-teal-700 dark:text-teal-300 text-xs font-bold uppercase tracking-wider mb-4">
-          <span>Patient-First Care</span>
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-50 dark:bg-cyan-950/70 border border-cyan-200 dark:border-cyan-800/60 text-cyan-700 dark:text-cyan-300 text-xs font-bold uppercase tracking-wider mb-4">
+          <span>Welcome to Lumia Dental</span>
         </div>
         <h1 className="text-3xl sm:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-5">
-          What to Expect as a Patient at Milano & Mazza
+          First Visit Expectations &amp; Insurance
         </h1>
         <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed">
-          From your initial diagnostic consultation to paperless onboarding and insurance optimization, we make every step seamless and transparent.
+          We understand that your time and comfort are essential. At Lumia Dental, our multidisciplinary clinical team ensures your visit to 160 Broadway is smooth, luxurious, and completely stress-free.
         </p>
       </div>
 
-      {/* First Visit & Preparation Timeline */}
+      {/* First Visit Expectations 3 Steps */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
         <div className="card-thick bg-white dark:bg-[#0f172a] rounded-3xl border-2 border-slate-200/90 dark:border-slate-800/90 p-7 shadow-sm">
-          <div className="w-10 h-10 rounded-2xl bg-teal-100 dark:bg-teal-950 text-teal-700 dark:text-teal-300 font-bold flex items-center justify-center mb-4">
+          <div className="w-10 h-10 rounded-2xl bg-cyan-100 dark:bg-cyan-950 text-cyan-700 dark:text-cyan-300 font-bold flex items-center justify-center mb-4">
             01
           </div>
           <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">
-            Initial Consultation & Diagnosis
+            Seamless Digital Intake &amp; Greeting
           </h3>
           <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-            Your first visit consists of a clinical evaluation explaining your diagnosis, reviewing any X-rays/referral slips from your dentist, and discussing tailored sedation options.
+            Paperless digital registration from your phone or reception iPad. We welcome you to our quiet boutique lounge on the 10th floor with zero wait times.
           </p>
         </div>
 
         <div className="card-thick bg-white dark:bg-[#0f172a] rounded-3xl border-2 border-slate-200/90 dark:border-slate-800/90 p-7 shadow-sm">
-          <div className="w-10 h-10 rounded-2xl bg-teal-100 dark:bg-teal-950 text-teal-700 dark:text-teal-300 font-bold flex items-center justify-center mb-4">
+          <div className="w-10 h-10 rounded-2xl bg-cyan-100 dark:bg-cyan-950 text-cyan-700 dark:text-cyan-300 font-bold flex items-center justify-center mb-4">
             02
           </div>
           <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">
-            The 8-Hour Fasting Rule
+            3D Digital Scans &amp; Gentle Exam
           </h3>
           <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-            <strong>Mandatory for IV Anesthesia:</strong> Have absolutely nothing to eat or drink for 8 hours prior to surgery. An adult driver must accompany you and remain during the procedure.
+            High-definition intraoral 3D scans and gentle ultrasonic cleaning while you watch Netflix or listen to your favorite playlist on overhead 4K displays.
           </p>
         </div>
 
         <div className="card-thick bg-white dark:bg-[#0f172a] rounded-3xl border-2 border-slate-200/90 dark:border-slate-800/90 p-7 shadow-sm">
-          <div className="w-10 h-10 rounded-2xl bg-teal-100 dark:bg-teal-950 text-teal-700 dark:text-teal-300 font-bold flex items-center justify-center mb-4">
+          <div className="w-10 h-10 rounded-2xl bg-cyan-100 dark:bg-cyan-950 text-cyan-700 dark:text-cyan-300 font-bold flex items-center justify-center mb-4">
             03
           </div>
           <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">
-            Post-Op Recovery & Support
+            Transparent Care &amp; Zero Hidden Fees
           </h3>
           <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-            You will wake comfortably in our recovery suite. We provide clear dietary instructions, prescription guidance, and direct doctor on-call availability for any questions.
+            Clear, itemized treatment plans and instant insurance benefit verification before any clinical work starts. We maximize your PPO benefits automatically.
           </p>
         </div>
       </div>
@@ -89,14 +89,14 @@ export default function PatientInfoPage({ onOpenConsultation, onNavigate }) {
       {/* Interactive In-Network Insurance Checker */}
       <div className="card-thick bg-white dark:bg-[#0f172a] rounded-3xl border-2 border-slate-200/90 dark:border-slate-800/90 p-8 sm:p-10 shadow-sm mb-16">
         <div className="text-center max-w-2xl mx-auto mb-8">
-          <span className="text-xs font-bold uppercase tracking-wider text-teal-600 dark:text-teal-400">
-            Coverage Verification
+          <span className="text-xs font-bold uppercase tracking-wider text-cyan-600 dark:text-cyan-400">
+            Insurance &amp; Financial Coverage
           </span>
           <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mt-1 mb-2">
-            In-Network Insurance & Flexible Financing
+            In-Network PPO Plans &amp; Flexible Financing
           </h2>
           <p className="text-sm text-slate-600 dark:text-slate-300">
-            We work hand-in-hand with you to maximize insurance reimbursement for covered surgical procedures.
+            We work with leading PPO insurers to ensure Manhattan professionals and families maximize their dental benefits seamlessly.
           </p>
         </div>
 
@@ -107,12 +107,12 @@ export default function PatientInfoPage({ onOpenConsultation, onNavigate }) {
               onClick={() => handleInsuranceCheck(ins.name)}
               className={`p-4 rounded-2xl border text-center transition active:scale-95 ${
                 selectedInsurance === ins.name
-                  ? 'bg-teal-50 dark:bg-teal-950 border-teal-600 text-teal-900 dark:text-teal-100 font-bold ring-2 ring-teal-500/20'
-                  : 'bg-slate-50 dark:bg-slate-900/60 border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 font-medium hover:border-teal-500/40'
+                  ? 'bg-cyan-50 dark:bg-cyan-950 border-cyan-600 text-cyan-900 dark:text-cyan-100 font-bold ring-2 ring-cyan-500/20'
+                  : 'bg-slate-50 dark:bg-slate-900/60 border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 font-medium hover:border-cyan-500/40'
               }`}
             >
               <p className="text-sm font-bold">{ins.name}</p>
-              <span className="text-[11px] text-teal-600 dark:text-teal-400 font-medium">
+              <span className="text-[11px] text-cyan-600 dark:text-cyan-400 font-medium">
                 {ins.status}
               </span>
             </button>
@@ -120,37 +120,37 @@ export default function PatientInfoPage({ onOpenConsultation, onNavigate }) {
         </div>
 
         {selectedInsurance && (
-          <div className="p-4 rounded-2xl bg-teal-50 dark:bg-teal-950/40 border border-teal-200 dark:border-teal-800/60 text-center text-sm text-teal-900 dark:text-teal-200 animate-fadeIn">
-            ✓ <strong>{selectedInsurance}</strong> is verified in our Easton office. We submit claims directly to maximize your benefits.
+          <div className="p-4 rounded-2xl bg-cyan-50 dark:bg-cyan-950/40 border border-cyan-200 dark:border-cyan-800/60 text-center text-sm text-cyan-900 dark:text-cyan-200 animate-fadeIn">
+            ✓ <strong>{selectedInsurance}</strong> is accepted at Lumia Dental in Lower Manhattan. Our care coordinators handle all claim submissions for you.
           </div>
         )}
       </div>
 
-      {/* 100% Paperless Digital Intake Studio (Replacing Old 2019 PDFs) */}
+      {/* Online Patient Intake Studio */}
       <div className="card-thick bg-gradient-to-br from-slate-900 via-[#0c1322] to-slate-950 text-white rounded-3xl border-2 border-slate-700/60 p-8 sm:p-12 shadow-2xl">
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-8">
-            <span className="px-3.5 py-1 rounded-full bg-teal-500/20 text-teal-300 text-xs font-semibold border border-teal-400/30 inline-block mb-3">
-              100% Paperless Onboarding
+            <span className="px-3.5 py-1 rounded-full bg-cyan-500/20 text-cyan-300 text-xs font-semibold border border-cyan-400/30 inline-block mb-3">
+              Fast Digital Registration
             </span>
             <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight mb-2">
-              Complete Patient Registration Online
+              Request Your Initial Visit Online
             </h2>
             <p className="text-slate-300 text-xs sm:text-sm">
-              Skip the clipboard in the waiting room. Submit your encrypted medical intake directly to Dr. Milano and Dr. Mazza in under 2 minutes.
+              Submit your request in advance to save time. You can also schedule directly through our AppointNow live calendar.
             </p>
           </div>
 
           {digitalFormSubmitted ? (
-            <div className="p-8 rounded-3xl bg-teal-950/80 border border-teal-500/40 text-center space-y-3 animate-fadeIn">
-              <div className="w-14 h-14 rounded-full bg-teal-500 text-slate-950 flex items-center justify-center font-bold text-2xl mx-auto shadow-lg">
+            <div className="p-8 rounded-3xl bg-cyan-950/80 border border-cyan-500/40 text-center space-y-3 animate-fadeIn">
+              <div className="w-14 h-14 rounded-full bg-cyan-500 text-slate-950 flex items-center justify-center font-bold text-2xl mx-auto shadow-lg">
                 ✓
               </div>
               <h3 className="text-xl font-bold text-white">
-                Registration Received!
+                Request Received!
               </h3>
-              <p className="text-teal-200 text-sm max-w-md mx-auto">
-                Thank you, {formData.fullName || 'Patient'}. Our surgical coordination team has received your registration. We will verify your insurance and call you at {formData.phone || '(610) 258-9081'} to finalize your appointment.
+              <p className="text-cyan-200 text-sm max-w-md mx-auto">
+                Thank you, {formData.fullName || 'Patient'}. Our Lumia Dental team at 160 Broadway has received your details. We will contact you at {formData.phone || '(212) 287-1275'} to confirm your appointment.
               </p>
             </div>
           ) : (
@@ -163,10 +163,10 @@ export default function PatientInfoPage({ onOpenConsultation, onNavigate }) {
                   <input
                     type="text"
                     required
-                    placeholder="e.g. John Doe"
+                    placeholder="e.g. Sarah Jenkins"
                     value={formData.fullName}
                     onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                    className="w-full px-4 py-3 rounded-2xl bg-white/10 border border-white/20 text-white placeholder-slate-400 text-sm focus:outline-none focus:border-teal-400 transition"
+                    className="w-full px-4 py-3 rounded-2xl bg-white/10 border border-white/20 text-white placeholder-slate-400 text-sm focus:outline-none focus:border-cyan-400 transition"
                   />
                 </div>
                 <div>
@@ -178,7 +178,7 @@ export default function PatientInfoPage({ onOpenConsultation, onNavigate }) {
                     required
                     value={formData.dob}
                     onChange={(e) => setFormData({ ...formData, dob: e.target.value })}
-                    className="w-full px-4 py-3 rounded-2xl bg-white/10 border border-white/20 text-white text-sm focus:outline-none focus:border-teal-400 transition"
+                    className="w-full px-4 py-3 rounded-2xl bg-white/10 border border-white/20 text-white text-sm focus:outline-none focus:border-cyan-400 transition"
                   />
                 </div>
               </div>
@@ -191,10 +191,10 @@ export default function PatientInfoPage({ onOpenConsultation, onNavigate }) {
                   <input
                     type="tel"
                     required
-                    placeholder="(555) 000-0000"
+                    placeholder="(212) 000-0000"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full px-4 py-3 rounded-2xl bg-white/10 border border-white/20 text-white placeholder-slate-400 text-sm focus:outline-none focus:border-teal-400 transition"
+                    className="w-full px-4 py-3 rounded-2xl bg-white/10 border border-white/20 text-white placeholder-slate-400 text-sm focus:outline-none focus:border-cyan-400 transition"
                   />
                 </div>
                 <div>
@@ -204,10 +204,10 @@ export default function PatientInfoPage({ onOpenConsultation, onNavigate }) {
                   <input
                     type="email"
                     required
-                    placeholder="john@example.com"
+                    placeholder="sarah@example.com"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-4 py-3 rounded-2xl bg-white/10 border border-white/20 text-white placeholder-slate-400 text-sm focus:outline-none focus:border-teal-400 transition"
+                    className="w-full px-4 py-3 rounded-2xl bg-white/10 border border-white/20 text-white placeholder-slate-400 text-sm focus:outline-none focus:border-cyan-400 transition"
                   />
                 </div>
               </div>
@@ -215,47 +215,59 @@ export default function PatientInfoPage({ onOpenConsultation, onNavigate }) {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs font-semibold text-slate-300 mb-1.5">
-                    Primary Concern / Procedure
+                    Primary Service Needed
                   </label>
                   <select
                     value={formData.procedureConcern}
                     onChange={(e) => setFormData({ ...formData, procedureConcern: e.target.value })}
-                    className="w-full px-4 py-3 rounded-2xl bg-slate-800 border border-white/20 text-white text-sm focus:outline-none focus:border-teal-400 transition"
+                    className="w-full px-4 py-3 rounded-2xl bg-slate-800 border border-white/20 text-white text-sm focus:outline-none focus:border-cyan-400 transition"
                   >
-                    <option value="Dental Implants">Dental Implants</option>
-                    <option value="Wisdom Teeth">Wisdom Teeth Extraction</option>
-                    <option value="Bone Grafting">Bone Grafting / Sinus Lift</option>
-                    <option value="Jaw Surgery">Corrective Jaw Surgery</option>
-                    <option value="Second Opinion">Second Opinion / Consultation</option>
+                    <option value="Cosmetic Dentistry & Veneers">Cosmetic Porcelain Veneers &amp; Smile Design</option>
+                    <option value="Invisalign Clear Aligners">Invisalign® Clear Aligners</option>
+                    <option value="Pediatric Gentle Dental Care">Pediatric Dentistry (Children &amp; Teens)</option>
+                    <option value="Dental Implants">Dental Implants &amp; Restorations</option>
+                    <option value="Routine Hygiene & Exam">Routine Cleaning &amp; Dental Exam</option>
+                    <option value="Endodontics & Root Canals">Endodontics / Root Canal Relief</option>
+                    <option value="Periodontics & Gum Therapy">Periodontics &amp; Gum Health</option>
+                    <option value="Toothache / Emergency">Emergency Tooth Pain Relief</option>
                   </select>
                 </div>
                 <div>
                   <label className="block text-xs font-semibold text-slate-300 mb-1.5">
-                    Sedation Preference
+                    Comfort &amp; Scheduling Preference
                   </label>
                   <select
                     value={formData.sedationInterest}
                     onChange={(e) => setFormData({ ...formData, sedationInterest: e.target.value })}
-                    className="w-full px-4 py-3 rounded-2xl bg-slate-800 border border-white/20 text-white text-sm focus:outline-none focus:border-teal-400 transition"
+                    className="w-full px-4 py-3 rounded-2xl bg-slate-800 border border-white/20 text-white text-sm focus:outline-none focus:border-cyan-400 transition"
                   >
-                    <option value="IV Twilight Sleep">IV Twilight Sleep (Asleep)</option>
-                    <option value="Nitrous Oxide">Nitrous Oxide (Laughing Gas)</option>
-                    <option value="Local Anesthesia">Local Numbing Only</option>
-                    <option value="Discuss at Consultation">Discuss with Surgeon</option>
+                    <option value="Early Morning (8:00 AM)">Early Morning Slot (8:00 AM)</option>
+                    <option value="Lunchtime (12:00 PM)">Lunchtime Slot (12:00 PM)</option>
+                    <option value="Evening Slot (Until 6:00 PM)">Evening Slot (Until 6:00 PM)</option>
+                    <option value="Ceiling 4K TV & Streaming">Ceiling 4K TV &amp; Netflix Entertainment</option>
+                    <option value="Gentle Warm Anesthesia">Gentle Warm Local Numbing</option>
                   </select>
                 </div>
               </div>
 
               <button
                 type="submit"
-                className="w-full py-4 mt-2 rounded-2xl bg-teal-400 hover:bg-teal-300 text-slate-950 font-bold text-sm tracking-wide shadow-xl active:scale-98 transition"
+                className="w-full py-4 mt-2 rounded-2xl bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-bold text-sm tracking-wide shadow-xl active:scale-98 transition"
               >
-                Submit Paperless Registration Form
+                Submit Patient Registration Request
               </button>
 
-              <p className="text-[11px] text-slate-400 text-center">
-                🔒 HIPAA Compliant & 256-bit Encrypted. Your health information is strictly confidential.
-              </p>
+              <div className="flex flex-col sm:flex-row items-center justify-between pt-3 text-xs text-slate-400 gap-2">
+                <span>🔒 Confidential &amp; Encrypted HIPAA Protection</span>
+                <a 
+                  href={BUSINESS_INFO.bookingUrl} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-cyan-400 font-bold hover:underline"
+                >
+                  Or Book Directly on AppointNow Calendar ↗
+                </a>
+              </div>
             </form>
           )}
         </div>

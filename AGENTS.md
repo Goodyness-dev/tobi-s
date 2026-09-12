@@ -75,3 +75,21 @@ Whenever building or updating this site or ANY new website:
 - Must support mobile screens, tablets, and desktop:
   - Collapsible drawer sidebar with backdrop blur on mobile.
   - Responsive KPI cards, consultation queue, real-time message inbox, and practice configuration.
+
+---
+
+## 🌐 MULTI-PAGE INGESTION & NAVBAR DEEP CRAWL DIRECTIVE
+Whenever given a client website URL to scaffold, redesign, or modernize:
+1. **Never Stop at the Homepage**: A service business or medical website stores its highest-value assets (full doctor credentials, procedure breakdowns, smile galleries, patient forms, and direct booking links) on secondary pages linked in the `<header>` navbar and `<footer>`.
+2. **Autonomous Navigation Ingestion Protocol**:
+   - Immediately parse all navigation links (`<nav>`, dropdowns, flyouts, and footer sitemaps).
+   - Concurrently fetch and ingest all major sub-routes:
+     - About / Clinical Team (`/about`, `/team`, `/doctors`)
+     - Specialized Services (`/services`, `/cosmetic-dentistry`, `/invisalign`, `/implants`, etc.)
+     - Patient Info & Insurance (`/patient-information`, `/insurance`, `/financing`)
+     - Reviews & Proof (`/reviews`, `/testimonials`, `/smile-gallery`)
+     - Contact & Scheduling (`/contact`, `/booking`, third-party portal links like AppointNow or ZocDoc)
+3. **Zero-Prompt Completeness**:
+   - Extract real doctor names, degrees, residency backgrounds, procedure descriptions, FAQs, and exact photography URLs immediately.
+   - Synthesize these into the data layers (`businessData.js`, `servicesData.js`) in the very first pass without requiring the user to prompt or ask if subpages were checked.
+

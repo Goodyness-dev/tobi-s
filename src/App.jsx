@@ -257,17 +257,17 @@ export default function App() {
       {/* Sticky Mobile Quick Bar */}
       <div className={`fixed bottom-0 left-0 right-0 z-40 sm:hidden ${darkMode ? 'bg-[#090d11]/95 border-slate-800' : 'bg-white/95 border-slate-200'} backdrop-blur-md border-t p-2.5 flex items-center gap-2.5 shadow-2xl`}>
         <a
-          href="tel:6102589081"
+          href={`tel:${BUSINESS_INFO.phone.replace(/[^0-9]/g, '')}`}
           className={`flex-1 py-3 px-3 rounded-xl ${darkMode ? 'bg-slate-900 text-white border-slate-800' : 'bg-slate-100 text-slate-900 border-slate-200'} font-bold text-xs flex items-center justify-center gap-2 border active:scale-95 transition`}
         >
-          <svg className="w-4 h-4 text-teal-600 dark:text-teal-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg className="w-4 h-4 text-cyan-600 dark:text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
           </svg>
-          <span>Call (610) 258-9081</span>
+          <span>Call {BUSINESS_INFO.phone}</span>
         </a>
         <button
           onClick={() => handleOpenConsultation()}
-          className="flex-1 py-3 px-3 rounded-xl bg-teal-600 hover:bg-teal-500 text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-md active:scale-95 transition"
+          className="flex-1 py-3 px-3 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-md active:scale-95 transition"
         >
           <span>Book Consult</span>
           <span>→</span>
