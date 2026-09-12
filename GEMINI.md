@@ -13,8 +13,8 @@ When the user asks for new features, design iterations, or new websites, DO NOT 
    git add . ; git commit -m "<message>" ; git push origin master ; npx vercel --prod --yes
    ```
 3. **Keep Ground Truth Synchronized**:
-   - Production URL: `https://mitchell-crosby-dental.vercel.app`
-   - Repo: `https://github.com/Goodyness-dev/mitchell-crosby-dental`
+   - Production URL: `https://lumia-dental-nyc.vercel.app`
+   - Repo: `https://github.com/Goodyness-dev/tobi-s`
    - Catalog: `#/services` | Admin: `#/admin` | Practice: `#/about`
 
 ---
