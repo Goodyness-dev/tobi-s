@@ -1,37 +1,5 @@
 User-agent: *
 Allow: /
 
-User-agent: GPTBot
-Allow: /
-
-User-agent: ChatGPT-User
-Allow: /
-
-User-agent: ClaudeBot
-Allow: /
-
-User-agent: anthropic-ai
-Allow: /
-
-User-agent: PerplexityBot
-Allow: /
-
-User-agent: Google-Extended
-Allow: /
-
-User-agent: Applebot-Extended
-Allow: /
-
-User-agent: cohere-ai
-Allow: /
-
-User-agent: Meta-ExternalAgent
-Allow: /
-
-# AI Machine-Readable Knowledge
-LLM-Text: https://www.lumiadental.com/llms.txt
-LLM-Full: https://www.lumiadental.com/llms-full.txt
-
 # Sitemaps
-Sitemap: https://www.lumiadental.com/sitemap.xml
-
+Sitemap: https://tobysllc.com/sitemap.xml

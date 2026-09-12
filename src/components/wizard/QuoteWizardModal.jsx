@@ -13,13 +13,13 @@ export default function QuoteWizardModal({
   const [result, setResult] = useState(null);
 
   const [formData, setFormData] = useState({
-    procedure: 'cosmetic-dentistry',
-    referralStatus: 'New Patient Consultation',
-    hasXRays: 'Please take 3D digital scans at visit',
-    sedationPreference: 'Ceiling 4K TV & Streaming Entertainment',
+    procedure: 'dental-implants',
+    referralStatus: 'Referred by General Dentist',
+    referringDoctorName: '',
+    hasXRays: 'Yes, I have X-rays/Panorex',
+    sedationPreference: 'IV Twilight Sleep',
     insuranceProvider: 'Delta Dental',
-    urgency: 'This week',
-    preferredTime: 'Morning Slot (8:00 - 11:30 AM)',
+    urgency: 'Within 1-2 weeks',
     patientName: '',
     phone: '',
     email: '',
@@ -57,27 +57,27 @@ export default function QuoteWizardModal({
     try {
       const selectedProc = PROCEDURES.find(p => p.id === formData.procedure);
       const payload = {
-        name: formData.patientName || 'Lumia Dental Patient',
+        name: formData.patientName || 'Easton Patient',
         email: formData.email,
         phone: formData.phone,
-        serviceCategory: selectedProc ? selectedProc.title : 'Dental Consultation',
-        detailedService: `Preferred Time: ${formData.preferredTime} | Comfort: ${formData.sedationPreference} | Ins: ${formData.insuranceProvider}`,
-        details: `Visit Type: ${formData.referralStatus}. X-rays: ${formData.hasXRays}. Notes: ${formData.notes || 'None'}`,
+        serviceCategory: selectedProc ? selectedProc.title : 'Oral Surgery Consultation',
+        detailedService: `Sedation: ${formData.sedationPreference} | Ins: ${formData.insuranceProvider}`,
+        details: `Referral: ${formData.referralStatus} (${formData.referringDoctorName || 'N/A'}). X-rays: ${formData.hasXRays}. Notes: ${formData.notes || 'None'}`,
         timeline: formData.urgency,
-        location: BUSINESS_INFO.address.formatted
+        location: '1412 Sullivan Trail, Easton, PA'
       };
 
       const res = await submitQuoteRequest(payload);
       setResult({
         success: true,
-        id: res.quoteId || `LUMIA-${Math.floor(100000 + Math.random() * 900000)}`
+        id: res.quoteId || `MM-${Math.floor(100000 + Math.random() * 900000)}`
       });
       setStep(6); // Confirmation step
     } catch (err) {
       // Offline fallback
       setResult({
         success: true,
-        id: `LUMIA-${Math.floor(100000 + Math.random() * 900000)}`
+        id: `MM-${Math.floor(100000 + Math.random() * 900000)}`
       });
       setStep(6);
     } finally {
@@ -92,15 +92,15 @@ export default function QuoteWizardModal({
         {/* Header Bar */}
         <div className="px-6 py-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-slate-50 dark:bg-slate-900/60">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-full bg-cyan-600 text-white flex items-center justify-center font-bold text-xs">
-              LD
+            <div className="w-8 h-8 rounded-full bg-teal-600 text-white flex items-center justify-center font-bold text-xs">
+              M&M
             </div>
             <div>
               <h3 className="font-bold text-sm text-slate-900 dark:text-white">
-                Online Dental Appointment Request
+                Oral Surgery Consultation Request
               </h3>
-              <p className="text-[11px] text-cyan-600 dark:text-cyan-400 font-semibold">
-                Lumia Dental • 160 Broadway, Suite 1004, New York, NY
+              <p className="text-[11px] text-teal-600 dark:text-teal-400 font-semibold">
+                Drs. Milano & Mazza • Easton, PA
               </p>
             </div>
           </div>
@@ -117,7 +117,7 @@ export default function QuoteWizardModal({
         {step <= 5 && (
           <div className="w-full bg-slate-100 dark:bg-slate-800 h-1.5">
             <div 
-              className="bg-cyan-600 h-1.5 transition-all duration-300"
+              className="bg-teal-600 h-1.5 transition-all duration-300"
               style={{ width: `${(step / 5) * 100}%` }}
             />
           </div>
@@ -129,14 +129,14 @@ export default function QuoteWizardModal({
           {step === 1 && (
             <div className="space-y-4 animate-fadeIn">
               <div className="mb-4">
-                <span className="text-xs font-bold uppercase tracking-wider text-cyan-600 dark:text-cyan-400">
+                <span className="text-xs font-bold uppercase tracking-wider text-teal-600 dark:text-teal-400">
                   Step 1 of 5
                 </span>
                 <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mt-1">
-                  Which dental service do you need?
+                  Which procedure are you inquiring about?
                 </h2>
                 <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
-                  Select the primary treatment or concern. You can consult with our clinical team at 160 Broadway.
+                  Select the primary treatment or concern. You will review everything with the surgeon.
                 </p>
               </div>
 
@@ -148,13 +148,13 @@ export default function QuoteWizardModal({
                     onClick={() => setFormData({ ...formData, procedure: p.id })}
                     className={`p-4 rounded-2xl border text-left transition active:scale-98 flex items-start gap-3 ${
                       formData.procedure === p.id
-                        ? 'border-cyan-600 bg-cyan-50 dark:bg-cyan-950/60 ring-2 ring-cyan-500/20 text-slate-900 dark:text-white'
-                        : 'border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/60 text-slate-700 dark:text-slate-300 hover:border-cyan-500/40'
+                        ? 'border-teal-600 bg-teal-50 dark:bg-teal-950/60 ring-2 ring-teal-500/20 text-slate-900 dark:text-white'
+                        : 'border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/60 text-slate-700 dark:text-slate-300 hover:border-teal-500/40'
                     }`}
                   >
                     <span className={`w-5 h-5 rounded-full border flex items-center justify-center text-xs mt-0.5 shrink-0 ${
                       formData.procedure === p.id 
-                        ? 'border-cyan-600 bg-cyan-600 text-white font-bold' 
+                        ? 'border-teal-600 bg-teal-600 text-white font-bold' 
                         : 'border-slate-300 dark:border-slate-700'
                     }`}>
                       {formData.procedure === p.id ? '✓' : ''}
@@ -173,65 +173,77 @@ export default function QuoteWizardModal({
             </div>
           )}
 
-          {/* STEP 2: Visit Type & Preferred Time */}
+          {/* STEP 2: Referral & Diagnostic Information */}
           {step === 2 && (
             <div className="space-y-4 animate-fadeIn">
               <div className="mb-4">
-                <span className="text-xs font-bold uppercase tracking-wider text-cyan-600 dark:text-cyan-400">
+                <span className="text-xs font-bold uppercase tracking-wider text-teal-600 dark:text-teal-400">
                   Step 2 of 5
                 </span>
                 <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mt-1">
-                  Visit Type &amp; Preferred Time Slot
+                  Referral & Diagnostic Status
                 </h2>
                 <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
-                  We offer early 8:00 AM starts and appointments until 6:00 PM in the Financial District.
+                  Were you referred by a general dentist, or are you self-scheduling?
                 </p>
               </div>
 
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-2">
-                    Appointment Category
-                  </label>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    {['New Patient Consultation', 'Routine Hygiene & Exam', 'Invisalign & Cosmetic Scan', 'Urgent / Same-Day Dental Relief'].map((opt) => (
-                      <button
-                        key={opt}
-                        type="button"
-                        onClick={() => setFormData({ ...formData, referralStatus: opt })}
-                        className={`p-3.5 rounded-2xl border text-xs font-semibold text-left transition ${
-                          formData.referralStatus === opt
-                            ? 'border-cyan-600 bg-cyan-50 dark:bg-cyan-950/60 text-cyan-900 dark:text-cyan-200'
-                            : 'border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/60 text-slate-700 dark:text-slate-300'
-                        }`}
-                      >
-                        {opt}
-                      </button>
-                    ))}
-                  </div>
+              <div className="space-y-3">
+                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300">
+                  Referral Type
+                </label>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {['Referred by General Dentist', 'Self-Scheduling / Second Opinion'].map((opt) => (
+                    <button
+                      key={opt}
+                      type="button"
+                      onClick={() => setFormData({ ...formData, referralStatus: opt })}
+                      className={`p-4 rounded-2xl border text-sm font-semibold text-left transition ${
+                        formData.referralStatus === opt
+                          ? 'border-teal-600 bg-teal-50 dark:bg-teal-950/60 text-teal-900 dark:text-teal-200'
+                          : 'border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/60 text-slate-700 dark:text-slate-300'
+                      }`}
+                    >
+                      {opt}
+                    </button>
+                  ))}
                 </div>
 
-                <div>
+                {formData.referralStatus === 'Referred by General Dentist' && (
+                  <div className="pt-2">
+                    <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                      Referring Dentist / Practice Name (Optional)
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="e.g. Dr. Miller / Easton Family Dental"
+                      value={formData.referringDoctorName}
+                      onChange={(e) => setFormData({ ...formData, referringDoctorName: e.target.value })}
+                      className="w-full px-4 py-3 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm focus:outline-none focus:border-teal-500"
+                    />
+                  </div>
+                )}
+
+                <div className="pt-2">
                   <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-2">
-                    Preferred Time of Day
+                    Do you have recent X-Rays or a Panorex?
                   </label>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {[
-                      'Early Morning (8:00 - 10 AM)',
-                      'Lunchtime (11:30 AM - 2 PM)',
-                      'Late Afternoon (3:00 - 6:00 PM)'
-                    ].map((time) => (
+                      'Yes, I have them or dentist emailed them',
+                      'No, I will need a 3D scan at your office'
+                    ].map((x) => (
                       <button
-                        key={time}
+                        key={x}
                         type="button"
-                        onClick={() => setFormData({ ...formData, preferredTime: time })}
-                        className={`p-3 rounded-xl border text-xs font-semibold text-center transition ${
-                          formData.preferredTime === time
-                            ? 'border-cyan-600 bg-cyan-50 dark:bg-cyan-950/60 text-cyan-900 dark:text-cyan-200 font-bold'
+                        onClick={() => setFormData({ ...formData, hasXRays: x })}
+                        className={`p-3.5 rounded-2xl border text-xs font-medium text-left transition ${
+                          formData.hasXRays === x
+                            ? 'border-teal-600 bg-teal-50 dark:bg-teal-950/60 text-teal-900 dark:text-teal-200 font-bold'
                             : 'border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/60 text-slate-700 dark:text-slate-300'
                         }`}
                       >
-                        {time}
+                        {x}
                       </button>
                     ))}
                   </div>
@@ -240,38 +252,38 @@ export default function QuoteWizardModal({
             </div>
           )}
 
-          {/* STEP 3: Comfort & Relaxation Preference */}
+          {/* STEP 3: Sedation & Comfort Preference */}
           {step === 3 && (
             <div className="space-y-4 animate-fadeIn">
               <div className="mb-4">
-                <span className="text-xs font-bold uppercase tracking-wider text-cyan-600 dark:text-cyan-400">
+                <span className="text-xs font-bold uppercase tracking-wider text-teal-600 dark:text-teal-400">
                   Step 3 of 5
                 </span>
                 <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mt-1">
-                  Comfort &amp; Relaxation Preferences
+                  How would you prefer to be comforted?
                 </h2>
                 <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
-                  Our priority is YOU. How can we make your dental experience extraordinary?
+                  Drs. Milano and Mazza are hospital-trained anesthesiologists. You choose your level of comfort.
                 </p>
               </div>
 
               <div className="space-y-3">
                 {[
                   {
-                    name: 'Ceiling 4K TV & Streaming Entertainment',
-                    desc: 'Watch your favorite shows on Netflix, Disney+, or listen to streaming music during care.'
+                    name: 'IV Twilight Sleep (Most Popular)',
+                    desc: 'You sleep peacefully through surgery. Zero pain, zero anxiety, and zero memory of sounds or pressure.'
                   },
                   {
-                    name: 'iTero® 3D Digital Scanners (No Messy Impression Putty)',
-                    desc: 'High-speed digital intraoral scans for veneers, crowns, and Invisalign.'
+                    name: 'Nitrous Oxide (Laughing Gas)',
+                    desc: 'Mild inhaled relaxation that wears off within minutes of completion.'
                   },
                   {
-                    name: 'Gentle Bedside Care & Warm Buffered Anesthesia',
-                    desc: 'Comfort-first injection technique designed for complete numbness without the sting.'
+                    name: 'Local Numbing Anesthesia Only',
+                    desc: 'Completely numb mouth while remaining fully awake.'
                   },
                   {
-                    name: 'Pediatric Gentle Specialist Protocol',
-                    desc: 'Fun, welcoming, positive dental visits specifically calibrated for children & teens.'
+                    name: 'Discuss Options with Doctor at Consult',
+                    desc: 'Let Dr. Milano or Dr. Mazza evaluate your health history and recommend the safest choice.'
                   }
                 ].map((s) => (
                   <button
@@ -280,13 +292,13 @@ export default function QuoteWizardModal({
                     onClick={() => setFormData({ ...formData, sedationPreference: s.name })}
                     className={`w-full p-4 rounded-2xl border text-left transition active:scale-98 flex items-start gap-3 ${
                       formData.sedationPreference === s.name
-                        ? 'border-cyan-600 bg-cyan-50 dark:bg-cyan-950/60 text-slate-900 dark:text-white'
+                        ? 'border-teal-600 bg-teal-50 dark:bg-teal-950/60 text-slate-900 dark:text-white'
                         : 'border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/60 text-slate-700 dark:text-slate-300'
                     }`}
                   >
                     <span className={`w-5 h-5 rounded-full border flex items-center justify-center text-xs mt-0.5 shrink-0 ${
                       formData.sedationPreference === s.name
-                        ? 'border-cyan-600 bg-cyan-600 text-white font-bold'
+                        ? 'border-teal-600 bg-teal-600 text-white font-bold'
                         : 'border-slate-300 dark:border-slate-700'
                     }`}>
                       {formData.sedationPreference === s.name ? '✓' : ''}
@@ -305,36 +317,36 @@ export default function QuoteWizardModal({
             </div>
           )}
 
-          {/* STEP 4: Insurance Carrier */}
+          {/* STEP 4: Insurance & Scheduling Timeline */}
           {step === 4 && (
             <div className="space-y-4 animate-fadeIn">
               <div className="mb-4">
-                <span className="text-xs font-bold uppercase tracking-wider text-cyan-600 dark:text-cyan-400">
+                <span className="text-xs font-bold uppercase tracking-wider text-teal-600 dark:text-teal-400">
                   Step 4 of 5
                 </span>
                 <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mt-1">
-                  Insurance Provider
+                  Insurance Provider & Timeline
                 </h2>
                 <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
-                  We participate in-network with premier PPO dental plans and offer flexible financing.
+                  We check benefits prior to your appointment to eliminate surprise costs.
                 </p>
               </div>
 
               <div>
                 <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-2">
-                  Select Your Dental Coverage
+                  Dental or Medical Insurance Carrier
                 </label>
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 mb-4">
                   {[
-                    'Delta Dental PPO',
-                    'Aetna Dental PPO',
-                    'Cigna Total Choice',
-                    'MetLife PDP Plus',
-                    'Guardian DentalGuard',
-                    'Blue Cross Blue Shield',
-                    'United Healthcare',
-                    'CareCredit (0% APR)',
-                    'Self-Pay / Private Pay'
+                    'Delta Dental',
+                    'Blue Cross Dental',
+                    'Aetna PPO',
+                    'Cigna Dental',
+                    'MetLife',
+                    'Guardian',
+                    'Medicare / Medical',
+                    'CareCredit Financing',
+                    'Private Pay / Cash'
                   ].map((carrier) => (
                     <button
                       key={carrier}
@@ -342,7 +354,7 @@ export default function QuoteWizardModal({
                       onClick={() => setFormData({ ...formData, insuranceProvider: carrier })}
                       className={`p-3 rounded-xl border text-xs font-semibold text-center transition ${
                         formData.insuranceProvider === carrier
-                          ? 'border-cyan-600 bg-cyan-50 dark:bg-cyan-950/60 text-cyan-900 dark:text-cyan-200 font-bold'
+                          ? 'border-teal-600 bg-teal-50 dark:bg-teal-950/60 text-teal-900 dark:text-teal-200 font-bold'
                           : 'border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/60 text-slate-700 dark:text-slate-300'
                       }`}
                     >
@@ -351,51 +363,73 @@ export default function QuoteWizardModal({
                   ))}
                 </div>
               </div>
+
+              <div>
+                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-2">
+                  How Soon Would You Like to Be Seen?
+                </label>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                  {['In Pain / Urgent', 'Within 1-2 Weeks', 'Flexible / Routine Consult'].map((time) => (
+                    <button
+                      key={time}
+                      type="button"
+                      onClick={() => setFormData({ ...formData, urgency: time })}
+                      className={`p-3 rounded-xl border text-xs font-semibold text-center transition ${
+                        formData.urgency === time
+                          ? 'border-teal-600 bg-teal-50 dark:bg-teal-950/60 text-teal-900 dark:text-teal-200 font-bold'
+                          : 'border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/60 text-slate-700 dark:text-slate-300'
+                      }`}
+                    >
+                      {time}
+                    </button>
+                  ))}
+                </div>
+              </div>
             </div>
           )}
 
-          {/* STEP 5: Contact Details & Submit */}
+          {/* STEP 5: Contact Information */}
           {step === 5 && (
             <div className="space-y-4 animate-fadeIn">
               <div className="mb-4">
-                <span className="text-xs font-bold uppercase tracking-wider text-cyan-600 dark:text-cyan-400">
+                <span className="text-xs font-bold uppercase tracking-wider text-teal-600 dark:text-teal-400">
                   Step 5 of 5
                 </span>
                 <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mt-1">
-                  Contact Information
+                  Where Should We Send Your Consultation Details?
                 </h2>
                 <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
-                  Where should our Lumia Dental care coordination team send your confirmation?
+                  Our surgical coordinators will call to confirm your appointment date and time.
                 </p>
               </div>
 
               <div className="space-y-3">
                 <div>
                   <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
-                    Your Full Name *
+                    Patient Full Name *
                   </label>
                   <input
                     type="text"
                     required
-                    placeholder="e.g. Rachel Adams"
+                    placeholder="e.g. Michael Miller"
                     value={formData.patientName}
                     onChange={(e) => setFormData({ ...formData, patientName: e.target.value })}
-                    className="w-full px-4 py-3 rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white text-sm focus:outline-none focus:border-cyan-500"
+                    className="w-full px-4 py-3 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm focus:outline-none focus:border-teal-500"
                   />
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
                     <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
-                      Phone Number *
+                      Phone Number (for SMS & Call) *
                     </label>
                     <input
                       type="tel"
                       required
-                      placeholder="(212) 000-0000"
+                      placeholder="(610) 000-0000"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="w-full px-4 py-3 rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white text-sm focus:outline-none focus:border-cyan-500"
+                      className="w-full px-4 py-3 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm focus:outline-none focus:border-teal-500"
                     />
                   </div>
                   <div>
@@ -405,24 +439,24 @@ export default function QuoteWizardModal({
                     <input
                       type="email"
                       required
-                      placeholder="rachel@example.com"
+                      placeholder="michael@example.com"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full px-4 py-3 rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white text-sm focus:outline-none focus:border-cyan-500"
+                      className="w-full px-4 py-3 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm focus:outline-none focus:border-teal-500"
                     />
                   </div>
                 </div>
 
                 <div>
                   <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
-                    Any specific symptoms or questions? (Optional)
+                    Any Symptoms or Special Requests? (Optional)
                   </label>
                   <textarea
-                    rows={2}
-                    placeholder="Tell us about any tooth discomfort, desired appointment dates, etc."
+                    rows="2"
+                    placeholder="e.g. Swollen lower jaw on right side, very anxious about needles..."
                     value={formData.notes}
                     onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-                    className="w-full px-4 py-2.5 rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white text-sm focus:outline-none focus:border-cyan-500"
+                    className="w-full px-4 py-2.5 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-sm focus:outline-none focus:border-teal-500"
                   />
                 </div>
               </div>
@@ -431,69 +465,77 @@ export default function QuoteWizardModal({
 
           {/* STEP 6: Confirmation Screen */}
           {step === 6 && result && (
-            <div className="text-center py-8 space-y-4 animate-fadeIn">
-              <div className="w-16 h-16 rounded-full bg-emerald-100 dark:bg-emerald-950/80 text-emerald-600 dark:text-emerald-400 font-bold text-3xl flex items-center justify-center mx-auto shadow-md">
+            <div className="py-6 text-center space-y-4 animate-fadeIn">
+              <div className="w-16 h-16 rounded-full bg-teal-500 text-slate-950 flex items-center justify-center font-extrabold text-2xl mx-auto shadow-xl">
                 ✓
               </div>
-              <h2 className="text-2xl font-extrabold text-slate-900 dark:text-white">
-                Appointment Request Received!
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">
+                Consultation Request Confirmed!
               </h2>
-              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 max-w-md mx-auto leading-relaxed">
-                Thank you, {formData.patientName || 'Patient'}. Our Lumia Dental coordination team at 160 Broadway has received your request. We will reach out to you at <strong>{formData.phone || '(212) 287-1275'}</strong> shortly to confirm your visit.
-              </p>
-              <div className="p-4 rounded-2xl bg-slate-100 dark:bg-slate-800/80 max-w-xs mx-auto text-xs text-slate-600 dark:text-slate-300 font-mono">
+              <p className="text-sm font-semibold text-teal-600 dark:text-teal-400">
                 Confirmation ID: {result.id}
+              </p>
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 max-w-md mx-auto leading-relaxed">
+                Thank you, {formData.patientName || 'Patient'}. Our Easton surgical coordinator has received your request. We will verify your {formData.insuranceProvider} benefits and reach out to you at {formData.phone || '(610) 258-9081'} to finalize your consultation time.
+              </p>
+
+              <div className="p-4 rounded-2xl bg-teal-50 dark:bg-teal-950/40 border border-teal-200 dark:border-teal-800/60 max-w-md mx-auto text-xs text-teal-900 dark:text-teal-200 text-left space-y-1">
+                <p className="font-bold">📍 Office Address:</p>
+                <p>1412 Sullivan Trail, Easton, PA 18040</p>
+                <p className="font-bold pt-1">⚠️ If Having IV Sedation:</p>
+                <p>Remember the 8-hour fasting rule (no food or liquids) and bring an adult driver.</p>
               </div>
-              <div className="pt-2">
+
+              <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
                 <button
                   onClick={onClose}
-                  className="px-8 py-3 rounded-full bg-cyan-600 hover:bg-cyan-500 text-white font-bold text-xs sm:text-sm shadow-md transition"
+                  className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-slate-900 dark:bg-teal-600 text-white font-bold text-sm"
                 >
-                  Close &amp; Return to Site
+                  Return to Website
                 </button>
+                <a
+                  href="tel:6102589081"
+                  className="w-full sm:w-auto px-6 py-3.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-bold text-sm"
+                >
+                  Call Office Directly
+                </a>
               </div>
             </div>
           )}
         </div>
 
-        {/* Modal Footer Controls */}
+        {/* Modal Footer Controls (Steps 1 to 5) */}
         {step <= 5 && (
           <div className="px-6 py-4 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/60 flex items-center justify-between">
             {step > 1 ? (
               <button
                 type="button"
                 onClick={handlePrev}
-                className="px-5 py-2.5 rounded-full border border-slate-300 dark:border-slate-700 font-semibold text-xs text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition"
+                className="px-5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 font-semibold text-xs text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition"
               >
                 ← Back
               </button>
             ) : (
-              <a
-                href={BUSINESS_INFO.bookingUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[11px] font-bold text-cyan-600 dark:text-cyan-400 hover:underline"
-              >
-                Or Open AppointNow Live Calendar ↗
-              </a>
+              <div />
             )}
 
             {step < 5 ? (
               <button
                 type="button"
                 onClick={handleNext}
-                className="px-7 py-2.5 rounded-full bg-cyan-600 hover:bg-cyan-500 text-white font-bold text-xs shadow-md transition"
+                className="px-7 py-3 rounded-full bg-teal-600 hover:bg-teal-500 text-white font-bold text-xs sm:text-sm shadow-md active:scale-95 transition flex items-center gap-1.5"
               >
-                Next Step →
+                <span>Continue</span>
+                <span>→</span>
               </button>
             ) : (
               <button
                 type="button"
-                onClick={handleSubmit}
                 disabled={isSubmitting || !formData.patientName || !formData.phone}
-                className="px-8 py-2.5 rounded-full bg-gradient-to-r from-cyan-600 to-sky-600 hover:from-cyan-500 hover:to-sky-500 text-white font-bold text-xs shadow-md transition disabled:opacity-50"
+                onClick={handleSubmit}
+                className="px-8 py-3.5 rounded-full bg-teal-600 hover:bg-teal-500 disabled:opacity-50 text-white font-bold text-xs sm:text-sm shadow-xl active:scale-95 transition"
               >
-                {isSubmitting ? 'Sending Request...' : 'Submit Request ✓'}
+                {isSubmitting ? 'Transmitting Request...' : 'Submit Consultation Request'}
               </button>
             )}
           </div>

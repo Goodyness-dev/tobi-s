@@ -64,10 +64,10 @@ export default function ProcedureVideoPlayer({
               </div>
             </div>
 
-            {/* Badge Overlay at Bottom */}
+            {/* Surgeon Badge Overlay at Bottom */}
             <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between text-xs text-slate-400 z-10">
-              <span className="truncate">Clinical Educational Guide</span>
-              <span className="text-teal-400 font-semibold">Lumia Dental NYC</span>
+              <span className="truncate">AAOMS Clinical Educational Series</span>
+              <span className="text-teal-400 font-semibold">Drs. Milano & Mazza</span>
             </div>
           </div>
         )}
@@ -90,7 +90,7 @@ export default function ProcedureVideoPlayer({
             <svg className="w-3.5 h-3.5 text-teal-600 dark:text-teal-400" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
             </svg>
-            Performed with boutique comfort amenities
+            Performed under in-office twilight anesthesia
           </span>
         </div>
 
