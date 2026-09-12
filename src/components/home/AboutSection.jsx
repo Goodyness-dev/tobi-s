@@ -1,76 +1,86 @@
 import React from 'react';
-import { Quote } from 'lucide-react';
 import { BUSINESS_INFO } from '../../data/businessData';
 
-export default function AboutSection({ onOpenWizard }) {
+export default function AboutSection({ onOpenConsultation, onNavigate }) {
   return (
-    <section id="about" className="py-20 sm:py-24 bg-stone-50 dark:bg-black transition-colors" aria-labelledby="about-heading">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Left: Image with lazy loading & optimized lightweight JPG */}
-          <div className="relative">
-            <div className="rounded-2xl overflow-hidden shadow-lg border border-gray-100 dark:border-neutral-800">
-              <img
-                src="/images/storefront.jpg"
-                alt="Toby's Auto Mechanic repair facility storefront on Jimmie Kerr Blvd in Casa Grande, Arizona"
-                loading="lazy"
-                decoding="async"
-                width="640"
-                height="400"
-                className="w-full h-72 sm:h-96 lg:h-[420px] object-cover"
-              />
+    <section className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        {/* Left Column: Practice Philosophy */}
+        <div className="lg:col-span-6">
+          <span className="text-xs font-bold uppercase tracking-wider text-teal-600 dark:text-teal-400">
+            Meet Your Surgeons
+          </span>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight mt-1 mb-6">
+            Drs. Carl J. Milano & Fredric C. Mazza
+          </h2>
+          <p className="text-slate-600 dark:text-slate-300 leading-relaxed text-base sm:text-lg mb-6">
+            Oral and maxillofacial surgery requires specialized hospital-based residency training beyond dental school. For over 25 years on Sullivan Trail, our surgeons have delivered microscopic precision and comforting bedside empathy to generations of families across Northampton County.
+          </p>
+
+          <div className="space-y-3.5 mb-8">
+            <div className="flex items-start gap-3">
+              <span className="w-5 h-5 rounded-full bg-teal-100 dark:bg-teal-950 text-teal-600 dark:text-teal-400 font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">✓</span>
+              <p className="text-sm font-medium text-slate-700 dark:text-slate-300">
+                <strong>Fellows of AAOMS:</strong> Actively adhering to the highest national standards of oral surgical excellence.
+              </p>
             </div>
-            {/* Floating stat badge */}
-            <div className="absolute -bottom-5 right-4 sm:right-8 bg-white dark:bg-[#0c0c0c] rounded-2xl shadow-xl border border-gray-100 dark:border-neutral-800 px-6 py-3.5 transition-colors">
-              <div className="text-2xl sm:text-4xl font-black font-heading text-red-700 dark:text-red-500">15+</div>
-              <div className="text-xs sm:text-sm text-gray-600 dark:text-neutral-300 font-semibold">Years Serving Arizona</div>
+            <div className="flex items-start gap-3">
+              <span className="w-5 h-5 rounded-full bg-teal-100 dark:bg-teal-950 text-teal-600 dark:text-teal-400 font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">✓</span>
+              <p className="text-sm font-medium text-slate-700 dark:text-slate-300">
+                <strong>Hospital Staff Privileges:</strong> Credentialed at local trauma centers for complex maxillofacial reconstruction.
+              </p>
+            </div>
+            <div className="flex items-start gap-3">
+              <span className="w-5 h-5 rounded-full bg-teal-100 dark:bg-teal-950 text-teal-600 dark:text-teal-400 font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">✓</span>
+              <p className="text-sm font-medium text-slate-700 dark:text-slate-300">
+                <strong>Integrated General Dentist Network:</strong> Seamless collaboration with your trusted family dentist.
+              </p>
             </div>
           </div>
 
-          {/* Right: Text with bigger fonts */}
-          <div className="space-y-6">
-            <h2 id="about-heading" className="text-3xl sm:text-4xl lg:text-5xl font-black font-heading text-gray-900 dark:text-white tracking-tight leading-tight">
-              From Mobile Mechanic to Casa Grande's Trusted Shop
-            </h2>
+          <div className="flex items-center gap-4">
+            <button
+              onClick={() => onNavigate('about')}
+              className="px-6 py-3.5 rounded-full bg-slate-900 hover:bg-slate-800 dark:bg-teal-600 dark:hover:bg-teal-500 text-white font-bold text-xs sm:text-sm shadow-md active:scale-95 transition"
+            >
+              Read Full Surgeon Biographies
+            </button>
+            <button
+              onClick={() => onOpenConsultation()}
+              className="px-6 py-3.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 font-bold text-xs sm:text-sm hover:bg-slate-200 transition"
+            >
+              Consult with Doctors
+            </button>
+          </div>
+        </div>
 
-            {/* Owner Quote */}
-            <div className="border-l-4 border-red-700 dark:border-red-600 pl-5 sm:pl-6 py-2">
-              <Quote className="w-6 h-6 text-red-400 dark:text-red-500 mb-2" aria-hidden="true" />
-              <p className="text-gray-700 dark:text-neutral-300 text-sm sm:text-lg italic leading-relaxed">
-                "{BUSINESS_INFO.owner.quote}"
+        {/* Right Column: Tactile Doctor Highlight Cards */}
+        <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-6">
+          {BUSINESS_INFO.surgeons.map((s) => (
+            <div 
+              key={s.id}
+              className="card-thick bg-white dark:bg-[#0f172a] rounded-3xl border-2 border-slate-200/90 dark:border-slate-800/90 p-6 sm:p-7 shadow-sm"
+            >
+              <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-teal-700 to-teal-500 text-white flex items-center justify-center font-extrabold text-lg mb-4 shadow-md">
+                {s.name.split(' ').map(n => n[0]).slice(1, 3).join('')}
+              </div>
+              <h3 className="font-bold text-lg text-slate-900 dark:text-white mb-1">
+                {s.name}
+              </h3>
+              <p className="text-xs text-teal-600 dark:text-teal-400 font-semibold mb-3">
+                {s.role}
               </p>
-              <div className="mt-3 text-sm sm:text-base font-bold text-red-700 dark:text-red-500">
-                — {BUSINESS_INFO.owner.name}, {BUSINESS_INFO.owner.role}
-              </div>
-            </div>
-
-            <p className="text-gray-700 dark:text-neutral-300 text-sm sm:text-lg leading-relaxed">
-              Who you trust to maintain your vehicle determines how much it costs over its lifetime. At Toby's, you get straight answers, honest quotes, and seasoned craftsmanship without upselling or hidden dealership markups.
-            </p>
-
-            {/* Key milestones */}
-            <div className="flex flex-wrap gap-3 pt-2">
-              <div className="flex items-center space-x-2.5 px-4 py-2.5 bg-white dark:bg-[#0c0c0c] rounded-xl border border-gray-200 dark:border-neutral-800 text-xs sm:text-sm font-medium transition-colors">
-                <span className="font-bold text-red-700 dark:text-red-500 text-sm sm:text-base">2009</span>
-                <span className="text-gray-700 dark:text-neutral-300">Started as mobile roadside mechanic</span>
-              </div>
-              <div className="flex items-center space-x-2.5 px-4 py-2.5 bg-white dark:bg-[#0c0c0c] rounded-xl border border-gray-200 dark:border-neutral-800 text-xs sm:text-sm font-medium transition-colors">
-                <span className="font-bold text-red-700 dark:text-red-500 text-sm sm:text-base">2022</span>
-                <span className="text-gray-700 dark:text-neutral-300">Opened permanent Casa Grande facility</span>
-              </div>
-            </div>
-
-            {/* CTA */}
-            <div className="pt-2">
+              <p className="text-xs text-slate-600 dark:text-slate-300 line-clamp-4 leading-relaxed mb-4">
+                {s.bio}
+              </p>
               <button
-                onClick={() => onOpenWizard()}
-                className="px-8 py-4 rounded-xl bg-red-700 hover:bg-red-800 text-white font-bold text-base sm:text-lg transition-all shadow-md active:scale-95"
-                aria-label="Request a quote from Toby's team"
+                onClick={() => onNavigate('about')}
+                className="text-xs font-bold text-teal-600 dark:text-teal-400 hover:underline"
               >
-                Get a Free Quote
+                View Credentials →
               </button>
             </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>

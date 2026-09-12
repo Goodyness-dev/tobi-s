@@ -1,212 +1,223 @@
 import React, { useState, useEffect } from 'react';
-import { Phone, Menu, X, ChevronRight, Sun, Moon } from 'lucide-react';
 import { BUSINESS_INFO } from '../../data/businessData';
+import { PROCEDURES } from '../../data/servicesData';
 
-export default function Navbar({ onOpenWizard, currentPage = 'home', onNavigate, darkMode, onToggleDarkMode }) {
-  const [isScrolled, setIsScrolled] = useState(false);
+export default function Navbar({ 
+  onOpenConsultation, 
+  currentPage, 
+  onNavigate, 
+  darkMode, 
+  onToggleDarkMode 
+}) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [procDropdownOpen, setProcDropdownOpen] = useState(false);
 
+  // Close dropdown on outside click or navigation
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const handleNavClick = (e, target) => {
-    e.preventDefault();
+    setProcDropdownOpen(false);
     setMobileMenuOpen(false);
-
-    if (target === 'services') {
-      if (onNavigate) onNavigate('services');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      return;
-    }
-
-    if (currentPage !== 'home' && onNavigate) {
-      onNavigate('home');
-      setTimeout(() => {
-        const el = document.querySelector(target);
-        if (el) el.scrollIntoView({ behavior: 'smooth' });
-      }, 100);
-      return;
-    }
-
-    const el = document.querySelector(target);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    } else {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  };
-
-  const navLinks = [
-    { name: 'Services', target: 'services' },
-    { name: 'About', target: '#about' },
-    { name: 'Amenities', target: '#amenities' },
-    { name: 'Location', target: '#location' },
-    { name: 'Reviews', target: '#reviews' },
-  ];
+  }, [currentPage]);
 
   return (
-    <header 
-      className={`sticky top-0 z-40 transition-all duration-300 ${
-        isScrolled 
-          ? 'bg-white/95 dark:bg-black/95 backdrop-blur-md shadow-sm border-b border-gray-200 dark:border-neutral-900' 
-          : 'bg-white dark:bg-black border-b border-gray-100 dark:border-neutral-900'
-      }`}
-      role="banner"
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 sm:h-20 flex items-center justify-between">
-        {/* Logo & Brand */}
+    <header className="fixed top-3 left-3 right-3 sm:top-5 sm:left-6 sm:right-6 max-w-7xl mx-auto z-50">
+      {/* Curved Floating Pill Navigation Bar (Matching website templete to follow.jpg) */}
+      <nav className="rounded-full bg-white/95 dark:bg-[#090e18]/95 backdrop-blur-md shadow-xl border-2 border-slate-200/90 dark:border-slate-800/90 px-4 sm:px-6 py-2.5 sm:py-3 flex items-center justify-between transition-colors">
+        
+        {/* Brand Logo & Name */}
         <button 
-          onClick={(e) => handleNavClick(e, '#')} 
-          className="flex items-center space-x-3 group text-left"
-          aria-label="Toby's Auto Mechanic Home"
+          onClick={() => onNavigate('home')} 
+          className="flex items-center gap-3 text-left group focus:outline-none"
         >
-          <img 
-            src="/logo.png" 
-            alt="Toby's Auto Mechanic Logo - Casa Grande AZ" 
-            width="160"
-            height="40"
-            decoding="async"
-            className="h-10 sm:h-12 w-auto object-contain"
-          />
-          <div className="flex flex-col">
-            <span className="font-heading text-lg sm:text-2xl font-black tracking-tight text-gray-900 dark:text-white leading-tight">
-              Toby's <span className="text-red-700 dark:text-red-600">Auto</span>
+          <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-teal-700 to-teal-500 text-white flex items-center justify-center font-extrabold text-sm shadow-md group-hover:scale-105 transition">
+            M&M
+          </div>
+          <div>
+            <span className="font-extrabold text-sm sm:text-base text-slate-900 dark:text-white tracking-tight leading-none block">
+              Milano & Mazza
             </span>
-            <span className="text-xs sm:text-sm tracking-wider uppercase text-gray-500 dark:text-neutral-400 hidden xs:block font-medium">
-              Diesel & Auto Care
+            <span className="text-[10px] sm:text-[11px] font-semibold text-teal-600 dark:text-teal-400 tracking-wider uppercase">
+              Oral & Maxillofacial Surgery
             </span>
           </div>
         </button>
 
         {/* Desktop Nav Links */}
-        <nav className="hidden lg:flex items-center space-x-7" aria-label="Main Navigation">
-          {navLinks.map((link) => {
-            const isActive = link.target === 'services' && currentPage === 'services';
-            return (
-              <button
-                key={link.name}
-                onClick={(e) => handleNavClick(e, link.target)}
-                className={`text-base font-semibold transition-colors ${
-                  isActive 
-                    ? 'text-red-700 dark:text-red-500 font-bold' 
-                    : 'text-gray-700 dark:text-neutral-300 hover:text-gray-900 dark:hover:text-white'
-                }`}
-              >
-                {link.name}
-              </button>
-            );
-          })}
-        </nav>
+        <div className="hidden lg:flex items-center gap-6 text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-200">
+          <button 
+            onClick={() => onNavigate('home')}
+            className={`hover:text-teal-600 dark:hover:text-teal-400 transition ${currentPage === 'home' ? 'text-teal-600 dark:text-teal-400' : ''}`}
+          >
+            Home
+          </button>
 
-        {/* Desktop CTAs & Dark Mode Toggle */}
-        <div className="hidden md:flex items-center space-x-4">
-          {/* Midnight Dark Mode Toggle Pill */}
+          {/* Procedures Dropdown */}
+          <div className="relative">
+            <button
+              onClick={() => setProcDropdownOpen(!procDropdownOpen)}
+              className="flex items-center gap-1 hover:text-teal-600 dark:hover:text-teal-400 transition"
+            >
+              <span>Procedures (3D Guides)</span>
+              <svg className={`w-3.5 h-3.5 transition-transform ${procDropdownOpen ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+
+            {procDropdownOpen && (
+              <div className="absolute top-full left-0 mt-3 w-64 rounded-3xl bg-white dark:bg-[#0f172a] shadow-2xl border border-slate-200 dark:border-slate-800 p-3 space-y-1 animate-fadeIn">
+                {PROCEDURES.slice(0, 5).map((p) => (
+                  <button
+                    key={p.id}
+                    onClick={() => {
+                      onNavigate(`procedure-${p.slug}`);
+                      setProcDropdownOpen(false);
+                    }}
+                    className="w-full text-left px-3.5 py-2.5 rounded-2xl hover:bg-teal-50 dark:hover:bg-teal-950/50 text-xs font-semibold text-slate-800 dark:text-slate-200 hover:text-teal-600 dark:hover:text-teal-400 flex items-center justify-between group transition"
+                  >
+                    <span>{p.title}</span>
+                    <span className="text-[10px] text-teal-600 dark:text-teal-400 opacity-0 group-hover:opacity-100 transition">3D ▶</span>
+                  </button>
+                ))}
+                <div className="pt-2 border-t border-slate-100 dark:border-slate-800/80">
+                  <button
+                    onClick={() => {
+                      onNavigate('procedures');
+                      setProcDropdownOpen(false);
+                    }}
+                    className="w-full text-center py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-[11px] font-bold text-teal-700 dark:text-teal-300 hover:bg-slate-200 transition"
+                  >
+                    View All Procedures →
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+
+          <button 
+            onClick={() => onNavigate('about')}
+            className={`hover:text-teal-600 dark:hover:text-teal-400 transition ${currentPage === 'about' ? 'text-teal-600 dark:text-teal-400' : ''}`}
+          >
+            About Surgeons
+          </button>
+
+          <button 
+            onClick={() => onNavigate('patient-info')}
+            className={`hover:text-teal-600 dark:hover:text-teal-400 transition ${currentPage === 'patient-info' ? 'text-teal-600 dark:text-teal-400' : ''}`}
+          >
+            Patient Info & Intake
+          </button>
+
+          <button 
+            onClick={() => onNavigate('referring-doctors')}
+            className={`hover:text-teal-600 dark:hover:text-teal-400 transition ${currentPage === 'referring-doctors' ? 'text-teal-600 dark:text-teal-400' : ''}`}
+          >
+            Referring Doctors
+          </button>
+        </div>
+
+        {/* Right Action Buttons */}
+        <div className="flex items-center gap-2.5">
+          {/* Dark Mode Toggle Button */}
           <button
-            type="button"
             onClick={onToggleDarkMode}
-            className="flex items-center space-x-2 px-3.5 py-2 rounded-full border border-gray-200 dark:border-neutral-800 bg-gray-100 dark:bg-[#111111] text-gray-800 dark:text-neutral-200 hover:border-red-400 dark:hover:border-neutral-700 transition cursor-pointer shadow-sm active:scale-95"
-            aria-label={darkMode ? "Switch to light mode" : "Switch to midnight black mode"}
-            title={darkMode ? "Switch to light mode" : "Switch to midnight black mode"}
+            aria-label="Toggle dark mode"
+            className="w-9 h-9 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 flex items-center justify-center hover:bg-slate-200 dark:hover:bg-slate-700 transition"
           >
             {darkMode ? (
-              <>
-                <Sun className="w-4 h-4 text-amber-400 animate-spin-slow" />
-                <span className="text-xs font-bold text-neutral-200">Light</span>
-              </>
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+              </svg>
             ) : (
-              <>
-                <Moon className="w-4 h-4 text-neutral-700" />
-                <span className="text-xs font-bold text-neutral-800">Dark</span>
-              </>
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+              </svg>
             )}
           </button>
 
+          {/* Call Phone Button (Desktop) */}
           <a
-            href={`tel:${BUSINESS_INFO.phone.replace(/[^0-9]/g, '')}`}
-            className="flex items-center space-x-2 text-base text-gray-800 dark:text-neutral-200 hover:text-red-700 dark:hover:text-red-500 font-bold transition"
-            aria-label={`Call Toby's Auto Mechanic: ${BUSINESS_INFO.phone}`}
+            href="tel:6102589081"
+            className="hidden sm:flex items-center gap-1.5 px-4 py-2.5 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 text-xs font-bold transition"
           >
-            <Phone className="w-4 h-4 text-red-700 dark:text-red-600" aria-hidden="true" />
-            <span>{BUSINESS_INFO.phone}</span>
+            <svg className="w-3.5 h-3.5 text-teal-600 dark:text-teal-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+            </svg>
+            <span>(610) 258-9081</span>
           </a>
 
+          {/* Primary CTA: Book Consultation */}
           <button
-            onClick={() => onOpenWizard()}
-            className="flex items-center space-x-1.5 px-5 py-2.5 rounded-xl bg-red-700 hover:bg-red-800 text-white font-bold text-base transition-colors shadow-sm active:scale-95"
-            aria-label="Launch Free Quote Wizard"
+            onClick={() => onOpenConsultation()}
+            className="px-5 py-2.5 rounded-full bg-teal-600 hover:bg-teal-500 text-white font-bold text-xs sm:text-sm tracking-wide shadow-md shadow-teal-700/20 active:scale-95 transition"
           >
-            <span>Free Quote</span>
-            <ChevronRight className="w-5 h-5" />
-          </button>
-        </div>
-
-        {/* Mobile Controls */}
-        <div className="flex lg:hidden items-center space-x-2.5">
-          {/* Mobile Dark Mode Toggle */}
-          <button
-            type="button"
-            onClick={onToggleDarkMode}
-            className="p-2.5 rounded-xl border border-gray-200 dark:border-neutral-800 bg-gray-100 dark:bg-[#111111] text-gray-800 dark:text-neutral-200 transition cursor-pointer active:scale-95"
-            aria-label={darkMode ? "Switch to light mode" : "Switch to midnight black mode"}
-          >
-            {darkMode ? (
-              <Sun className="w-5 h-5 text-amber-400" />
-            ) : (
-              <Moon className="w-5 h-5 text-neutral-800" />
-            )}
+            Book Consult
           </button>
 
-          <button
-            onClick={() => onOpenWizard()}
-            className="px-3.5 py-2 rounded-xl bg-red-700 text-white text-sm font-bold active:scale-95 shadow-sm"
-            aria-label="Get Free Quote"
-          >
-            Quote
-          </button>
+          {/* Mobile Menu Burger */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 rounded-xl text-gray-700 dark:text-neutral-200 hover:bg-gray-100 dark:hover:bg-neutral-900"
-            aria-label="Toggle navigation menu"
-            aria-expanded={mobileMenuOpen}
+            className="lg:hidden p-2 rounded-full text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
+            aria-label="Open mobile menu"
           >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              {mobileMenuOpen ? (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+              ) : (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
+              )}
+            </svg>
           </button>
         </div>
-      </div>
+      </nav>
 
-      {/* Mobile Nav Drawer */}
+      {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <nav className="lg:hidden bg-white dark:bg-black border-b border-gray-200 dark:border-neutral-900 px-5 pt-3 pb-6 space-y-2 shadow-2xl" aria-label="Mobile Navigation">
-          {navLinks.map((link) => (
-            <button
-              key={link.name}
-              onClick={(e) => handleNavClick(e, link.target)}
-              className="w-full text-left px-3.5 py-3 rounded-xl text-base font-semibold text-gray-800 dark:text-neutral-200 hover:bg-gray-50 dark:hover:bg-neutral-900 transition"
-            >
-              {link.name}
-            </button>
-          ))}
-          <div className="pt-4 border-t border-gray-100 dark:border-neutral-900 space-y-3">
+        <div className="lg:hidden mt-2 p-5 rounded-3xl bg-white/95 dark:bg-[#090e18]/95 backdrop-blur-md shadow-2xl border-2 border-slate-200 dark:border-slate-800 animate-fadeIn space-y-3">
+          <button 
+            onClick={() => onNavigate('home')} 
+            className="w-full text-left p-2.5 rounded-xl font-bold text-sm text-slate-800 dark:text-slate-200 hover:bg-teal-50 dark:hover:bg-slate-800"
+          >
+            Home
+          </button>
+          <button 
+            onClick={() => onNavigate('procedures')} 
+            className="w-full text-left p-2.5 rounded-xl font-bold text-sm text-slate-800 dark:text-slate-200 hover:bg-teal-50 dark:hover:bg-slate-800 flex items-center justify-between"
+          >
+            <span>All Procedures</span>
+            <span className="text-xs text-teal-600 dark:text-teal-400">3D Guides ▶</span>
+          </button>
+          <button 
+            onClick={() => onNavigate('about')} 
+            className="w-full text-left p-2.5 rounded-xl font-bold text-sm text-slate-800 dark:text-slate-200 hover:bg-teal-50 dark:hover:bg-slate-800"
+          >
+            About Surgeons (Milano & Mazza)
+          </button>
+          <button 
+            onClick={() => onNavigate('patient-info')} 
+            className="w-full text-left p-2.5 rounded-xl font-bold text-sm text-slate-800 dark:text-slate-200 hover:bg-teal-50 dark:hover:bg-slate-800"
+          >
+            Patient Info & Digital Intake
+          </button>
+          <button 
+            onClick={() => onNavigate('referring-doctors')} 
+            className="w-full text-left p-2.5 rounded-xl font-bold text-sm text-slate-800 dark:text-slate-200 hover:bg-teal-50 dark:hover:bg-slate-800"
+          >
+            Referring Doctors Portal
+          </button>
+          <div className="pt-2 border-t border-slate-200 dark:border-slate-800 flex flex-col gap-2">
             <a
-              href={`tel:${BUSINESS_INFO.phone.replace(/[^0-9]/g, '')}`}
-              className="w-full flex items-center justify-center space-x-2 py-3 rounded-xl border border-gray-200 dark:border-neutral-800 text-gray-900 dark:text-white font-bold text-base bg-gray-50 dark:bg-[#111111]"
-              aria-label={`Call ${BUSINESS_INFO.phone}`}
+              href="tel:6102589081"
+              className="w-full py-3 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white font-bold text-xs flex items-center justify-center gap-2"
             >
-              <Phone className="w-5 h-5 text-red-700 dark:text-red-600" />
-              <span>{BUSINESS_INFO.phone}</span>
+              <span>Call (610) 258-9081</span>
             </a>
             <button
-              onClick={() => { setMobileMenuOpen(false); onOpenWizard(); }}
-              className="w-full py-3.5 rounded-xl bg-red-700 text-white font-bold text-base shadow-sm"
-              aria-label="Get Free Quote Now"
+              onClick={() => onOpenConsultation()}
+              className="w-full py-3 rounded-xl bg-teal-600 text-white font-bold text-xs shadow-md"
             >
-              Get a Free Quote
+              Request Consultation
             </button>
           </div>
-        </nav>
+        </div>
       )}
     </header>
   );

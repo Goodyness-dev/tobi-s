@@ -1,106 +1,127 @@
 export const BUSINESS_INFO = {
-  name: "Toby's Auto Mechanic",
-  legalName: "Toby's Auto Mechanic LLC",
-  tagline: "Dependable Diesel & Automotive Care — Casa Grande's Trusted Shop Since 2009",
+  name: "Milano & Mazza Oral and Maxillofacial Surgery",
+  shortName: "Milano & Mazza",
+  legalName: "Milano & Mazza Oral and Maxillofacial Surgery LLC",
+  tagline: "Board-Certified Excellence in Dental Implants & Facial Surgery — Serving Easton & The Lehigh Valley",
   address: {
-    street: "15276 W Jimmie Kerr Blvd, Ste 1",
-    city: "Casa Grande",
-    state: "AZ",
-    zip: "85122",
-    formatted: "15276 W Jimmie Kerr Blvd, Ste 1, Casa Grande, AZ 85122",
+    street: "1412 Sullivan Trail",
+    city: "Easton",
+    state: "PA",
+    zip: "18040",
+    formatted: "1412 Sullivan Trail, Easton, PA 18040",
   },
-  phone: "(520) 836-6921",
-  secondaryPhone: "(520) 836-6021",
-  website: "tobysllc.com",
-  email: "info@tobysllc.com",
-  googleMapsLink: "https://www.google.com/maps/dir/?api=1&destination=Toby%27s+Auto+Mechanic,+15276+W+Jimmie+Kerr+Blvd,+Ste+1,+Casa+Grande,+AZ+85122",
-  googleMapsEmbedUrl: "https://maps.google.com/maps?q=Toby%27s%20Auto%20Mechanic%2C%2015276%20W%20Jimmie%20Kerr%20Blvd%2C%20Ste%201%2C%20Casa%20Grande%2C%20AZ%2085122&t=&z=15&ie=UTF8&iwloc=&output=embed",
+  phone: "(610) 258-9081",
+  fax: "(610) 258-0377",
+  website: "milanoandmazzaoralsurgery.com",
+  email: "info@milanoandmazzaoralsurgery.com",
+  googleMapsLink: "https://www.google.com/maps/dir/?api=1&destination=1412+Sullivan+Trail,+Easton,+PA+18040",
+  googleMapsEmbedUrl: "https://maps.google.com/maps?q=1412%20Sullivan%20Trail%2C%20Easton%2C%20PA%2018040&t=&z=15&ie=UTF8&iwloc=&output=embed",
   
   hours: [
-    { day: "Monday", open: "8:00 AM", close: "5:00 PM", note: "" },
-    { day: "Tuesday", open: "8:00 AM", close: "5:00 PM", note: "" },
-    { day: "Wednesday", open: "8:00 AM", close: "5:00 PM", note: "" },
-    { day: "Thursday", open: "8:00 AM", close: "5:00 PM", note: "" },
-    { day: "Friday", open: "8:00 AM", close: "5:00 PM", note: "" },
-    { day: "Saturday", open: "8:00 AM", close: "5:00 PM", note: "By Appointment Only" },
-    { day: "Sunday", open: "Closed", close: "Closed", note: "" },
+    { day: "Monday", open: "9:00 AM", close: "5:00 PM", note: "Surgeries & Consultations" },
+    { day: "Tuesday", open: "9:00 AM", close: "5:00 PM", note: "Surgeries & Consultations" },
+    { day: "Wednesday", open: "9:00 AM", close: "5:00 PM", note: "Surgeries & Consultations" },
+    { day: "Thursday", open: "9:00 AM", close: "5:00 PM", note: "Surgeries & Consultations" },
+    { day: "Friday", open: "9:00 AM", close: "5:00 PM", note: "Surgeries & Follow-ups" },
+    { day: "Saturday", open: "Closed", close: "Closed", note: "Emergency On-Call" },
+    { day: "Sunday", open: "Closed", close: "Closed", note: "Emergency On-Call" },
   ],
 
-  history: [
+  serviceAreas: [
+    "Easton", "Bethlehem", "Allentown", "Bangor", "Phillipsburg, NJ", "Washington, NJ", "Northampton County", "Lehigh Valley"
+  ],
+
+  insurancePartners: [
+    { name: "Delta Dental", status: "In-Network Premier", badge: "Preferred" },
+    { name: "Blue Cross Dental", status: "In-Network PPO", badge: "In-Network" },
+    { name: "Aetna PPO", status: "In-Network", badge: "In-Network" },
+    { name: "Cigna Dental", status: "In-Network PPO", badge: "In-Network" },
+    { name: "MetLife Dental", status: "In-Network", badge: "In-Network" },
+    { name: "Guardian Dental", status: "In-Network", badge: "In-Network" },
+    { name: "Medicare / Major Medical", status: "Participating Plans", badge: "Medical Accepted" },
+    { name: "CareCredit", status: "0% APR Financing", badge: "Financing" }
+  ],
+
+  surgeons: [
     {
-      year: "2009",
-      title: "Humble Beginnings",
-      description: "Toby started out as a mobile mechanic for hire, traveling across Arizona heat and backroads to help stranded drivers and local farmers with reliable on-site repair."
+      id: "dr-milano",
+      name: "Dr. Carl J. Milano, D.M.D.",
+      role: "Oral & Maxillofacial Surgeon",
+      credentials: "D.M.D. • Fellow, American Association of Oral & Maxillofacial Surgeons (AAOMS)",
+      bio: "Dr. Carl J. Milano is a premier oral and maxillofacial surgeon serving Easton and the greater Lehigh Valley for over 25 years. Following dental school graduation, Dr. Milano completed intensive hospital-based surgical and general anesthesia residency training. He specializes in advanced dental implant surgery, sinus augmentations, complex bone regeneration, and corrective orthognathic jaw reconstruction. Dr. Milano is dedicated to providing surgical precision with a compassionate, anxiety-free bedside manner.",
+      specialties: ["Dental Implants & All-on-X", "Complex Bone Grafting & Sinus Lifts", "Corrective Jaw Surgery", "Oral Pathology Biopsies"]
     },
     {
-      year: "2015",
-      title: "Diesel Mastery",
-      description: "Expanded into specialized heavy-duty diesel diagnostics, complete engine swaps, and performance transmission rebuilds."
-    },
-    {
-      year: "2022",
-      title: "Permanent Casa Grande Facility",
-      description: "Opened our fully-equipped, modern auto repair facility with dedicated hydraulic lifts, comfortable waiting room, and U-Haul rental partnership on Jimmie Kerr Blvd."
-    },
-    {
-      year: "Present",
-      title: "Pinal County's Trusted Choice",
-      description: "Serving hundreds of satisfied local drivers, fleet operators, and military families with transparent, honest, high-caliber automotive work."
+      id: "dr-mazza",
+      name: "Dr. Fredric C. Mazza, D.M.D.",
+      role: "Oral & Maxillofacial Surgeon",
+      credentials: "D.M.D. • Fellow, American Association of Oral & Maxillofacial Surgeons (AAOMS)",
+      bio: "Dr. Fredric C. Mazza is an esteemed oral and maxillofacial surgeon recognized across Pennsylvania and New Jersey for his mastery in outpatient anesthesia and traumatic maxillofacial reconstruction. With comprehensive hospital training in intravenous sedation, facial trauma management, and impacted wisdom tooth extractions, Dr. Mazza ensures every patient experiences gentle care, minimal post-operative recovery time, and complete peace of mind.",
+      specialties: ["IV Twilight Sedation & Sleep Surgery", "Impacted Wisdom Teeth Removal", "Facial Trauma & Fracture Repair", "Impacted Canine Exposure"]
     }
   ],
 
-  owner: {
-    name: "Toby S.",
-    role: "Founder & Master Technician",
-    quote: "Auto repair has always been a passion of mine and serving Arizona car owners with vehicle repair has been my honor and treat. The Arizona heat and terrain provided the perfect environment to create a state filled with vehicles that need repairs and I've been able to perfect my skills."
+  anesthesiaStandards: {
+    title: "Hospital-Grade Safety in Our Modern Surgical Suite",
+    description: "Our state-of-the-art Easton surgical center is fully equipped with hospital-grade anesthesia delivery and continuous vital monitoring systems. Our surgical staff consists of certified oral and maxillofacial surgical assistants trained in IV sedation administration, BLS/ACLS, and CPR.",
+    features: [
+      "Continuous EKG, blood pressure, and pulse oximetry monitoring",
+      "Hospital-trained surgeons certified in general anesthesia & IV sedation",
+      "Certified Oral & Maxillofacial Surgical Assistants (DAANCE certified)",
+      "Zero pain memory: wake up comfortably with your procedure complete"
+    ]
   },
 
   reviews: [
     {
-      author: "Marcus R.",
-      location: "Casa Grande, AZ",
-      source: "Yelp",
-      rating: 5,
-      date: "2 months ago",
-      comment: "Toby is hands down the most honest mechanic in Pinal County. Diagnosed a complex transmission shudder that two other dealerships quoted me thousands for, and fixed it same day at a fraction of the cost. A true lifesaver!"
-    },
-    {
-      author: "Elena G.",
-      location: "Eloy, AZ",
-      source: "Google Review",
+      author: "Sarah M.",
+      location: "Easton, PA",
+      source: "Google Verified Review",
       rating: 5,
       date: "3 weeks ago",
-      comment: "My A/C died during a 112° Arizona scorcher with my kids in the car. Toby got us right in, recharged the system, replaced a bad compressor clutch, and had us ice-cold before noon. Respectful, transparent, and fair."
+      procedure: "Dental Implant & Bone Graft",
+      comment: "I was terrified of getting a dental implant after losing a front tooth in a sports accident. Dr. Milano was so calm and reassuring. Under IV twilight sleep, I felt absolutely zero pain and woke up before I even knew it started! My new implant looks and feels identical to my natural teeth. Truly world-class care right here on Sullivan Trail."
     },
     {
-      author: "Sgt. David W.",
-      location: "Casa Grande, AZ",
-      source: "Yelp",
+      author: "Michael T.",
+      location: "Bethlehem, PA",
+      source: "Healthgrades",
       rating: 5,
       date: "1 month ago",
-      comment: "Veteran friendly and top-shelf diesel care. Toby overhauled the injectors on my Cummins Ram 2500 and the truck runs like it just rolled off the showroom floor. You won't find better craftmanship."
+      procedure: "Wisdom Teeth Extraction",
+      comment: "Had all 4 impacted wisdom teeth removed by Dr. Mazza. The staff was incredibly warm, the insurance verification was handled seamlessly beforehand, and I had almost zero swelling. I was back eating regular food in three days. Best oral surgeons in the Lehigh Valley without question."
     },
     {
-      author: "Jessica B.",
-      location: "Maricopa, AZ",
-      source: "Google Review",
+      author: "Diane K.",
+      location: "Phillipsburg, NJ",
+      source: "Google Verified Review",
       rating: 5,
-      date: "4 months ago",
-      comment: "The waiting room is air conditioned and spotlessly clean. Toby explained every single line item on my brake service before doing the work. Highly recommend to any woman who wants zero BS or upselling."
+      date: "2 months ago",
+      procedure: "Sinus Lift & Multiple Implants",
+      comment: "My general dentist referred me to Drs. Milano & Mazza for a sinus lift because I had severe bone loss. Their office coordination with my dentist was flawless. The procedure was smooth, transparent pricing with my insurance, and no hidden surprises. 10/10 recommendation!"
+    },
+    {
+      author: "Robert L.",
+      location: "Allentown, PA",
+      source: "Patient Testimonial",
+      rating: 5,
+      date: "3 months ago",
+      procedure: "Emergency Facial Injury",
+      comment: "After a severe jaw injury, the hospital referred me directly to Dr. Mazza. His surgical expertise restored my bite and facial alignment completely. The administrative staff also helped navigate medical insurance and Medicare effortlessly."
     }
   ]
 };
 
 export const isOpenNow = () => {
   const now = new Date();
-  const day = now.getDay(); // 0 = Sun, 1 = Mon, ..., 6 = Sat
-  const hour = now.getHours();
+  // US Eastern Time calculation
+  const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+  const etOffset = -4; // ET approx (EDT -4 / EST -5)
+  const etDate = new Date(utc + (3600000 * etOffset));
+  const day = etDate.getDay(); // 0 = Sun, 1 = Mon, ..., 6 = Sat
+  const hour = etDate.getHours();
   
-  if (day === 0) return false; // Sunday closed
-  if (day === 6) {
-    // Saturday by appointment 8am - 5pm
-    return hour >= 8 && hour < 17;
-  }
-  // Monday - Friday 8am - 5pm
-  return hour >= 8 && hour < 17;
+  if (day === 0 || day === 6) return false; // Weekends closed
+  return hour >= 9 && hour < 17; // Mon - Fri 9am - 5pm ET
 };
+

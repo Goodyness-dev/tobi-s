@@ -1,170 +1,108 @@
 import React from 'react';
-import { Phone, MapPin, ChevronRight } from 'lucide-react';
 import { BUSINESS_INFO } from '../../data/businessData';
+import { PROCEDURES } from '../../data/servicesData';
 
-export default function Footer({ onOpenWizard, onNavigate }) {
-  const handleLinkClick = (e, target) => {
-    e.preventDefault();
-    if (target === 'services') {
-      if (onNavigate) onNavigate('services');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      return;
-    }
-
-    if (onNavigate) onNavigate('home');
-    setTimeout(() => {
-      const el = document.querySelector(target);
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
-    }, 100);
-  };
-
+export default function Footer({ onOpenConsultation, onNavigate }) {
   return (
-    <footer className="bg-black text-neutral-400 text-sm sm:text-base pb-16 sm:pb-0 border-t border-neutral-900" role="contentinfo">
-      {/* Pre-footer CTA Bar (Bigger typography) */}
-      <div className="bg-red-700 py-10 sm:py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="text-center md:text-left">
-            <h3 className="text-2xl sm:text-4xl font-black font-heading text-white tracking-tight">
-              Need reliable auto or diesel repair in Casa Grande?
-            </h3>
-            <p className="text-red-100 mt-2 text-sm sm:text-lg">
-              Get an honest, transparent quote breakdown in under 2 minutes.
-            </p>
-          </div>
-          <div className="flex flex-col sm:flex-row items-center gap-3.5 w-full md:w-auto shrink-0">
-            <button
-              onClick={() => onOpenWizard()}
-              className="w-full sm:w-auto px-8 py-4 rounded-xl bg-white text-red-700 font-bold text-base hover:bg-gray-50 transition shadow-md active:scale-95 text-center"
-              aria-label="Get a Free Quote Now"
-            >
-              Get a Free Quote
-            </button>
-            <a
-              href={`tel:${BUSINESS_INFO.phone.replace(/[^0-9]/g, '')}`}
-              className="w-full sm:w-auto px-7 py-4 rounded-xl bg-red-800 hover:bg-red-900 text-white font-bold text-base transition border border-red-600 flex items-center justify-center space-x-2.5 active:scale-95 text-center"
-              aria-label={`Call Toby's Auto Mechanic at ${BUSINESS_INFO.phone}`}
-            >
-              <Phone className="w-5 h-5" aria-hidden="true" />
-              <span>{BUSINESS_INFO.phone}</span>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      {/* Main Footer Columns */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
-        {/* Brand */}
-        <div className="space-y-4">
-          <div className="flex items-center space-x-3">
-            <img 
-              src="/logo.png" 
-              alt="Toby's Auto Mechanic Logo" 
-              width="160"
-              height="40"
-              loading="lazy"
-              decoding="async"
-              className="h-10 w-auto object-contain brightness-200" 
-            />
-            <span className="font-heading font-black text-white text-base sm:text-lg">
-              TOBY'S AUTO MECHANIC
-            </span>
-          </div>
-          <p className="text-gray-400 text-sm sm:text-base leading-relaxed">
-            Dependable diesel and automotive repair serving Casa Grande, Eloy, Coolidge, and Pinal County. Family-owned and operated since 2009.
-          </p>
-        </div>
-
-        {/* Quick Links */}
-        <div>
-          <h4 className="text-white font-bold text-sm sm:text-base uppercase tracking-wider mb-4">Quick Links</h4>
-          <ul className="space-y-2.5 text-sm sm:text-base">
-            {[
-              { label: 'All Services Catalog', target: 'services' },
-              { label: 'About Toby', target: '#about' },
-              { label: 'Shop Amenities', target: '#amenities' },
-              { label: 'Hours & Location Map', target: '#location' },
-              { label: 'Verified Reviews', target: '#reviews' },
-            ].map(link => (
-              <li key={link.label}>
-                <button 
-                  onClick={(e) => handleLinkClick(e, link.target)} 
-                  className="hover:text-white transition text-gray-300 hover:underline text-left"
-                >
-                  {link.label}
-                </button>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Hours */}
-        <div>
-          <h4 className="text-white font-bold text-sm sm:text-base uppercase tracking-wider mb-4">Shop Hours</h4>
-          <div className="space-y-2 text-sm sm:text-base">
-            <div className="flex justify-between">
-              <span>Mon – Fri</span>
-              <span className="text-white font-semibold">8:00 AM – 5:00 PM</span>
-            </div>
-            <div className="flex justify-between">
-              <span>Saturday</span>
-              <span className="text-amber-400 font-semibold">By Appointment</span>
-            </div>
-            <div className="flex justify-between">
-              <span>Sunday</span>
-              <span className="text-red-400 font-semibold">Closed</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Contact (Semantic Address) */}
-        <div>
-          <h4 className="text-white font-bold text-sm sm:text-base uppercase tracking-wider mb-4">Contact Shop</h4>
-          <address className="not-italic space-y-3 text-sm sm:text-base">
-            <div className="flex items-start space-x-2.5">
-              <MapPin className="w-5 h-5 text-red-500 shrink-0 mt-0.5" aria-hidden="true" />
-              <span className="text-gray-300">
-                {BUSINESS_INFO.address.street}<br />
-                {BUSINESS_INFO.address.city}, {BUSINESS_INFO.address.state} {BUSINESS_INFO.address.zip}
+    <footer className="bg-slate-950 text-slate-300 pt-16 pb-12 border-t border-slate-800">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-16">
+          {/* Col 1: Practice Info */}
+          <div>
+            <div className="flex items-center gap-3 mb-4">
+              <div className="w-10 h-10 rounded-full bg-teal-600 text-white flex items-center justify-center font-extrabold text-sm">
+                M&M
+              </div>
+              <span className="font-extrabold text-lg text-white">
+                Milano & Mazza
               </span>
             </div>
-            <div className="flex items-center space-x-2.5">
-              <Phone className="w-5 h-5 text-red-500 shrink-0" aria-hidden="true" />
-              <a 
-                href={`tel:${BUSINESS_INFO.phone.replace(/[^0-9]/g, '')}`} 
-                className="text-white hover:text-red-400 font-bold transition"
-                aria-label={`Call phone: ${BUSINESS_INFO.phone}`}
-              >
-                {BUSINESS_INFO.phone}
-              </a>
+            <p className="text-xs text-slate-400 leading-relaxed mb-4">
+              Oral & Maxillofacial Surgery facility in Easton, PA. Providing world-class dental implants, wisdom teeth extraction, bone grafting, and gentle hospital-trained IV sedation.
+            </p>
+            <div className="text-xs text-teal-400 space-y-1">
+              <p>📍 1412 Sullivan Trail, Easton, PA 18040</p>
+              <p>📞 Phone: (610) 258-9081</p>
+              <p>📠 Fax: (610) 258-0377</p>
             </div>
-            <a
-              href={BUSINESS_INFO.googleMapsLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center text-red-400 hover:text-red-300 font-bold pt-1"
-              aria-label="Open directions in Google Maps"
-            >
-              <span>Get Driving Directions</span>
-              <ChevronRight className="w-4 h-4" />
-            </a>
-          </address>
-        </div>
-      </div>
+          </div>
 
-      {/* Bottom Bar */}
-      <div className="border-t border-gray-800 py-6 px-4 text-center text-xs sm:text-sm text-gray-500">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
-          <span>© {new Date().getFullYear()} {BUSINESS_INFO.legalName}. All rights reserved.</span>
-          <div className="flex items-center space-x-4">
-            <span>Casa Grande, AZ Auto & Diesel Specialist</span>
-            <span>•</span>
+          {/* Col 2: Surgical Procedures */}
+          <div>
+            <h4 className="font-bold text-sm text-white uppercase tracking-wider mb-4">
+              3D Surgical Guides
+            </h4>
+            <ul className="space-y-2 text-xs">
+              {PROCEDURES.slice(0, 5).map((p) => (
+                <li key={p.id}>
+                  <button
+                    onClick={() => onNavigate(`procedure-${p.slug}`)}
+                    className="hover:text-teal-400 transition"
+                  >
+                    {p.title}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Col 3: Practice Links */}
+          <div>
+            <h4 className="font-bold text-sm text-white uppercase tracking-wider mb-4">
+              Patient & Doctor Care
+            </h4>
+            <ul className="space-y-2 text-xs">
+              <li>
+                <button onClick={() => onNavigate('about')} className="hover:text-teal-400 transition">
+                  About Dr. Milano & Dr. Mazza
+                </button>
+              </li>
+              <li>
+                <button onClick={() => onNavigate('patient-info')} className="hover:text-teal-400 transition">
+                  Patient Info & Fasting Guidelines
+                </button>
+              </li>
+              <li>
+                <button onClick={() => onNavigate('patient-info')} className="hover:text-teal-400 transition">
+                  Online Paperless Registration
+                </button>
+              </li>
+              <li>
+                <button onClick={() => onNavigate('referring-doctors')} className="hover:text-teal-400 transition">
+                  Referring Doctor Portal & X-Rays
+                </button>
+              </li>
+              <li>
+                <button onClick={() => onNavigate('admin')} className="hover:text-teal-400 transition text-slate-500">
+                  Staff Admin Portal (#/admin)
+                </button>
+              </li>
+            </ul>
+          </div>
+
+          {/* Col 4: Emergency / Hours Summary */}
+          <div>
+            <h4 className="font-bold text-sm text-white uppercase tracking-wider mb-4">
+              Hours & Immediate Care
+            </h4>
+            <div className="p-4 rounded-2xl bg-slate-900 border border-slate-800 text-xs space-y-2">
+              <p className="text-white font-semibold">Monday – Friday</p>
+              <p className="text-slate-400">9:00 AM – 5:00 PM</p>
+              <p className="text-white font-semibold pt-2 border-t border-slate-800">Saturday – Sunday</p>
+              <p className="text-slate-400">Closed (Emergency On-Call)</p>
+            </div>
             <button
-              onClick={() => onNavigate('admin')}
-              className="text-neutral-500 hover:text-red-400 transition underline underline-offset-2"
+              onClick={() => onOpenConsultation()}
+              className="w-full mt-4 py-3 rounded-xl bg-teal-600 hover:bg-teal-500 text-white font-bold text-xs tracking-wide transition active:scale-95"
             >
-              Shop Admin Portal
+              Request Consultation Online
             </button>
           </div>
+        </div>
+
+        <div className="pt-8 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
+          <p>© {new Date().getFullYear()} Milano & Mazza Oral and Maxillofacial Surgery LLC. All rights reserved.</p>
+          <p>Serving Easton, Bethlehem, Allentown, Phillipsburg, and the Greater Lehigh Valley.</p>
         </div>
       </div>
     </footer>
