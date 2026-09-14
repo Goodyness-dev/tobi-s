@@ -30,17 +30,19 @@ The Design Agent handles **the visual design alone**. When the user pastes a bus
   - Update `card-thick` and `card-thick-hover` shadow depths to match the tactile weight of the template image.
   - Adjust background grid patterns (`sana-grid-bg`) and text stroke styling if visible in the template.
 
-### 3. Component Layout & Refactoring
-Refactor the scaffolded UI components to reflect the template's composition:
+### 3. Component Layout & Refactoring (ObsidianUI Arsenal)
+Refactor scaffolded UI components to reflect the template's composition, leveraging motion patterns from **ObsidianUI** (`obsidianui.dev`):
+- **CTAs & Micro-interactions**: Integrate ObsidianUI `Arrow Fill Button` or circle magnetic hovers for high-converting call-to-actions.
+- **Headlines & Value Props**: Apply ObsidianUI `Rectangular Text Reveal`, `Flip Text`, or `Text Stream` for premium editorial header reveals.
+- **Services & Procedure Cards**: Utilize ObsidianUI `Apple Spotlight` or `Trading Card` hover glow effects embedded in `card-thick` containers.
+- **Social Proof & Testimonials**: Implement ObsidianUI `Draggable Marquee`, `Scroll Stack`, or `Parallax Gallery` for patient quotes and portfolio showcases.
+- **Tactile Backgrounds**: Apply ObsidianUI `Dotted Grid` or subtle canvas textures to replace flat backgrounds.
 - `Navbar.jsx`: Header height, monogram logo badge, pill navigation links, and quote button.
-- `Hero.jsx` / `SmileScrollHero.jsx`: Replicate the headline hierarchy, badge tags, CTA button pairings, and desktop/mobile layout shown in the template.
-- `ServicesSection.jsx`: Bento grid vs card carousel vs 3-column structured grid.
 - `AboutSection.jsx`: Narrative story card, split bio photos, and heritage stat badges.
-- `ReviewsSection.jsx`: Featured editorial spotlight quote + secondary card layout.
 - `Footer.jsx`: Clean pre-footer CTA banner and dark aesthetic footer links.
 
 ### 4. Quality & Compliance Checklist
-- [ ] **Zero Lucide-React Imports**: All icons must be lightweight inline semantic SVGs crafted directly into components.
-- [ ] **Zero Flat Cards**: Every card must feel thick, tactile, and elevated with layered shadows and `border-2` outlines.
-- [ ] **Mobile-First Fallback**: Ensure any video hero has an instant poster image fallback on screens `< 768px` with zero touch lag.
+- [ ] **Zero Lucide-React Imports**: All ObsidianUI and template icons must be lightweight inline semantic SVGs crafted directly into components.
+- [ ] **Zero Flat Cards**: Every card must feel thick, tactile, and elevated with layered shadows (`card-thick`) and `border-2` outlines.
+- [ ] **Mobile-First Fallback**: Ensure any WebGL, cursor, or video hero has an instant poster image fallback on screens `< 768px` with zero touch lag and native scrolling.
 - [ ] **Verification**: Always run `npm run build` locally to confirm 0 compilation errors before completing.

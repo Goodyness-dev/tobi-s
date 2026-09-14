@@ -58,20 +58,26 @@ Customize only the decoupled data files in `$Target\src\data\`:
 - `src/data/servicesData.js`: Full procedure/service catalog with deep descriptions, candidate lists, advantages, and FAQs.
 - `src/data/amenitiesData.js`: Key technology, comfort features, insurance perks, and accreditation badges.
 
-### Step 4: Design Agent (Visual Styling & Template Deconstruction)
+### Step 4: Design Agent (Visual Styling, Template Deconstruction & ObsidianUI)
 Whenever the user attaches a **template image**, mockup, or UI reference (e.g. `.user_uploaded/media_*.png` or `template.png`):
 1. **Inspect the Visual DNA**:
    - Use `view_file` to analyze the template image.
    - Extract color palette (backgrounds, surfaces, primary accents, borders), typography hierarchy, card border radiuses, and layout structure (hero split, bento grid, feature highlights).
-2. **Delegate or Apply Visual DNA**:
+2. **Delegate or Apply Visual DNA with ObsidianUI Arsenal (`obsidianui.dev`)**:
    - Invoke `design-agent` via `invoke_subagent` or execute the design translation:
      - Update `tailwind.config.js` with extracted theme colors and font families.
      - Update `src/index.css` for custom shadows (`card-thick`, `card-thick-hover`) and background patterns.
-     - Refactor UI layout components (`Hero.jsx`, `ServicesSection.jsx`, `Navbar.jsx`, `ReviewsSection.jsx`, `Footer.jsx`) to mirror the template's layout and tactile aesthetic.
+     - Refactor UI layout components (`Hero.jsx`, `ServicesSection.jsx`, `Navbar.jsx`, `ReviewsSection.jsx`, `Footer.jsx`) utilizing ObsidianUI interaction patterns:
+       - **CTAs & Micro-interactions**: ObsidianUI `Arrow Fill Button` or magnetic hover pills.
+       - **Headlines**: ObsidianUI `Rectangular Text Reveal`, `Flip Text`, or `Text Stream`.
+       - **Bento & Feature Cards**: ObsidianUI `Apple Spotlight` or `Trading Card` hover glows.
+       - **Testimonials & Portfolios**: ObsidianUI `Draggable Marquee`, `Scroll Stack`, or `Parallax Gallery`.
+       - **Backgrounds**: ObsidianUI `Dotted Grid` or tactile canvas meshes.
 3. **Preserve Thick & Alive Rules**:
    - Outlines: `border-2 border-neutral-200/90 dark:border-neutral-800/90` with `rounded-3xl` or `rounded-2xl`.
    - Internal Padding: Generous `p-7` to `p-14`.
    - Zero flat cards and zero external icon libraries (`lucide-react` is strictly prohibited; inline SVGs only).
+   - Mobile Fallback: Full graceful degradation on screens `< 768px` to native touch scroll.
 
 ### Step 5: Configure SEO, AI Crawlers, and Schema.org
 - `index.html`:
