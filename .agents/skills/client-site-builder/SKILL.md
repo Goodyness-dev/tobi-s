@@ -34,23 +34,19 @@ Extract ground-truth details from the user's input (Yelp URL, existing website, 
 6. **Perks & Credentials**: Insurance filed directly, CareCredit, sedation, ADA/AGD memberships, free Wi-Fi, etc.
 7. **Reviews & Social Proof**: Star ratings (Google & Yelp) and 3-4 authentic patient/customer quotes.
 
-### Step 2: Instant Isolated Scaffolding (Zero Disk Bloat)
-Run the following PowerShell pipeline to clone from the master template and junction `node_modules`:
+### Step 2: Instant Zero-Quota Scaffolder & Asset Harvester (3 Seconds)
+Run the automated one-shot scaffolder from PowerShell:
 
 ```powershell
-$Slug = "<client-slug>"
-$Target = "C:\Users\DELL\Documents\$Slug"
-$Template = "C:\Users\DELL\Documents\service-biz-master-template"
-
-# 1. Robocopy code structure (excluding git, node_modules, and build dist)
-robocopy $Template $Target /XD .git node_modules dist /E /NFL /NDL /NJH /NJS
-
-# 2. Create instant junction for node_modules (instant build, zero disk bloat)
-cmd.exe /c "mklink /J `"$Target\node_modules`" `"$Template\node_modules`""
-
-# 3. Initialize clean Git repository
-cd $Target ; git init ; git branch -M master
+npm run scaffold -- "<Business Name>" "<client-slug>" --url="<client-url>"
 ```
+
+This single command autonomously executes in 3 seconds with **zero token burn**:
+1. **Robocopy**: Clones clean code structure to `C:\Users\DELL\Documents\<client-slug>`.
+2. **Instant Junction**: Links `node_modules` via NTFS junction with zero disk bloat.
+3. **Asset Harvesting**: Scrapes candidate images from `<client-url>`, downloads them into `public/images/`, and generates `src/data/imageManifest.js`.
+4. **Data Seeding**: Pre-populates phone, business title, and `index.html` tags.
+5. **Git Setup**: Initializes clean Git repo.
 
 ### Step 3: Asset Harvester Agent (Image Intake & Local Caching)
 Invoke `asset-agent` via `invoke_subagent` to harvest, download, and normalize media from the client's URL:
