@@ -1,13 +1,20 @@
-# Antigravity Project Intelligence & Permanent Memory
-> **Toby's Auto Mechanic LLC (Casa Grande, AZ) Web Platform & Admin Portal**
-> Repository: `Goodyness-dev/tobi-s` | Location: `15276 W Jimmie Kerr Blvd, Ste 1, Casa Grande, AZ 85122`
+# Project Intelligence & Permanent Memory: Toby's Auto Mechanic LLC
+> **Workspace**: `c:\Users\DELL\Documents\tsuki no me` | **Repository**: `Goodyness-dev/tobi-s`
+> This configuration is loaded automatically by Antigravity whenever a new chat is opened in this project.
 
 ---
 
-## 🛑 STRICT PROJECT ISOLATION DIRECTIVE
-1. **This repository is DEDICATED SOLELY to Toby's Auto Mechanic LLC.**
-2. **DO NOT modify this project for other clients (dentists, plumbers, contractors, etc.).**
-3. **When scaffolding ANY new client website, ALWAYS create a new folder under `c:\Users\DELL\Documents\<new-client-slug>` (e.g. `c:\Users\DELL\Documents\glass-dentistry`). NEVER scaffold or write non-Toby client code into `tsuki no me`.**
+## 🛑 DIRECTIVE #1: STRICT REPOSITORY ISOLATION (ZERO CONTAMINATION)
+1. **This workspace belongs SOLELY to Toby's Auto Mechanic LLC.**
+2. **NEVER modify or replace Toby's auto repair code when asked to build or scaffold a new client website** (e.g. dentists, plumbers, medspas, contractors).
+3. **When the user provides a new client link or asks to build a new site:**
+   - **Destination**: ALWAYS create a new folder under `C:\Users\DELL\Documents\<client-slug>` (e.g. `C:\Users\DELL\Documents\glass-dentistry`).
+   - Clone from master template: `C:\Users\DELL\Documents\service-biz-master-template`.
+   - Link `node_modules` instantly with zero disk bloat:
+     ```powershell
+     cmd.exe /c "mklink /J node_modules `"C:\Users\DELL\Documents\service-biz-master-template\node_modules`""
+     ```
+   - **NEVER put non-Toby client code into `tsuki no me`.**
 
 ---
 
@@ -16,13 +23,53 @@
 - **Owner**: Toby S. (Master Technician)
 - **Phone**: (520) 836-6921 | **Secondary**: (520) 836-6021
 - **Address**: 15276 W Jimmie Kerr Blvd, Ste 1, Casa Grande, AZ 85122
-- **Specialty**: Heavy-duty diesel repair, transmission overhauls, A/C diagnostics, fleet services, U-Haul neighborhood dealer.
-- **Theme**: Midnight dark mode, bold automotive performance aesthetic.
+- **Operating Hours**: Mon – Fri: 8:00 AM – 5:00 PM; Sat: 8:00 AM – 5:00 PM (By Appt); Sun: Closed
+- **Core Specialties**: Heavy-duty diesel diagnostics, complete engine swaps, transmission overhauls, A/C diagnostics, fleet maintenance, U-Haul neighborhood dealer.
+- **Theme & Aesthetic**: Midnight dark mode (`#0c0c0c` / `#000000`), bold automotive performance aesthetic with high-contrast red accents (`#dc2626`).
+- **Production Backend**: SQLite + Node.js with Telegram Bot & EmailJS alerts, Customer Inbox, and dynamic admin dashboard.
 
 ---
 
-## ⚡ RAPID COMMAND PIPELINE (PowerShell)
-- Always chain commands with `;`:
+## 🎨 THE "THICK & ALIVE" DESIGN SYSTEM
+- **Zero Flat Cards**: Every card must feel tactile, premium, and alive.
+  - Card classes: `card-thick` or `card-thick-hover` (multi-layered drop shadow).
+  - Outlines: `border-2 border-neutral-200/90 dark:border-neutral-800/90` with rounded corners (`rounded-3xl` or `rounded-2xl`).
+  - Internal Padding: Generous padding (`p-7` to `p-14`). Never use cramped `p-3` or `p-4` for primary content cards.
+- **Zero Lucide-React / External Icon Libraries**:
+  - NEVER import from `lucide-react` or external icon packages. They cause bundle bloat, missing export crashes, and generic visuals.
+  - ALWAYS use lightweight, semantic, inline SVGs crafted directly into components.
+- **Dark & Light Mode Harmony**:
+  - High-contrast dark mode (`dark:bg-black`, `dark:text-white`, `dark:border-neutral-800`).
+- **No Flat Pricing**:
+  - Never list rigid flat prices on the public UI. Use interactive consultation / appointment quote flows.
+
+---
+
+## 🎬 HERO VIDEO SCROLL & INSTANT MOBILE FALLBACK
+- **Desktop (>= 768px)**:
+  - Scrubbed via GSAP `ScrollTrigger` (`pin: true`, `scrub: 1.5`, `start: "top top"`, `end: "+=350%"`).
+- **Mobile (< 768px)**:
+  - Native touch scrolling with instant poster image fallback (`/images/hours-poster.jpg` or `/images/hero-truck.jpg` with `fetchpriority="high"`).
+  - Zero video loading delay and zero scroll hijacking on touch screens.
+  - Both CTA buttons immediately clickable above the fold.
+
+---
+
+## 🤖 2026 AI-NATIVE ACCESSIBILITY & LOCAL GEO SEO
+1. **Machine-Readable AI Context (`/llms.txt` and `/llms-full.txt`)**:
+   - Present in `public/` following the [llmstxt.org](https://llmstxt.org/) standard so Perplexity, ChatGPT, Claude, and Applebot can index practice details directly.
+2. **Robots AI Crawler Permissions**:
+   - `public/robots.txt` must explicitly permit AI agents (`GPTBot`, `ChatGPT-User`, `ClaudeBot`, `PerplexityBot`, `Google-Extended`, `Applebot-Extended`).
+3. **Semantic `<noscript>` Fallback**:
+   - `index.html` must contain a complete, human-and-crawler readable `<noscript>` block containing practice name, address, phone link, doctors/services list, and service areas.
+4. **Schema.org Structured Data (JSON-LD)**:
+   - Local business schema with accurate coordinates, phone, address, hours, and services.
+
+---
+
+## ⚡ RAPID COMMAND PIPELINE (Windows PowerShell)
+- **Always chain commands with `;` (NEVER bash `&&`)**:
   ```powershell
   npm run build ; git add . ; git commit -m "<message>" ; git push origin main
   ```
+- **Autonomous Verification**: Always run `npm run build` locally to confirm 0 compilation errors before completing any task.
