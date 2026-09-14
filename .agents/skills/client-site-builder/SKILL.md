@@ -92,6 +92,10 @@ Whenever the user attaches a **template image**, mockup, or UI reference (e.g. `
    - Internal Padding: Generous `p-7` to `p-14`.
    - Zero flat cards and zero external icon libraries (`lucide-react` is strictly prohibited; inline SVGs only).
    - Mobile Fallback: Full graceful degradation on screens `< 768px` to native touch scroll.
+4. **Template-Inspired Admin Dashboard Enforcement**:
+   - The Admin Dashboard (`src/components/admin/`) is **mandatory and must NEVER be generic**.
+   - Skin `AdminLayout.jsx`, `DashboardOverview.jsx`, `InboxView.jsx`, and `OrdersView.jsx` using the template's extracted color palette, typography hierarchy, `card-thick` KPI widgets, and ObsidianUI spotlight interactions.
+   - Tailor labels to the client domain ("Patients / Appointments" for dentistry vs "Vehicles / Work Orders" for auto shops vs "Clients / Estimates" for contractors).
 
 ### Step 6: Configure SEO, AI Crawlers, and Schema.org
 - `index.html`:

@@ -80,6 +80,7 @@
   2. Deconstruct visual DNA: color palette, typography hierarchy, card border radiuses, and bento/split grid structure.
   3. Modify target `tailwind.config.js`, `src/index.css`, and UI components (`Hero.jsx`, `ServicesSection.jsx`, `Navbar.jsx`, `ReviewsSection.jsx`, `Footer.jsx`) leveraging ObsidianUI interaction patterns to mirror the template aesthetic.
   4. Retain all "Thick & Alive" constraints (zero flat cards, multi-layered shadows, `border-2`, generous `p-7` to `p-14` padding, inline SVGs only, instant mobile fallback).
+  5. **Custom-Themed Admin Dashboard**: Re-skin the admin portal (`src/components/admin/`) with the template's visual DNA—brand color accents, `card-thick` KPI widgets, ObsidianUI spotlights, and domain-calibrated labels. Never leave the admin dashboard generic.
 
 ## 📸 MULTI-AGENT ARCHITECTURE: ASSET HARVESTER PROTOCOL
 - **Role**: Dedicated subagent (`asset-agent`) responsible for extracting, downloading, normalizing, and verifying all media from target client links directly into `public/images/`.

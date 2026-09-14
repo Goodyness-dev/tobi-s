@@ -41,7 +41,18 @@ Refactor scaffolded UI components to reflect the template's composition, leverag
 - `AboutSection.jsx`: Narrative story card, split bio photos, and heritage stat badges.
 - `Footer.jsx`: Clean pre-footer CTA banner and dark aesthetic footer links.
 
-### 4. Quality & Compliance Checklist
+### 4. Custom-Themed Admin Dashboard (Template-Inspired DNA)
+The Admin Dashboard (`src/components/admin/`) is **mandatory and must NEVER be a generic screen**. The Design Agent must skin the dashboard using the template's visual DNA:
+- **Palette & Mood**: Apply the template's brand colors (accent colors, gradients, dark/light surface layers) to `AdminLayout.jsx`, `DashboardOverview.jsx`, `InboxView.jsx`, and `OrdersView.jsx`.
+- **Tactile Stat Widgets**: Metric summary cards, order lists, and inquiry cards must use `card-thick` and `card-thick-hover` with `border-2` outlines and identical corner radii (`rounded-2xl` / `rounded-3xl`).
+- **ObsidianUI Micro-interactions**: Integrate subtle `Apple Spotlight` hover glows on KPIs and tactile pill toggles on appointment/order statuses.
+- **Industry Vocabulary**: Calibrate labels to the business niche:
+  - Healthcare/Dental: "Appointments", "Patients", "Treatment Plans".
+  - Automotive/Trades: "Work Orders", "Vehicles / VINs", "Diagnostic Estimates".
+  - Contractors/General: "Job Requests", "Site Visits", "Project Quotes".
+
+### 5. Quality & Compliance Checklist
+- [ ] **Custom Admin Dashboard**: Verified `/admin` is fully functional and visually skinned to match the template DNA (no generic default styles).
 - [ ] **Zero Lucide-React Imports**: All ObsidianUI and template icons must be lightweight inline semantic SVGs crafted directly into components.
 - [ ] **Zero Flat Cards**: Every card must feel thick, tactile, and elevated with layered shadows (`card-thick`) and `border-2` outlines.
 - [ ] **Mobile-First Fallback**: Ensure any WebGL, cursor, or video hero has an instant poster image fallback on screens `< 768px` with zero touch lag and native scrolling.
