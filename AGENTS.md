@@ -67,6 +67,16 @@
 
 ---
 
+## 🎨 MULTI-AGENT ARCHITECTURE: DESIGN AGENT PROTOCOL
+- **Role**: Dedicated subagent (`design-agent`) responsible strictly for visual design, layout composition, color harmony, typography, and card aesthetics.
+- **Trigger**: When the user provides a business link AND attaches a template image (or design mockup / UI screenshot):
+  1. Inspect the template image via `view_file`.
+  2. Deconstruct visual DNA: color palette, typography hierarchy, card border radiuses, and bento/split grid structure.
+  3. Modify target `tailwind.config.js`, `src/index.css`, and UI components (`Hero.jsx`, `ServicesSection.jsx`, `Navbar.jsx`, `ReviewsSection.jsx`, `Footer.jsx`) to mirror the template aesthetic.
+  4. Retain all "Thick & Alive" constraints (zero flat cards, multi-layered shadows, `border-2`, generous `p-7` to `p-14` padding, inline SVGs only).
+
+---
+
 ## ⚡ RAPID COMMAND PIPELINE (Windows PowerShell)
 - **Always chain commands with `;` (NEVER bash `&&`)**:
   ```powershell

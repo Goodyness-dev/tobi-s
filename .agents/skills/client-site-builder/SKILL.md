@@ -58,7 +58,22 @@ Customize only the decoupled data files in `$Target\src\data\`:
 - `src/data/servicesData.js`: Full procedure/service catalog with deep descriptions, candidate lists, advantages, and FAQs.
 - `src/data/amenitiesData.js`: Key technology, comfort features, insurance perks, and accreditation badges.
 
-### Step 4: Configure SEO, AI Crawlers, and Schema.org
+### Step 4: Design Agent (Visual Styling & Template Deconstruction)
+Whenever the user attaches a **template image**, mockup, or UI reference (e.g. `.user_uploaded/media_*.png` or `template.png`):
+1. **Inspect the Visual DNA**:
+   - Use `view_file` to analyze the template image.
+   - Extract color palette (backgrounds, surfaces, primary accents, borders), typography hierarchy, card border radiuses, and layout structure (hero split, bento grid, feature highlights).
+2. **Delegate or Apply Visual DNA**:
+   - Invoke `design-agent` via `invoke_subagent` or execute the design translation:
+     - Update `tailwind.config.js` with extracted theme colors and font families.
+     - Update `src/index.css` for custom shadows (`card-thick`, `card-thick-hover`) and background patterns.
+     - Refactor UI layout components (`Hero.jsx`, `ServicesSection.jsx`, `Navbar.jsx`, `ReviewsSection.jsx`, `Footer.jsx`) to mirror the template's layout and tactile aesthetic.
+3. **Preserve Thick & Alive Rules**:
+   - Outlines: `border-2 border-neutral-200/90 dark:border-neutral-800/90` with `rounded-3xl` or `rounded-2xl`.
+   - Internal Padding: Generous `p-7` to `p-14`.
+   - Zero flat cards and zero external icon libraries (`lucide-react` is strictly prohibited; inline SVGs only).
+
+### Step 5: Configure SEO, AI Crawlers, and Schema.org
 - `index.html`:
   - Title, meta description, and Geo tags (`geo.region`, `geo.placename`, `geo.position`, `ICBM`).
   - OpenGraph image and social preview tags.
@@ -67,18 +82,11 @@ Customize only the decoupled data files in `$Target\src\data\`:
 - `public/robots.txt`: Explicit permissions for AI crawlers (`GPTBot`, `ClaudeBot`, `PerplexityBot`, `Google-Extended`).
 - `public/llms.txt` & `public/llms-full.txt`: Machine-readable markdown summaries adhering to the [llmstxt.org](https://llmstxt.org/) standard.
 
-### Step 5: Design System & Mobile QA
-Verify compliance with design rules:
-1. **"Thick & Alive" Tactile Aesthetic**:
-   - Primary cards use `card-thick` or `card-thick-hover` with `border-2 border-neutral-200/90 dark:border-neutral-800/90`.
-   - Generous padding (`p-7` to `p-14`). Zero flat or cramped cards.
-2. **Zero Lucide-React Imports**:
-   - Inline semantic SVGs only. No external icon library dependencies.
-3. **Hero Video & Mobile Poster Fallback**:
-   - Desktop: Scrubbed GSAP ScrollTrigger video.
-   - Mobile (< 768px): Instant poster image fallback (`/images/hero-smile-poster.jpg` with `fetchpriority="high"`). Native touch scrolling with zero lag.
+### Step 6: Mobile QA & Responsive Fallback
+- Desktop: Scrubbed GSAP ScrollTrigger hero animation/video.
+- Mobile (< 768px): Instant poster image fallback (`/images/hero-smile-poster.jpg` with `fetchpriority="high"`). Native touch scrolling with zero lag and instant above-the-fold CTA buttons.
 
-### Step 6: Autonomous Verification & Rapid Deployment
+### Step 7: Autonomous Verification & Rapid Deployment
 Always test locally before pushing:
 
 ```powershell
