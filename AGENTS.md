@@ -81,6 +81,14 @@
   3. Modify target `tailwind.config.js`, `src/index.css`, and UI components (`Hero.jsx`, `ServicesSection.jsx`, `Navbar.jsx`, `ReviewsSection.jsx`, `Footer.jsx`) leveraging ObsidianUI interaction patterns to mirror the template aesthetic.
   4. Retain all "Thick & Alive" constraints (zero flat cards, multi-layered shadows, `border-2`, generous `p-7` to `p-14` padding, inline SVGs only, instant mobile fallback).
 
+## 📸 MULTI-AGENT ARCHITECTURE: ASSET HARVESTER PROTOCOL
+- **Role**: Dedicated subagent (`asset-agent`) responsible for extracting, downloading, normalizing, and verifying all media from target client links directly into `public/images/`.
+- **Zero Broken Links Guarantee**:
+  1. Scrapes high-res logos, hero banners, doctor/owner headshots, facility/interior photos, service equipment, and transformation galleries.
+  2. Downloads directly to `C:\Users\DELL\Documents\<client-slug>\public\images\`.
+  3. Generates `src/data/imageManifest.js` mapping semantic slots to local relative paths (`/images/...`).
+  4. If source photos are missing or low quality, automatically provides high-resolution industry-calibrated visuals so no hero or card is ever blank.
+
 ---
 
 ## ⚡ RAPID COMMAND PIPELINE (Windows PowerShell)

@@ -52,13 +52,27 @@ cmd.exe /c "mklink /J `"$Target\node_modules`" `"$Template\node_modules`""
 cd $Target ; git init ; git branch -M master
 ```
 
-### Step 3: Populate Client Data Layer
-Customize only the decoupled data files in `$Target\src\data\`:
+### Step 3: Asset Harvester Agent (Image Intake & Local Caching)
+Invoke `asset-agent` via `invoke_subagent` to harvest, download, and normalize media from the client's URL:
+1. **Scrape Client Media**:
+   - Extract high-res image URLs from the client's website, Yelp gallery, or Google listing.
+   - Collect logos, hero banners, doctor/owner headshots, facility/interior photos, service equipment, and transformation galleries.
+2. **Download Directly to `public/images/`**:
+   - Save directly into `$Target\public\images\` with standardized semantic filenames (`hero-poster.jpg`, `doctor-profile.jpg`, `facility-1.jpg`, etc.).
+   - Reject tracking pixels and low-resolution assets.
+3. **Zero-Empty-Card Fallback**:
+   - If the source site has low-resolution or missing photos, automatically supply high-res industry-calibrated visuals so no card or hero is ever blank.
+4. **Generate `src/data/imageManifest.js`**:
+   - Export clean local relative paths (`/images/...`) and semantic alt text for UI components to consume.
+
+### Step 4: Populate Client Data Layer
+Customize decoupled data files in `$Target\src\data\`:
 - `src/data/businessData.js`: Business name, owner/doctor bios, phone, address, coordinates, hours, and verified reviews.
 - `src/data/servicesData.js`: Full procedure/service catalog with deep descriptions, candidate lists, advantages, and FAQs.
 - `src/data/amenitiesData.js`: Key technology, comfort features, insurance perks, and accreditation badges.
+- `src/data/imageManifest.js`: Local media assets harvested by the `asset-agent`.
 
-### Step 4: Design Agent (Visual Styling, Template Deconstruction & ObsidianUI)
+### Step 5: Design Agent (Visual Styling, Template Deconstruction & ObsidianUI)
 Whenever the user attaches a **template image**, mockup, or UI reference (e.g. `.user_uploaded/media_*.png` or `template.png`):
 1. **Inspect the Visual DNA**:
    - Use `view_file` to analyze the template image.
@@ -79,7 +93,7 @@ Whenever the user attaches a **template image**, mockup, or UI reference (e.g. `
    - Zero flat cards and zero external icon libraries (`lucide-react` is strictly prohibited; inline SVGs only).
    - Mobile Fallback: Full graceful degradation on screens `< 768px` to native touch scroll.
 
-### Step 5: Configure SEO, AI Crawlers, and Schema.org
+### Step 6: Configure SEO, AI Crawlers, and Schema.org
 - `index.html`:
   - Title, meta description, and Geo tags (`geo.region`, `geo.placename`, `geo.position`, `ICBM`).
   - OpenGraph image and social preview tags.
@@ -88,11 +102,11 @@ Whenever the user attaches a **template image**, mockup, or UI reference (e.g. `
 - `public/robots.txt`: Explicit permissions for AI crawlers (`GPTBot`, `ClaudeBot`, `PerplexityBot`, `Google-Extended`).
 - `public/llms.txt` & `public/llms-full.txt`: Machine-readable markdown summaries adhering to the [llmstxt.org](https://llmstxt.org/) standard.
 
-### Step 6: Mobile QA & Responsive Fallback
+### Step 7: Mobile QA & Responsive Fallback
 - Desktop: Scrubbed GSAP ScrollTrigger hero animation/video.
-- Mobile (< 768px): Instant poster image fallback (`/images/hero-smile-poster.jpg` with `fetchpriority="high"`). Native touch scrolling with zero lag and instant above-the-fold CTA buttons.
+- Mobile (< 768px): Instant poster image fallback (`/images/hero-poster.jpg` with `fetchpriority="high"`). Native touch scrolling with zero lag and instant above-the-fold CTA buttons.
 
-### Step 7: Autonomous Verification & Rapid Deployment
+### Step 8: Autonomous Verification & Rapid Deployment
 Always test locally before pushing:
 
 ```powershell
