@@ -98,3 +98,15 @@
   npm run build ; git add . ; git commit -m "<message>" ; git push origin main
   ```
 - **Autonomous Verification**: Always run `npm run build` locally to confirm 0 compilation errors before completing any task.
+- **Client Site GitHub & Vercel Pipeline**:
+  ```powershell
+  cd $Target ; npm run build ; git add . ; git commit -m "feat: complete modern web platform for $Slug" ; gh repo create $Slug --public --source=. --remote=origin --push ; npx vercel --prod --yes
+  ```
+
+---
+
+## 🔗 MANDATORY FINAL DELIVERABLES FOR CLIENT BUILDS
+Every completed client build response **MUST explicitly return clickable links** for all three:
+1. 🌐 **Public Client Website**: `https://<deployment-url>` (e.g. `https://glass-dentistry.vercel.app`)
+2. 🛠️ **Custom Admin Dashboard**: `https://<deployment-url>/admin` (e.g. `https://glass-dentistry.vercel.app/admin`)
+3. 📦 **GitHub Repository**: `https://github.com/Goodyness-dev/<slug>`

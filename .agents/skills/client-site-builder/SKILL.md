@@ -106,7 +106,7 @@ Whenever the user attaches a **template image**, mockup, or UI reference (e.g. `
 - Desktop: Scrubbed GSAP ScrollTrigger hero animation/video.
 - Mobile (< 768px): Instant poster image fallback (`/images/hero-poster.jpg` with `fetchpriority="high"`). Native touch scrolling with zero lag and instant above-the-fold CTA buttons.
 
-### Step 8: Autonomous Verification & Rapid Deployment
+### Step 8: Autonomous Verification, GitHub Push & Vercel Deployment
 Always test locally before pushing:
 
 ```powershell
@@ -116,5 +116,18 @@ cd $Target ; npm run build
 Once `npm run build` exits with code 0:
 
 ```powershell
-cd $Target ; git add . ; git commit -m "feat: complete modern web platform for $Slug" ; npx vercel --prod --yes
+# 1. Commit and push to a clean GitHub repository
+cd $Target ; git add . ; git commit -m "feat: complete modern web platform for $Slug"
+gh repo create $Slug --public --source=. --remote=origin --push
+
+# 2. Deploy to production on Vercel
+npx vercel --prod --yes
 ```
+
+---
+
+## 🔗 MANDATORY FINAL DELIVERABLES
+Every completed task **MUST explicitly return clickable links** for all three:
+1. 🌐 **Public Client Website Link**: `https://<deployment-url>` (e.g. `https://glass-dentistry.vercel.app`)
+2. 🛠️ **Custom Admin Dashboard Link**: `https://<deployment-url>/admin` (e.g. `https://glass-dentistry.vercel.app/admin`)
+3. 📦 **GitHub Repository Link**: `https://github.com/Goodyness-dev/<slug>`
