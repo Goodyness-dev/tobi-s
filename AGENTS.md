@@ -113,6 +113,23 @@
 
 ---
 
+## ⚡ ZERO-QUOTA SITE REPLICATION PIPELINE (/build)
+When the user triggers `/build` or requests to replicate an existing site for a similar client:
+- **Command**:
+  ```powershell
+  npm run build-site -- --from="<source-slug>" --to="<new-slug>" --name="<Business Name>" --url="<client-url>" --deploy
+  ```
+- **Autonomous 1-Step Execution**:
+  1. Clones winning architecture from `C:\Users\DELL\Documents\<source-slug>` (e.g. `glass-dentistry`, `holley-dental-group`, `top-canada-plumbing`, `captain-pauls-cajun-seafood`, or `service-biz-master-template`).
+  2. Links `node_modules` instantly via junction with 0 disk bloat.
+  3. Scrapes real images and contact metadata from `<client-url>` into `public/images/`.
+  4. Rewrites `businessData.js`, `index.html`, and `imageManifest.js` with new business branding.
+  5. Pushes to a new GitHub repository: `gh repo create <new-slug> --public --source=. --remote=origin --push`.
+  6. Deploys to production Vercel: `npx vercel --prod --yes`.
+  7. Consumes **ZERO Gemini API tokens** for the mechanical build, completely preventing rate limits!
+
+---
+
 ## ⚡ RAPID COMMAND PIPELINE (Windows PowerShell)
 - **Always chain commands with `;` (NEVER bash `&&`)**:
   ```powershell

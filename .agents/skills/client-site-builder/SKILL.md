@@ -22,7 +22,20 @@ Always scaffold a new dedicated folder under:
 
 ---
 
-## 🚀 15-Minute Rapid Scaffolding Procedure
+## ⚡ Mode A: Instant Replicator & Deployer (`/build` Engine)
+Use this whenever replicating an existing winning website architecture (e.g. `glass-dentistry`, `top-canada-plumbing`, `captain-pauls-cajun-seafood`, `holley-dental-group`) for a similar client:
+
+```powershell
+npm run build-site -- --from="<source-slug>" --to="<new-slug>" --name="<Business Name>" --url="<client-url>" --deploy
+```
+
+- **Zero Token Cost & Zero Rate Limits**: Executes 100% locally in 15 seconds.
+- **Auto-Pipeline**: Replicates structure, junctions `node_modules`, scrapes new client photos into `public/images/`, updates `businessData.js`, runs `npm run build`, creates GitHub repo (`gh repo create`), and deploys to Vercel (`npx vercel --prod --yes`).
+- **Final Links**: Immediately returns Public Site, Admin Portal, and GitHub Repo.
+
+---
+
+## 🚀 Mode B: Fresh Template Scaffolding Procedure
 
 ### Step 1: Intake & Client Intelligence
 Extract ground-truth details from the user's input (Yelp URL, existing website, or prompt):
