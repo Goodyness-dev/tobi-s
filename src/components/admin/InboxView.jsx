@@ -239,14 +239,14 @@ export default function InboxView({ onOpenFullQuote }) {
                       <span className={`text-[10px] px-2 py-0.5 rounded-full font-bold border ${
                         status === 'pending' ? 'bg-amber-50 text-amber-700 border-amber-200' :
                         status === 'quoted' ? 'bg-blue-50 text-blue-700 border-blue-200' :
-                        status === 'completed' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' :
+                        status === 'completed' ? 'bg-blue-50 text-blue-700 border-blue-200' :
                         'bg-slate-100 text-slate-600 border-slate-200'
                       }`}>
                         {status === 'pending' ? 'Needs Quote' : status === 'quoted' ? 'Quoted' : status}
                       </span>
 
                       {thread.quotedPrice && (
-                        <span className="font-mono text-[11px] font-bold text-emerald-600">
+                        <span className="font-mono text-[11px] font-bold text-[#1d77ff]">
                           ${thread.quotedPrice}
                         </span>
                       )}
@@ -431,7 +431,7 @@ export default function InboxView({ onOpenFullQuote }) {
                   className="rounded bg-slate-100 border-slate-300 text-red-600 focus:ring-red-500"
                 />
                 <span className="font-bold flex items-center space-x-1">
-                  <DollarSign className="w-3.5 h-3.5 text-emerald-600" />
+                  <DollarSign className="w-3.5 h-3.5 text-[#1d77ff]" />
                   <span>Attach Official Quote Price ($)</span>
                 </span>
               </label>

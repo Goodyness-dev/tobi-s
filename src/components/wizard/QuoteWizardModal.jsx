@@ -708,12 +708,12 @@ export default function QuoteWizardModal({ isOpen, onClose, initialCategory = nu
             {/* STEP 13: Success */}
             {currentStep === 13 && submissionResult && (
               <div className="text-center py-6 space-y-6">
-                <div className="w-18 h-18 sm:w-20 sm:h-20 rounded-full bg-green-50 dark:bg-green-950/50 border-2 border-green-300 dark:border-green-600 text-green-600 dark:text-green-400 flex items-center justify-center mx-auto shadow-lg">
+                <div className="w-18 h-18 sm:w-20 sm:h-20 rounded-full bg-blue-50 dark:bg-blue-950/50 border-2 border-blue-300 dark:border-blue-600 text-[#1d77ff] dark:text-[#38bdf8] flex items-center justify-center mx-auto shadow-lg">
                   <CheckCircle2 className="w-12 h-12" />
                 </div>
 
                 <div>
-                  <span className="text-green-600 dark:text-green-400 text-xs sm:text-sm font-bold uppercase tracking-wider">
+                  <span className="text-[#1d77ff] dark:text-[#38bdf8] text-xs sm:text-sm font-bold uppercase tracking-wider">
                     Quote Request #{submissionResult.quoteId}
                   </span>
                   <h3 className="text-3xl sm:text-4xl font-black font-heading text-gray-900 dark:text-white mt-1.5">

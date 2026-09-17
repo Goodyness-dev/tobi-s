@@ -52,6 +52,7 @@ The Admin Dashboard (`src/components/admin/`) is **mandatory and must NEVER be a
   - Contractors/General: "Job Requests", "Site Visits", "Project Quotes".
 
 ### 5. Quality & Compliance Checklist
+- [ ] **Zero AI-Looking Icons & Clichés**: Strictly NO sparkles (✨), cartoon teeth, cartoon wrenches, or multi-colored gradient vector blobs. Use editorial typography numbering (`01`, `02`), technical mono tags (`// PROCEDURE`), and surgical monoline 1.5px SVGs only.
 - [ ] **Custom Admin Dashboard**: Verified `/admin` is fully functional and visually skinned to match the template DNA (no generic default styles).
 - [ ] **Zero Lucide-React Imports**: All ObsidianUI and template icons must be lightweight inline semantic SVGs crafted directly into components.
 - [ ] **Zero Flat Cards**: Every card must feel thick, tactile, and elevated with layered shadows (`card-thick`) and `border-2` outlines.

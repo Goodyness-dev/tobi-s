@@ -28,9 +28,9 @@ export default function LocationHoursSection({ onOpenWizard }) {
               {/* Open/Closed Status */}
               <div className="flex items-center justify-between p-4 rounded-2xl bg-gray-50 dark:bg-[#141414] border border-gray-100 dark:border-neutral-800 mb-6">
                 <div className="flex items-center space-x-3.5">
-                  <span className={`w-3.5 h-3.5 rounded-full ${shopOpen ? 'bg-green-500 animate-pulse' : 'bg-amber-500'}`} aria-hidden="true" />
+                  <span className={`w-3.5 h-3.5 rounded-full ${shopOpen ? 'bg-[#1d77ff] animate-pulse' : 'bg-amber-500'}`} aria-hidden="true" />
                   <div>
-                    <span className={`font-bold text-base sm:text-lg block ${shopOpen ? 'text-green-700 dark:text-green-400' : 'text-amber-700 dark:text-amber-400'}`}>
+                    <span className={`font-bold text-base sm:text-lg block ${shopOpen ? 'text-[#1d77ff] dark:text-[#38bdf8]' : 'text-amber-700 dark:text-amber-400'}`}>
                       {shopOpen ? 'Open Now' : 'Currently Closed'}
                     </span>
                     <span className="text-xs sm:text-sm text-gray-500 dark:text-neutral-400">Today is {currentDayName}</span>

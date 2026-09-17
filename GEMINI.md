@@ -38,6 +38,11 @@
 - **Zero Lucide-React / External Icon Libraries**:
   - NEVER import from `lucide-react` or external icon packages. They cause bundle bloat, missing export crashes, and generic visuals.
   - ALWAYS use lightweight, semantic, inline SVGs crafted directly into components.
+- **🚫 STRICT BAN ON "AI-LOOKING" ICONS & VISUAL CLICHÉS**:
+  - **Zero AI Clichés**: NEVER use cartoonish teeth, cartoon wrenches, glowing magic wands, sparkles (✨), generic shields, or chaotic multi-color gradient SVGs. They instantly scream "AI-generated template" and destroy credibility.
+  - **Typography & Structure Over Icon Clutter**: Do NOT force an icon onto every card. Instead, use high-end agency conventions: sleek editorial numbering (`01`, `02`, `03` in monospace or subtle serif), technical category tags (`// 01 DIAGNOSTICS`, `[PREVENTATIVE CARE]`), or minimal status pulse dots (`w-2 h-2 rounded-full bg-emerald-500`).
+  - **Surgical Monoline SVGs Only**: When functional icons are needed (phone, map pin, arrows, clock, close/menu), use only ultra-crisp monoline geometric SVGs (`stroke-width="1.5"` or `1.75`, `fill="none" stroke="currentColor"`), matching the Linear/Stripe/Apple design system.
+  - **Authentic Industry Marks**: Use real verified corporate/trade accreditation marks (e.g. real ADA logo, ASE Certified seal, Google 5.0 star rating, BBB seal) rather than fake generic ribbons or trophies.
 - **Dark & Light Mode Harmony**:
   - High-contrast dark mode (`dark:bg-black`, `dark:text-white`, `dark:border-neutral-800`).
 - **No Flat Pricing**:
@@ -79,8 +84,8 @@
   1. Inspect the template image via `view_file`.
   2. Deconstruct visual DNA: color palette, typography hierarchy, card border radiuses, and bento/split grid structure.
   3. Modify target `tailwind.config.js`, `src/index.css`, and UI components (`Hero.jsx`, `ServicesSection.jsx`, `Navbar.jsx`, `ReviewsSection.jsx`, `Footer.jsx`) leveraging ObsidianUI interaction patterns to mirror the template aesthetic.
-  4. Retain all "Thick & Alive" constraints (zero flat cards, multi-layered shadows, `border-2`, generous `p-7` to `p-14` padding, inline SVGs only, instant mobile fallback).
   5. **Custom-Themed Admin Dashboard**: Re-skin the admin portal (`src/components/admin/`) with the template's visual DNA—brand color accents, `card-thick` KPI widgets, ObsidianUI spotlights, and domain-calibrated labels. Never leave the admin dashboard generic.
+  6. **Always Visible Admin Password on UI**: ALWAYS display the admin access key / password prominently on the Admin Login screen (`src/components/admin/AdminLogin.jsx`) with 1-click **"Autofill"** and **"Copy"** buttons. Clients, reviewers, and prospects must never be forced to ask for credentials separately. Resilient client demo authentication fallback must ensure instant access even if backends are cold.
 
 ## 📸 MULTI-AGENT ARCHITECTURE: ASSET HARVESTER PROTOCOL
 - **Role**: Dedicated subagent (`asset-agent`) responsible for extracting, downloading, normalizing, and verifying all media from target client links directly into `public/images/`.

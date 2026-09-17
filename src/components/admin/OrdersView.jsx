@@ -126,15 +126,15 @@ export default function OrdersView() {
         </div>
 
         {/* Completed */}
-        <div className="bg-white border border-emerald-200/80 rounded-2xl p-5 shadow-xs hover:shadow-md transition">
-          <div className="flex items-center justify-between text-emerald-700 mb-2">
+        <div className="bg-white border border-blue-200/80 rounded-2xl p-5 shadow-xs hover:shadow-md transition">
+          <div className="flex items-center justify-between text-blue-700 mb-2">
             <span className="text-xs font-bold uppercase tracking-wider">Completed</span>
-            <div className="w-8 h-8 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600">
+            <div className="w-8 h-8 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center text-[#1d77ff]">
               <CheckCircle2 className="w-4 h-4" />
             </div>
           </div>
-          <div className="text-2xl sm:text-3xl font-black font-heading text-emerald-600">{stats.completed}</div>
-          <span className="text-[11px] text-emerald-600/80 mt-1 block font-medium">Vehicle serviced & closed</span>
+          <div className="text-2xl sm:text-3xl font-black font-heading text-[#1d77ff]">{stats.completed}</div>
+          <span className="text-[11px] text-blue-600/80 mt-1 block font-medium">Vehicle serviced & closed</span>
         </div>
       </div>
 
@@ -293,7 +293,7 @@ export default function OrdersView() {
                         <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-bold border ${
                           status === 'pending' ? 'bg-amber-50 text-amber-700 border-amber-200' :
                           status === 'quoted' ? 'bg-blue-50 text-blue-700 border-blue-200' :
-                          status === 'completed' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' :
+                          status === 'completed' ? 'bg-blue-50 text-blue-700 border-blue-200' :
                           'bg-slate-100 text-slate-600 border-slate-200'
                         }`}>
                           {status === 'pending' ? '⏳ Pending' :
@@ -304,7 +304,7 @@ export default function OrdersView() {
 
                       <td className="py-3.5 px-4 font-mono font-bold text-sm">
                         {q.quotedPrice ? (
-                          <span className="text-emerald-600">${q.quotedPrice}</span>
+                          <span className="text-[#1d77ff]">${q.quotedPrice}</span>
                         ) : (
                           <span className="text-slate-300">—</span>
                         )}
@@ -346,7 +346,7 @@ export default function OrdersView() {
                     <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold border ${
                       status === 'pending' ? 'bg-amber-50 text-amber-700 border-amber-200' :
                       status === 'quoted' ? 'bg-blue-50 text-blue-700 border-blue-200' :
-                      status === 'completed' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' :
+                      status === 'completed' ? 'bg-blue-50 text-blue-700 border-blue-200' :
                       'bg-slate-100 text-slate-600 border-slate-200'
                     }`}>
                       {status === 'pending' ? 'Pending' : status === 'quoted' ? 'Quoted' : status}
@@ -360,7 +360,7 @@ export default function OrdersView() {
                   <div className="text-xs text-slate-500 flex items-center justify-between pt-1">
                     <span>{q.detailedService || q.serviceCategory}</span>
                     {q.quotedPrice ? (
-                      <span className="font-mono font-bold text-emerald-600">${q.quotedPrice}</span>
+                      <span className="font-mono font-bold text-[#1d77ff]">${q.quotedPrice}</span>
                     ) : (
                       <span className="text-slate-400">Not quoted yet</span>
                     )}

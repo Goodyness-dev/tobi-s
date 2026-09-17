@@ -152,8 +152,8 @@ export default function AdminSettings() {
     <div className="max-w-4xl mx-auto space-y-8 pb-16">
       {/* Top Banner Alert on Save */}
       {saveSuccess && (
-        <div className="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm flex items-center space-x-3 shadow-xs animate-fade-in">
-          <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
+        <div className="p-4 rounded-2xl bg-blue-50 border border-blue-200 text-blue-800 text-sm flex items-center space-x-3 shadow-xs animate-fade-in">
+          <CheckCircle2 className="w-5 h-5 text-[#1d77ff] shrink-0" />
           <span className="font-bold">Settings and automation credentials saved to SQLite database successfully!</span>
         </div>
       )}
@@ -259,9 +259,9 @@ export default function AdminSettings() {
 
           {telegramTestResult && (
             <div className={`text-xs px-3.5 py-2 rounded-xl flex items-center space-x-2 ${
-              telegramTestResult.success ? 'bg-emerald-50 text-emerald-800 border border-emerald-200' : 'bg-red-50 text-red-800 border border-red-200'
+              telegramTestResult.success ? 'bg-blue-50 text-blue-800 border border-blue-200' : 'bg-red-50 text-red-800 border border-red-200'
             }`}>
-              {telegramTestResult.success ? <CheckCircle2 className="w-4 h-4 text-emerald-600" /> : <AlertCircle className="w-4 h-4 text-red-600" />}
+              {telegramTestResult.success ? <CheckCircle2 className="w-4 h-4 text-[#1d77ff]" /> : <AlertCircle className="w-4 h-4 text-red-600" />}
               <span>{telegramTestResult.message || telegramTestResult.error}</span>
             </div>
           )}
@@ -368,9 +368,9 @@ export default function AdminSettings() {
 
           {emailTestResult && (
             <div className={`text-xs p-3 rounded-xl flex items-center space-x-2 ${
-              emailTestResult.success ? 'bg-emerald-50 text-emerald-800 border border-emerald-200' : 'bg-red-50 text-red-800 border border-red-200'
+              emailTestResult.success ? 'bg-blue-50 text-blue-800 border border-blue-200' : 'bg-red-50 text-red-800 border border-red-200'
             }`}>
-              {emailTestResult.success ? <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" /> : <AlertCircle className="w-4 h-4 text-red-600 shrink-0" />}
+              {emailTestResult.success ? <CheckCircle2 className="w-4 h-4 text-[#1d77ff] shrink-0" /> : <AlertCircle className="w-4 h-4 text-red-600 shrink-0" />}
               <span>{emailTestResult.message || emailTestResult.error}</span>
             </div>
           )}
@@ -475,8 +475,8 @@ export default function AdminSettings() {
         </div>
 
         {passSuccess && (
-          <div className="p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs sm:text-sm flex items-center space-x-2">
-            <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+          <div className="p-4 rounded-xl bg-blue-50 border border-blue-200 text-blue-800 text-xs sm:text-sm flex items-center space-x-2">
+            <CheckCircle2 className="w-4 h-4 text-[#1d77ff] shrink-0" />
             <span>{passSuccess}</span>
           </div>
         )}

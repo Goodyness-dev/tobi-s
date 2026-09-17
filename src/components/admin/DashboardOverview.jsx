@@ -126,7 +126,7 @@ export default function DashboardOverview({ onNavigateTab, onSelectQuote, onOpen
           <div className="my-4">
             <div className="text-4xl font-black font-heading text-slate-900">{stats.completed}</div>
           </div>
-          <div className="inline-flex items-center space-x-1.5 text-xs text-emerald-700 bg-emerald-50 border border-emerald-100 px-2.5 py-1 rounded-full w-max font-medium">
+          <div className="inline-flex items-center space-x-1.5 text-xs text-blue-700 bg-blue-50 border border-blue-100 px-2.5 py-1 rounded-full w-max font-medium">
             <span>✓ 100%</span>
             <span>on-time customer pickup</span>
           </div>
@@ -299,7 +299,7 @@ export default function DashboardOverview({ onNavigateTab, onSelectQuote, onOpen
                 <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full shrink-0 ${
                   q.status === 'pending' ? 'bg-amber-50 text-amber-700 border border-amber-200' :
                   q.status === 'quoted' ? 'bg-blue-50 text-blue-700 border border-blue-200' :
-                  q.status === 'completed' ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' :
+                  q.status === 'completed' ? 'bg-blue-50 text-blue-700 border border-blue-200' :
                   'bg-slate-100 text-slate-600'
                 }`}>
                   {q.status || 'Pending'}
@@ -358,7 +358,7 @@ export default function DashboardOverview({ onNavigateTab, onSelectQuote, onOpen
                   </div>
 
                   <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full shrink-0 ${
-                    q.status === 'completed' ? 'bg-emerald-100 text-emerald-800' :
+                    q.status === 'completed' ? 'bg-blue-100 text-blue-800' :
                     q.status === 'quoted' ? 'bg-blue-100 text-blue-800' :
                     'bg-amber-100 text-amber-800'
                   }`}>
@@ -416,7 +416,7 @@ export default function DashboardOverview({ onNavigateTab, onSelectQuote, onOpen
         <div className="lg:col-span-4 bg-gradient-to-br from-slate-900 to-black text-white border border-slate-800 rounded-3xl p-6 shadow-lg flex flex-col justify-between">
           <div className="flex items-center justify-between text-xs font-bold text-slate-400 uppercase tracking-wider">
             <span>Shop Bay Timer</span>
-            <span className="text-emerald-400 font-mono text-[11px]">● ACTIVE</span>
+            <span className="text-blue-400 font-mono text-[11px]">● ACTIVE</span>
           </div>
 
           <div className="my-4 text-center">
