@@ -87,7 +87,7 @@ Whenever the user attaches a **template image**, mockup, or UI reference (e.g. `
    - Outlines: `border-2 border-neutral-200/90 dark:border-neutral-800/90` with `rounded-3xl` or `rounded-2xl`.
    - Internal Padding: Generous `p-7` to `p-14`.
    - Zero flat cards and zero external icon libraries (`lucide-react` is strictly prohibited; inline SVGs only).
-   - **Zero "AI-Looking" Icons**: Strictly ban cartoonish clipart, sparkles (✨), generic shields, and multi-colored gradient vector blobs. Replace icons with sleek editorial numbers (`01`, `02`), technical mono tags (`// 01 PREVENTATIVE`), and surgical monoline 1.5px SVGs matching Stripe/Linear design aesthetics.
+   - **Zero "AI-Looking" Icons & Generate Realistic Images**: Strictly ban cartoonish clipart, sparkles (✨), generic shields, and multi-colored gradient vector blobs. ALWAYS generate or use high-detail realistic imagery/photography instead of icons for services and cards. Use sleek editorial numbers (`01`, `02`), technical mono tags (`// 01 PREVENTATIVE`), and surgical monoline 1.5px SVGs matching Stripe/Linear design aesthetics.
    - Mobile Fallback: Full graceful degradation on screens `< 768px` to native touch scroll.
 4. **Template-Inspired Admin Dashboard Enforcement**:
    - The Admin Dashboard (`src/components/admin/`) is **mandatory and must NEVER be generic**.
@@ -96,6 +96,18 @@ Whenever the user attaches a **template image**, mockup, or UI reference (e.g. `
 5. **Always Visible Admin Password on Login UI**:
    - `src/components/admin/AdminLogin.jsx` MUST visibly display the default admin access key / password in an elevated credential badge with 1-click **"Autofill"** and **"Copy"** buttons.
    - The user or prospect must never be forced to request or type credentials separately. Resilient client demo authentication fallback in `src/services/api.js` ensures instant login even if backends are asleep.
+6. **Mandatory GSAP Animations Suite (`gsap` Installed)**:
+   Every site MUST implement one or more of the following 10 GSAP animations:
+   - **Hero text reveal**: GSAP split/staggered reveal on headline.
+   - **Menu item fade-in on scroll**: ScrollTrigger staggered fade + slide-up.
+   - **Parallax hero image**: ScrollTrigger smooth vertical or depth parallax shift.
+   - **Dish image hover zoom** (or *Feature image hover zoom*): Tactile scale & clip-path expand on hover.
+   - **Counter number roll-up**: GSAP dynamic integer ticker on KPI stats.
+   - **Horizontal menu scroll**: ScrollTrigger pinned horizontal track scroll.
+   - **Nav link magnetic effect**: Magnetic cursor pull / spring physics on links/buttons.
+   - **Page transition curtain**: Smooth entry curtain wipe / veil reveal on load.
+   - **Booking form slide-in**: Tactile modal/drawer slide with spring easing.
+   - **Section heading draw-in line**: Architectural line expanding 0% to 100% on scroll entry.
 
 ### Step 6: Configure SEO, AI Crawlers, and Schema.org
 - `index.html`:

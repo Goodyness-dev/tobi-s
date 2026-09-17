@@ -51,8 +51,23 @@ The Admin Dashboard (`src/components/admin/`) is **mandatory and must NEVER be a
   - Automotive/Trades: "Work Orders", "Vehicles / VINs", "Diagnostic Estimates".
   - Contractors/General: "Job Requests", "Site Visits", "Project Quotes".
 
-### 5. Quality & Compliance Checklist
+### 5. Mandatory GSAP Animations Suite (`gsap` MUST be Installed)
+`gsap` is installed in `package.json`. Every client site **MUST incorporate one or more of the following 10 GSAP animations**:
+1. **Hero text reveal**: GSAP split/staggered reveal on the primary value proposition headline.
+2. **Menu item fade-in on scroll**: ScrollTrigger staggered fade + slide-up for service/menu items.
+3. **Parallax hero image**: ScrollTrigger smooth vertical or depth parallax shift on the hero backdrop/poster.
+4. **Dish image hover zoom** (or *Feature image hover zoom*): Tactile smooth GSAP scale & clip-path expand on card hover.
+5. **Counter number roll-up**: GSAP dynamic integer ticker animation on KPI stats (e.g., "30+" years, "5.0" rating, "1,200+" clients).
+6. **Horizontal menu scroll**: ScrollTrigger pinned horizontal track scroll for services, procedures, or menu items.
+7. **Nav link magnetic effect**: Magnetic cursor pull / spring physics on navbar links and primary CTA buttons.
+8. **Page transition curtain**: Smooth entry curtain wipe / veil reveal on initial load.
+9. **Booking form slide-in**: Tactile modal/drawer slide with spring easing on appointment or quote click.
+10. **Section heading draw-in line**: Architectural line expanding from 0% to 100% width on scroll trigger entry.
+
+### 6. Quality & Compliance Checklist
+- [ ] **Generate Images Instead of Cheesy Icons**: NEVER use cartoonish clipart or generic icons to fill cards. ALWAYS use/generate high-detail realistic imagery, macro photography, or real harvested media.
 - [ ] **Zero AI-Looking Icons & Clichés**: Strictly NO sparkles (✨), cartoon teeth, cartoon wrenches, or multi-colored gradient vector blobs. Use editorial typography numbering (`01`, `02`), technical mono tags (`// PROCEDURE`), and surgical monoline 1.5px SVGs only.
+- [ ] **Mandatory GSAP Animation Active**: Verified at least one signature GSAP animation from the suite is configured and functioning smoothly.
 - [ ] **Custom Admin Dashboard**: Verified `/admin` is fully functional and visually skinned to match the template DNA (no generic default styles).
 - [ ] **Zero Lucide-React Imports**: All ObsidianUI and template icons must be lightweight inline semantic SVGs crafted directly into components.
 - [ ] **Zero Flat Cards**: Every card must feel thick, tactile, and elevated with layered shadows (`card-thick`) and `border-2` outlines.

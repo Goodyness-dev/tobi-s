@@ -39,6 +39,7 @@
   - NEVER import from `lucide-react` or external icon packages. They cause bundle bloat, missing export crashes, and generic visuals.
   - ALWAYS use lightweight, semantic, inline SVGs crafted directly into components.
 - **🚫 STRICT BAN ON "AI-LOOKING" ICONS & VISUAL CLICHÉS**:
+  - **Generate Images Instead of Cheesy Icons**: NEVER use cartoonish clipart or generic icons to fill cards. ALWAYS use/generate high-detail realistic imagery, macro photography, or real harvested media for procedures, dishes, amenities, and service cards.
   - **Zero AI Clichés**: NEVER use cartoonish teeth, cartoon wrenches, glowing magic wands, sparkles (✨), generic shields, or chaotic multi-color gradient SVGs. They instantly scream "AI-generated template" and destroy credibility.
   - **Typography & Structure Over Icon Clutter**: Do NOT force an icon onto every card. Instead, use high-end agency conventions: sleek editorial numbering (`01`, `02`, `03` in monospace or subtle serif), technical category tags (`// 01 DIAGNOSTICS`, `[PREVENTATIVE CARE]`), or minimal status pulse dots (`w-2 h-2 rounded-full bg-emerald-500`).
   - **Surgical Monoline SVGs Only**: When functional icons are needed (phone, map pin, arrows, clock, close/menu), use only ultra-crisp monoline geometric SVGs (`stroke-width="1.5"` or `1.75`, `fill="none" stroke="currentColor"`), matching the Linear/Stripe/Apple design system.
@@ -47,6 +48,21 @@
   - High-contrast dark mode (`dark:bg-black`, `dark:text-white`, `dark:border-neutral-800`).
 - **No Flat Pricing**:
   - Never list rigid flat prices on the public UI. Use interactive consultation / appointment quote flows.
+
+---
+
+## 🎭 MANDATORY GSAP ANIMATIONS SUITE (`gsap` MUST BE INSTALLED)
+`gsap` is installed in `package.json` across all projects. **Every client site MUST feature one or more of the following 10 GSAP animations**:
+1. **Hero text reveal**: GSAP split/staggered reveal on the primary value proposition headline.
+2. **Menu item fade-in on scroll**: ScrollTrigger staggered fade + slide-up for service/menu items.
+3. **Parallax hero image**: ScrollTrigger smooth vertical or depth parallax shift on the hero backdrop/poster.
+4. **Dish image hover zoom** (or *Feature image hover zoom*): Tactile smooth GSAP scale & clip-path expand on card hover.
+5. **Counter number roll-up**: GSAP dynamic integer ticker animation on KPI stats (e.g., "30+" years, "5.0" rating, "1,200+" clients).
+6. **Horizontal menu scroll**: ScrollTrigger pinned horizontal track scroll for services, procedures, or menu items.
+7. **Nav link magnetic effect**: Magnetic cursor pull / spring physics on navbar links and primary CTA buttons.
+8. **Page transition curtain**: Smooth entry curtain wipe / veil reveal on initial load.
+9. **Booking form slide-in**: Tactile modal/drawer slide with spring easing on appointment or quote click.
+10. **Section heading draw-in line**: Architectural line expanding from 0% to 100% width on scroll trigger entry.
 
 ---
 
