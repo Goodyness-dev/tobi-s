@@ -9,10 +9,10 @@
     "start": "node server/index.js",
     "build": "vite build",
     "preview": "vite preview",
-    "scaffold": "node \"../service-biz-master-template/scaffold-new-project.js\"",
-    "build-site": "node \"../service-biz-master-template/clone-and-rebrand.js\"",
-    "rebuild-site": "node \"../service-biz-master-template/rebuild-site.js\"",
-    "batch": "node \"../service-biz-master-template/batch-builder.js\""
+    "scaffold": "node scaffold-new-project.js",
+    "build-site": "node engine/clone-and-rebrand.js",
+    "rebuild-site": "node engine/rebuild-site.js",
+    "batch": "node engine/batch-builder.js"
   },
   "dependencies": {
     "clsx": "^2.1.1",
