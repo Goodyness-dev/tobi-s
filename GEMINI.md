@@ -130,6 +130,22 @@ When the user triggers `/build` or requests to replicate an existing site for a 
 
 ---
 
+## 🔄 AUTONOMOUS CLIENT WEBSITE REBUILD ENGINE (/rebuild)
+When the user triggers `/rebuild` or asks in chat to rebuild an existing client's website:
+- **Command**:
+  ```powershell
+  npm run rebuild-site -- --url="<client-url>" [--name="<Business Name>"] [--slug="<new-slug>"] --deploy
+  ```
+- **Autonomous Multi-Page Ingestion**:
+  1. **Comprehensive Multi-Page Crawl**: Discovers and crawls all internal subpages (`/services`, `/about`, `/gallery`, `/before-and-after`, `/reviews`, `/contact`) by parsing both navigation URLs and anchor text.
+  2. **Deep Content Extraction**: Harvests real procedure descriptions, doctor/practitioner credentials and bios, operating hours, and patient reviews.
+  3. **High-Res Media Harvesting**: Downloads and organizes all real photos into `public/images/` (hero, doctor profile, before/after transformations, clinic facility, service gallery).
+  4. **Full Architecture Synthesis**: Rebuilds `servicesData.js` with all real procedures, synthesizes `businessData.js` and `imageManifest.js`.
+  5. **Instant Deployment**: Runs local compilation (`npm run build`), creates a public GitHub repo (`gh repo create`), and deploys live to Vercel (`npx vercel --prod --yes`).
+  6. **Outputs 3 Clickable Deliverables**: Public Website, Admin Portal with credentials, GitHub Repo.
+
+---
+
 ## ⚡ RAPID COMMAND PIPELINE (Windows PowerShell)
 - **Always chain commands with `;` (NEVER bash `&&`)**:
   ```powershell
