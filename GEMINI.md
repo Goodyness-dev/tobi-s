@@ -148,3 +148,18 @@ Every completed client build response **MUST explicitly return clickable links**
 1. 🌐 **Public Client Website**: `https://<deployment-url>` (e.g. `https://glass-dentistry.vercel.app`)
 2. 🛠️ **Custom Admin Dashboard**: `https://<deployment-url>/admin` (e.g. `https://glass-dentistry.vercel.app/admin`)
 3. 📦 **GitHub Repository**: `https://github.com/Goodyness-dev/<slug>`
+
+---
+
+## 💬 ZERO-CLI CHAT-DRIVEN OPERATING MODEL (THE USER DRIVES VIA CHAT BOX)
+- **The User Never Touches Terminal / CLI**: The user initiates and manages all client builds, replications, and customizations directly through the Antigravity chat box.
+- **Autonomous Execution**: When the user provides a client URL, business name, template screenshot, or `/build` instruction in chat:
+  1. The agent autonomously runs the multi-page crawler, asset harvester, scaffolding/cloning, and design translation.
+  2. The agent verifies compilation (`npm run build`) and deploys to GitHub + Vercel.
+  3. The agent immediately returns the 3 live clickable links (Public Site, Admin Portal with pre-filled credentials, GitHub Repo).
+- **Interactive Chat-Based Iteration**:
+  - The user reviews the live deployment and requests changes/tweaks directly in the chat box (e.g. typography, color accents, hero images, copywriting, layout tweaks).
+  - The agent immediately applies the changes in the target client's folder, tests the build, pushes to GitHub, and confirms the live Vercel update in the chat.
+- **Strict Repository Isolation Remains Supreme**:
+  - All client modifications occur strictly in `C:\Users\DELL\Documents\<client-slug>`.
+  - The `tsuki no me` workspace code is NEVER contaminated with non-Toby client code.
