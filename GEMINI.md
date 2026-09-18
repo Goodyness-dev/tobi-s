@@ -146,6 +146,27 @@ When the user triggers `/rebuild` or asks in chat to rebuild an existing client'
 
 ---
 
+## 🚀 HIGH-VOLUME BATCH OUTREACH ENGINE (100 SITES / DAY)
+When targeting 100 businesses a day for cold acquisition / outreach:
+- **Zero Token Cost**: Executes locally in parallel via Node.js with 0 Gemini API consumption.
+- **Input**: `C:\Users\DELL\Documents\service-biz-master-template\targets.txt` (or `--file="custom_targets.txt"`).
+- **Execution Command**:
+  ```powershell
+  npm run batch -- [--file="targets.txt"] [--concurrency=3]
+  ```
+- **Autonomous Output**:
+  1. Multi-page crawls all target URLs concurrently (concurrency 3-5).
+  2. Scrapes photos, creates isolated folders, builds and deploys each to Vercel.
+  3. Automatically de-duplicates against `built_history.json`.
+  4. Exports date-stamped lead manifest (`outreach_leads_YYYY_MM_DD.csv`) with:
+     `Business Name | Phone | Address | Live Pitch URL | Admin Portal | Admin Key | Status`
+- **Instant Chat-Based Customization**:
+  After batch runs, if the user wants to polish a specific whale client, they ask directly in chat:
+  `"On <client-slug>: change headline to..."` or `"On <client-slug>: apply luxury-editorial styling"`.
+  The agent makes surgical 1-line edits in that specific project folder without re-running the crawler or burning tokens.
+
+---
+
 ## ⚡ RAPID COMMAND PIPELINE (Windows PowerShell)
 - **Always chain commands with `;` (NEVER bash `&&`)**:
   ```powershell
