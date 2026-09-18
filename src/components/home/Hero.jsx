@@ -1,32 +1,18 @@
 import React from 'react';
-import { ChevronRight, Phone, Wrench, Shield } from 'lucide-react';
+import HeroMedia from './HeroMedia';
+import { ChevronRight, Phone, Wrench, Shield } from '../ui/Icons.jsx';
 import { BUSINESS_INFO } from '../../data/businessData';
 
 export default function Hero({ onOpenWizard }) {
   return (
-    <section className="relative overflow-hidden" aria-label="Introduction & Quick Quote">
+    <section className="relative" aria-label="Introduction & Quick Quote">
       {/* Full-width Hero with Preloaded Video Background */}
-      <div className="relative min-h-[540px] sm:min-h-[620px] lg:min-h-[680px] flex items-center">
+      <div data-hero-stage className="hero-stage relative min-h-[540px] sm:min-h-[620px] lg:min-h-[680px] flex items-center">
         {/* Video Background with auto preload and bulletproof image fallback */}
-        <div className="absolute inset-0 overflow-hidden bg-neutral-950 bg-[url('/images/hero-truck.jpg')] bg-cover bg-center">
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="auto"
-            className="w-full h-full object-cover"
-            poster="/images/hero-truck.jpg"
-            aria-hidden="true"
-          >
-            <source src="/images/hero-video.mp4" type="video/mp4" />
-          </video>
-          {/* Overlay gradient optimized for crisp text contrast */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-black/35" />
-        </div>
+        <HeroMedia />
 
         {/* Hero Content (Bigger typography) */}
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28 lg:py-32 w-full">
+        <div className="hero-copy relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28 lg:py-32 w-full">
           <div className="max-w-3xl space-y-5 sm:space-y-6">
             {/* Small badge */}
             <div className="inline-flex items-center space-x-2.5 px-4 py-2 rounded-full bg-white/15 backdrop-blur-sm text-white text-xs sm:text-sm font-semibold border border-white/20">
@@ -35,12 +21,12 @@ export default function Hero({ onOpenWizard }) {
             </div>
 
             {/* Headline (Bigger: 4xl to 7xl) */}
-            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black font-heading text-white tracking-tight leading-[1.1]">
+            <h1 data-hero-reveal className="text-4xl sm:text-6xl lg:text-7xl font-black font-heading text-white tracking-tight leading-[1.1]">
               Dependable Auto & Diesel Care
             </h1>
 
             {/* Subtitle (Bigger: text-lg to 2xl) */}
-            <p className="text-lg sm:text-2xl text-white/90 max-w-2xl leading-relaxed font-medium">
+            <p data-hero-reveal className="text-lg sm:text-2xl text-white/90 max-w-2xl leading-relaxed font-medium">
               Family-owned repair shop specializing in engine swaps, diesel diagnostics, and honest automotive work in Casa Grande, AZ.
             </p>
 
@@ -80,7 +66,7 @@ export default function Hero({ onOpenWizard }) {
 
       {/* Floating Quick Action Bar (Midnight Pure Black) */}
       <div className="max-w-4xl mx-auto px-4 -mt-10 relative z-10 pb-8 sm:pb-10">
-        <div className="bg-white dark:bg-black rounded-2xl shadow-xl border border-gray-100 dark:border-neutral-800 p-4 sm:p-5 flex flex-col sm:flex-row items-center gap-3.5 transition-colors">
+        <div className="card-thick bg-white dark:bg-black rounded-2xl shadow-xl border border-gray-100 dark:border-neutral-800 p-4 sm:p-5 flex flex-col sm:flex-row items-center gap-3.5 transition-colors">
           <div 
             className="flex items-center space-x-3 flex-1 w-full cursor-pointer"
             onClick={() => onOpenWizard()}

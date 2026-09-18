@@ -47,7 +47,6 @@
     <link rel="dns-prefetch" href="https://maps.google.com" />
 
     <!-- Speed Optimization: Preload Critical Video & Hero Poster Assets -->
-    <link rel="preload" href="/images/hero-video.mp4" as="video" type="video/mp4" />
     <link rel="preload" href="/images/hero-truck.jpg" as="image" fetchpriority="high" />
     <link rel="preload" href="/logo.png" as="image" />
 
@@ -161,6 +160,19 @@
     </script>
   </head>
   <body class="bg-white dark:bg-black text-gray-900 dark:text-white font-sans antialiased selection:bg-red-700 selection:text-white">
+    <noscript>
+      <main style="max-width:60rem;margin:2rem auto;padding:1.5rem;font-family:system-ui">
+        <h1>Toby's Auto Mechanic LLC</h1>
+        <p>Auto and diesel repair in Casa Grande, Arizona. Owner: Toby S., Master Technician.</p>
+        <address>15276 W Jimmie Kerr Blvd, Ste 1, Casa Grande, AZ 85122</address>
+        <p>Call <a href="tel:+15208366921">(520) 836-6921</a> or <a href="tel:+15208366021">(520) 836-6021</a> to discuss service and request an estimate.</p>
+        <h2>Services</h2>
+        <ul><li>Heavy-duty diesel diagnostics</li><li>Engine repair and complete engine swaps</li><li>Transmission overhauls</li><li>Brake, electrical, and A/C diagnostics and repair</li><li>Oil changes and scheduled maintenance</li><li>Fleet maintenance</li><li>U-Haul neighborhood dealer</li></ul>
+        <h2>Hours</h2><p>Monday–Friday: 8:00 AM–5:00 PM. Saturday: 8:00 AM–5:00 PM by appointment only. Sunday: closed. All hours are Arizona time (America/Phoenix).</p>
+        <h2>Service area</h2><p>Casa Grande, Eloy, Coolidge, Maricopa, and Pinal County, Arizona.</p>
+        <p>The interactive quote form requires JavaScript. You can also request a quote by phone.</p>
+      </main>
+    </noscript>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

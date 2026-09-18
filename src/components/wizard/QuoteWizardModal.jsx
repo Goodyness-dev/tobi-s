@@ -14,7 +14,7 @@ import {
   Loader2,
   Search,
   CheckCircle2
-} from 'lucide-react';
+} from '../ui/Icons.jsx';
 import { VEHICLE_MAKES } from '../../data/makesData';
 import { submitQuoteRequest } from '../../services/quoteService';
 

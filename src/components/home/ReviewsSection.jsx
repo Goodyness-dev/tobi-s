@@ -1,5 +1,5 @@
 import React from 'react';
-import { Star } from 'lucide-react';
+import { Star } from '../ui/Icons.jsx';
 import { BUSINESS_INFO } from '../../data/businessData';
 
 export default function ReviewsSection({ onOpenWizard }) {

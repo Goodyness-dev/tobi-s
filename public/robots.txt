@@ -1,5 +1,13 @@
 User-agent: *
 Allow: /
 
+User-agent: GPTBot
+User-agent: ChatGPT-User
+User-agent: ClaudeBot
+User-agent: PerplexityBot
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+Allow: /
+
 # Sitemaps
 Sitemap: https://tobysllc.com/sitemap.xml

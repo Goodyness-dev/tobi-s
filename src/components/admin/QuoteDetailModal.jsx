@@ -3,7 +3,7 @@ import {
   X, Phone, Mail, MapPin, Calendar, Clock, Truck, Bus, 
   CheckCircle2, Send, AlertCircle, Loader2, DollarSign, 
   ShieldCheck, Wrench, Trash2, ArrowUpRight, Check
-} from 'lucide-react';
+} from '../ui/Icons.jsx';
 import { quotesApi } from '../../services/api';
 import { BUSINESS_INFO } from '../../data/businessData';
 

@@ -3,7 +3,7 @@ import {
   ArrowUpRight, Plus, Clock, CheckCircle2, 
   Wrench, Send, Truck, Bus, Calendar, 
   Play, Pause, RotateCcw, ChevronRight, Phone, Mail, User
-} from 'lucide-react';
+} from '../ui/Icons.jsx';
 import { quotesApi } from '../../services/api';
 
 export default function DashboardOverview({ onNavigateTab, onSelectQuote, onOpenNewOrder }) {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { SERVICES } from '../../data/servicesData';
-import { ArrowRight, LayoutGrid } from 'lucide-react';
+import { ArrowRight, LayoutGrid } from '../ui/Icons.jsx';
 
 const CARD_IMAGES = [
   '/images/card-1.jpg',
@@ -30,7 +30,7 @@ export default function ServicesSection({ onOpenWizard, onViewAllServices }) {
           {featuredServices.map((service, index) => (
             <article
               key={service.id}
-              className="group relative rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer border border-transparent dark:border-neutral-800"
+              className="card-thick-hover group relative rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer border border-transparent dark:border-neutral-800"
               onClick={() => onOpenWizard(service.category, service.subType)}
             >
               {/* Card Image */}
@@ -56,7 +56,7 @@ export default function ServicesSection({ onOpenWizard, onViewAllServices }) {
               </div>
 
               {/* Card Content (Bigger text) */}
-              <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6">
+              <div className="absolute bottom-0 left-0 right-0 p-7">
                 {/* Title */}
                 <h3 className="text-white font-bold text-lg sm:text-2xl leading-snug mb-2">
                   {service.title}

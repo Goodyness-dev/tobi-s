@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Lock, Eye, EyeOff, Wrench, AlertCircle, ArrowLeft, Loader2, ShieldCheck } from 'lucide-react';
+import { Lock, Eye, EyeOff, Wrench, AlertCircle, ArrowLeft, Loader2, ShieldCheck } from '../ui/Icons.jsx';
 import { authApi } from '../../services/api';
 import { BUSINESS_INFO } from '../../data/businessData';
 

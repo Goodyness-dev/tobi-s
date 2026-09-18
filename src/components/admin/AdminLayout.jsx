@@ -3,7 +3,7 @@ import {
   LayoutDashboard, ClipboardList, MessageSquare, 
   Settings, LogOut, ExternalLink, Search, 
   Bell, Mail, Wrench, Menu, X, Plus, Calendar, ShieldCheck
-} from 'lucide-react';
+} from '../ui/Icons.jsx';
 import DashboardOverview from './DashboardOverview';
 import OrdersView from './OrdersView';
 import InboxView from './InboxView';

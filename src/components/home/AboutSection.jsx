@@ -1,5 +1,5 @@
 import React from 'react';
-import { Quote } from 'lucide-react';
+import { Quote } from '../ui/Icons.jsx';
 import { BUSINESS_INFO } from '../../data/businessData';
 
 export default function AboutSection({ onOpenWizard }) {

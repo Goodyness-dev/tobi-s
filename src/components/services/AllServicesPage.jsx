@@ -3,54 +3,10 @@ import {
   SERVICES, 
   SERVICE_CATEGORIES 
 } from '../../data/servicesData';
-import { 
-  Wrench, 
-  Zap, 
-  Disc, 
-  Wind, 
-  ScanEye, 
-  SunMedium, 
-  PowerOff, 
-  Volume2, 
-  FileCheck, 
-  SquareDashedBottom, 
-  ToggleRight, 
-  Activity, 
-  AlertTriangle, 
-  Droplets, 
-  Fuel, 
-  Gauge, 
-  CalendarCheck, 
-  Cog, 
-  Recycle, 
-  ArrowRight, 
-  ArrowLeft,
-  Search,
-  Phone
-} from 'lucide-react';
+import { ArrowRight, ArrowLeft, Search, Phone } from '../ui/Icons.jsx';
 import { BUSINESS_INFO } from '../../data/businessData';
 
-const ICON_MAP = {
-  Wrench,
-  Zap,
-  Disc,
-  Wind,
-  ScanEye,
-  SunMedium,
-  PowerOff,
-  Volume2,
-  FileCheck,
-  SquareDashedBottom,
-  ToggleRight,
-  Activity,
-  AlertTriangle,
-  Droplets,
-  Fuel,
-  Gauge,
-  CalendarCheck,
-  Cog,
-  Recycle
-};
+
 
 export default function AllServicesPage({ onOpenWizard, onBackToHome }) {
   const [selectedCategory, setSelectedCategory] = useState('All Services');
@@ -152,8 +108,7 @@ export default function AllServicesPage({ onOpenWizard, onBackToHome }) {
 
         {/* Services Grid (Midnight black cards) */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredServices.map((service) => {
-            const IconComponent = ICON_MAP[service.icon] || Wrench;
+          {filteredServices.map((service, index) => {
 
             return (
               <article
@@ -163,7 +118,7 @@ export default function AllServicesPage({ onOpenWizard, onBackToHome }) {
                 <div>
                   <div className="flex items-center justify-between mb-5">
                     <div className="w-13 h-13 sm:w-14 sm:h-14 rounded-2xl bg-red-50 dark:bg-red-950/50 text-red-700 dark:text-red-400 flex items-center justify-center group-hover:bg-red-700 group-hover:text-white transition-colors">
-                      <IconComponent className="w-7 h-7" />
+                      <span className="font-mono text-xl" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
                     </div>
                     <span className="text-xs sm:text-sm font-bold uppercase tracking-wider px-3 py-1 rounded-md bg-gray-100 dark:bg-[#161616] text-gray-600 dark:text-neutral-300">
                       {service.category}

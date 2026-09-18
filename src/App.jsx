@@ -11,12 +11,14 @@ import AllServicesPage from './components/services/AllServicesPage';
 import QuoteWizardModal from './components/wizard/QuoteWizardModal';
 import AdminLayout from './components/admin/AdminLayout';
 import AdminLogin from './components/admin/AdminLogin';
-import { Phone, Calendar } from 'lucide-react';
+import { Phone, Calendar } from './components/ui/Icons.jsx';
 import { BUSINESS_INFO } from './data/businessData';
 import { authApi, getStoredToken } from './services/api';
+import { useSiteMotion } from './hooks/useSiteMotion';
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState('home'); // 'home' | 'services' | 'admin'
+  useSiteMotion(currentPage);
   const [wizardOpen, setWizardOpen] = useState(false);
   const [wizardCategory, setWizardCategory] = useState(null);
   const [wizardService, setWizardService] = useState(null);
@@ -161,7 +163,8 @@ export default function App() {
       />
 
       {/* Main View: Landing Page OR All Services Page */}
-      <main className="flex-grow">
+      <a href="#main-content" className="skip-link">Skip to content</a>
+      <main id="main-content" tabIndex={-1} className="flex-grow">
         {currentPage === 'services' ? (
           <AllServicesPage 
             onOpenWizard={handleOpenWizard}

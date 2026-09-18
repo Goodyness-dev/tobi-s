@@ -1,0 +1,18 @@
+# Toby's Auto Mechanic LLC
+
+> Auto and diesel repair shop in Casa Grande, Arizona, owned by Toby S., Master Technician. Contact the shop for estimates and appointment availability.
+
+## Business information
+
+- Address: 15276 W Jimmie Kerr Blvd, Ste 1, Casa Grande, AZ 85122, USA.
+- Phone: (520) 836-6921. Secondary phone: (520) 836-6021.
+- Hours (America/Phoenix): Monday–Friday 8:00 AM–5:00 PM; Saturday 8:00 AM–5:00 PM by appointment only; Sunday closed.
+- Specialties: heavy-duty diesel diagnostics, engine swaps, transmission overhauls, A/C diagnostics, fleet maintenance, and U-Haul neighborhood dealer services.
+- Service area: Casa Grande, Eloy, Coolidge, Maricopa, and Pinal County, Arizona.
+- Estimates depend on the vehicle, diagnosis, parts, and labor. Submitting a request does not confirm an appointment.
+
+## Website
+
+- [Home](https://tobysllc.com/): Business information and quote request form.
+- [Services](https://tobysllc.com/#/services): Auto and diesel service directory.
+- [Full business context](https://tobysllc.com/llms-full.txt): Contact details, services, and quote process in plain text.

@@ -5,7 +5,7 @@ import {
   Banknote, 
   ShieldCheck,
   CalendarCheck
-} from 'lucide-react';
+} from '../ui/Icons.jsx';
 
 const FEATURES = [
   {

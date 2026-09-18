@@ -1,5 +1,5 @@
 import React from 'react';
-import { Phone, MapPin, ChevronRight } from 'lucide-react';
+import { Phone, MapPin, ChevronRight } from '../ui/Icons.jsx';
 import { BUSINESS_INFO } from '../../data/businessData';
 
 export default function Footer({ onOpenWizard, onNavigate }) {

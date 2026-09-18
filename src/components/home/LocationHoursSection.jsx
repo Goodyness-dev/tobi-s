@@ -1,5 +1,5 @@
 import React from 'react';
-import { MapPin, Clock, Navigation, Phone, ExternalLink } from 'lucide-react';
+import { MapPin, Clock, Navigation, Phone, ExternalLink } from '../ui/Icons.jsx';
 import { BUSINESS_INFO, isOpenNow } from '../../data/businessData';
 
 export default function LocationHoursSection({ onOpenWizard }) {

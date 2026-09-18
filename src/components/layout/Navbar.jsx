@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Phone, Menu, X, ChevronRight, Sun, Moon } from 'lucide-react';
+import { Phone, Menu, X, ChevronRight, Sun, Moon } from '../ui/Icons.jsx';
 import { BUSINESS_INFO } from '../../data/businessData';
 
 export default function Navbar({ onOpenWizard, currentPage = 'home', onNavigate, darkMode, onToggleDarkMode }) {

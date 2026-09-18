@@ -1,0 +1,43 @@
+# Toby's Auto Mechanic LLC
+
+> Business context for readers and AI assistants. This file describes the shop and its services; it does not provide real-time availability or binding estimates.
+
+## Contact and location
+
+Business name: Toby's Auto Mechanic LLC.
+Owner: Toby S., Master Technician.
+Address: 15276 W Jimmie Kerr Blvd, Ste 1, Casa Grande, AZ 85122, USA.
+Primary phone: (520) 836-6921; international format +1-520-836-6921.
+Secondary phone: (520) 836-6021; international format +1-520-836-6021.
+Website: https://tobysllc.com/
+
+## Hours
+
+All hours use America/Phoenix (Arizona Mountain Standard Time, UTC−07:00).
+Monday through Friday: 8:00 AM–5:00 PM.
+Saturday: 8:00 AM–5:00 PM, by appointment only.
+Sunday: closed.
+Call the shop to confirm holiday hours and appointment availability.
+
+## Services
+
+Core specialties include heavy-duty diesel diagnostics, complete engine swaps, transmission overhauls, A/C diagnostics, and fleet maintenance. The business is also a U-Haul neighborhood dealer.
+
+The website service directory includes battery and fluid recycling; battery and electrical repair; brake repair; gas and diesel engine repair; general diagnosis; A/C and heating repair; vehicle lighting; no-start diagnosis; noise diagnosis; pre-purchase inspections; window regulator replacement; switch and sensor replacement; vibration diagnosis; check-engine-light diagnosis; engine oil light diagnosis; fuel system service; oil and filter changes; scheduled maintenance; and transmission leak inspections.
+
+Service area: Casa Grande, Eloy, Coolidge, Maricopa, and Pinal County, Arizona. Contact the shop to confirm arrangements for a particular vehicle or location.
+
+## Requesting service
+
+Use the quote request form on https://tobysllc.com/ or call (520) 836-6921.
+The form collects the requested service, vehicle make/model/year, symptoms, preferred timing, location, contact details, and towing or shuttle needs.
+The shop must confirm availability, any transportation arrangements, diagnosis, and pricing. A submitted quote request is not a confirmed appointment or a binding estimate.
+There are no fixed public service prices. Estimates depend on diagnosis, parts, and labor.
+
+## Public resources
+
+- [Home and quote request](https://tobysllc.com/)
+- [Service directory](https://tobysllc.com/#/services)
+- [Concise business context](https://tobysllc.com/llms.txt)
+
+This file intentionally excludes customer information, internal settings, and authentication credentials.

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { 
   Send, Mail, Lock, ShieldCheck, CheckCircle2, AlertCircle, 
   Loader2, Save, Eye, EyeOff, HelpCircle, ExternalLink, RefreshCw, Key
-} from 'lucide-react';
+} from '../ui/Icons.jsx';
 import { settingsApi, authApi } from '../../services/api';
 import { BUSINESS_INFO } from '../../data/businessData';
 
